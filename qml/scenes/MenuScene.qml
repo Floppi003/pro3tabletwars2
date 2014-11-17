@@ -41,17 +41,4 @@ SceneBase {
             onClicked: creditsPressed()
         }
     }
-
-    /*
-    // a little V-Play logo is always nice to have, right?
-    Image {
-        source: "../../assets/img/vplay-logo.png"
-        width: 60
-        height: 60
-        anchors.right: menuScene.gameWindowAnchorItem.right
-        anchors.rightMargin: 10
-        anchors.bottom: menuScene.gameWindowAnchorItem.bottom
-        anchors.bottomMargin: 10
-    }
-    */
 }

@@ -5,7 +5,7 @@ import ".."
 
 Common.LevelBase {
     //levelName: "Level1"
-
+    id:scene
 
 
     // physics world for collision detection
