@@ -25,7 +25,7 @@ Item {
         y: 100
 
         // rotation in degrees clockwise
-        //rotation: 0
+        rotation: 0
         tankBody.source: "../../assets/charRed.png"
     }
 
@@ -34,7 +34,7 @@ Item {
         x: scene.width / 2
         y: scene.height - 120
 
-        //rotation: 0
+        rotation: 0
         tankBody.source: "../../assets/charBlue.png"
     }
 

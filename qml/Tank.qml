@@ -20,7 +20,7 @@ EntityBase {
         id: tankBody
         width: 40
         height: 40
-        rotation: 180
+        //rotation: 0
         anchors.centerIn: parent
     }
 

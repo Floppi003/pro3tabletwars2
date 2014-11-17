@@ -48,14 +48,14 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle - 90
+            level.tankRed.tankBody.rotation = angle
             level.tankRed.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle - 90
+            level.tankRed.tankBody.rotation = angle
             level.tankRed.boxCollider.rotation = angle
         }
 
@@ -92,7 +92,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle
+            return angle - 90
         }
     }
 
@@ -159,7 +159,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle
+            return angle - 90
         }
     }
 
@@ -193,14 +193,14 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle - 90
+            level.tankBlue.tankBody.rotation = angle
             level.tankBlue.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle - 90
+            level.tankBlue.tankBody.rotation = angle
             level.tankBlue.boxCollider.rotation = angle
         }
 
@@ -234,7 +234,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle
+            return angle - 90
         }
     }
 
@@ -301,7 +301,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle
+            return angle - 90
         }
     }
 }
