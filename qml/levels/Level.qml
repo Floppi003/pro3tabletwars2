@@ -12,6 +12,7 @@ Item {
     // make tanks accessible from outside
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
+    property alias opponentSnowman: opponentSnowman
 
     Rectangle {
         id: backgroundRectangle
@@ -36,6 +37,15 @@ Item {
 
         rotation: 0
         tankBody.source: "../../assets/charBlue.png"
+    }
+
+    Opponent {
+        id: opponentSnowman
+        x: scene.width / 2
+        y: scene.height - 520
+
+        rotation: 0
+        opponentBody.source: "../../assets/opponentSnowman.png"
     }
 
     Wall {

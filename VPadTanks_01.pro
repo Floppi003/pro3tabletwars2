@@ -65,5 +65,6 @@ OTHER_FILES += \
     MenuButton.qml \
     SceneBase.qml \
     LevelBase.qml \
-    Level1.qml
+    Level1.qml \
+    qml/Opponent.qml
 
