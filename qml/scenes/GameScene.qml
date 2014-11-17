@@ -20,6 +20,9 @@ SceneBase {
         activeLevelFileName = fileName
     }
 
+    width: 768
+    height: 1024
+
     // background
     Rectangle {
         anchors.fill: parent.gameWindowAnchorItem
@@ -59,9 +62,7 @@ SceneBase {
         onLoaded: {
             // reset the score
             score = 0
-            // since we did not define a width and height in the level item itself, we are doing it here
-            item.width = gameScene.width
-            item.height = gameScene.height
+
             // store the loaded level as activeLevel for easier access
             activeLevel = item
             // restarts the countdown

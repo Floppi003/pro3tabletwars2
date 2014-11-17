@@ -15,6 +15,7 @@ SceneBase {
         //anchors.fill: parent.gameWindowAnchorItem
         width: 1536
         height: 2048
+
         color: "#47688e"
     }
 
@@ -41,6 +42,7 @@ SceneBase {
         }
     }
 
+    /*
     // a little V-Play logo is always nice to have, right?
     Image {
         source: "../../assets/img/vplay-logo.png"
@@ -51,4 +53,5 @@ SceneBase {
         anchors.bottom: menuScene.gameWindowAnchorItem.bottom
         anchors.bottomMargin: 10
     }
+    */
 }

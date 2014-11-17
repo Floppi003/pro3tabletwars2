@@ -31,13 +31,9 @@ GameWindow {
     height: 2048
     width: 1536
 
-    GameController {
-        id: scene
-    }
 
     id: window
 
-    //activeScene: scene
     activeScene: menuScene
 
     // create and remove entities at runtime
@@ -102,8 +98,8 @@ GameWindow {
     states: [
         State {
             name: "menu"
-            PropertyChanges {target: scene; opacity: 1}
-            PropertyChanges {target: window; activeScene: scene}
+            PropertyChanges {target: menuscene; opacity: 1}
+            PropertyChanges {target: window; activeScene: menuscene}
         },
         State {
             name: "selectLevel"
