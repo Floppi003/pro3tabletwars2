@@ -16,10 +16,11 @@ EntityBase {
         id: twoAxisController
     }
 
-    Rectangle {
+    Image {
         id: tankBody
         width: 40
         height: 40
+        rotation: 180
         anchors.centerIn: parent
     }
 
@@ -31,7 +32,6 @@ EntityBase {
         width: 26
         height: 4
         transformOrigin: Item.Left
-        rotation: -45
         //transformOriginPoint: Qt.point(13, 2)
 
         color: "#000000"

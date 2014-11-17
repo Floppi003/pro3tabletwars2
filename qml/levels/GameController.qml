@@ -48,14 +48,14 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle
+            level.tankRed.tankBody.rotation = angle - 90
             level.tankRed.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle
+            level.tankRed.tankBody.rotation = angle - 90
             level.tankRed.boxCollider.rotation = angle
         }
 
@@ -193,14 +193,14 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle
+            level.tankBlue.tankBody.rotation = angle - 90
             level.tankBlue.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle
+            level.tankBlue.tankBody.rotation = angle - 90
             level.tankBlue.boxCollider.rotation = angle
         }
 
