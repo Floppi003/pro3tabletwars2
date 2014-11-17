@@ -31,14 +31,8 @@ GameWindow {
     height: 2048
     width: 1536
 
-    GameController {
-        id: scene
-    }
-
     id: window
 
-    //activeScene: scene
-    activeScene: menuScene
 
     // create and remove entities at runtime
     EntityManager {
@@ -90,20 +84,16 @@ GameWindow {
         onBackPressed: window.state = "selectLevel"
     }
 
-    MenuButton {
-        text: "Levels"
-        onClicked: window.state = "selectLevel"
-    }
-
     // menuScene is our first scene, so set the state to menu initially
     state: "menu"
+    activeScene: menuScene
 
     // state machine, takes care reversing the PropertyChanges when changing the state, like changing the opacity back to 0
     states: [
         State {
             name: "menu"
-            PropertyChanges {target: scene; opacity: 1}
-            PropertyChanges {target: window; activeScene: scene}
+            PropertyChanges {target: menuScene; opacity: 1}
+            PropertyChanges {target: window; activeScene: menuScene}
         },
         State {
             name: "selectLevel"

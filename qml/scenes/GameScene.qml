@@ -9,16 +9,14 @@ SceneBase {
     // the currently loaded level gets stored here
     property variant activeLevel
     // score
-    property int score: 0
-    // countdown shown at level start
-    property int countdown: 0
-    // flag indicating if game is running
-    property bool gameRunning: countdown == 0
 
     // set the name of the current level, this will cause the Loader to load the corresponding level
     function setLevel(fileName) {
         activeLevelFileName = fileName
     }
+
+    width: 768
+    height: 1024
 
     // background
     Rectangle {
@@ -59,9 +57,7 @@ SceneBase {
         onLoaded: {
             // reset the score
             score = 0
-            // since we did not define a width and height in the level item itself, we are doing it here
-            item.width = gameScene.width
-            item.height = gameScene.height
+
             // store the loaded level as activeLevel for easier access
             activeLevel = item
             // restarts the countdown
@@ -90,22 +86,5 @@ SceneBase {
         color: "white"
         font.pixelSize: 40
         text: score
-    }
-
-    // text displaying either the countdown or "tap!"
-    Text {
-        anchors.centerIn: parent
-        color: "white"
-        font.pixelSize: countdown > 0 ? 160 : 18
-        text: countdown > 0 ? countdown : "tap!"
-    }
-
-    // if the countdown is greater than 0, this timer is triggered every second, decreasing the countdown (until it hits 0 again)
-    Timer {
-        repeat: true
-        running: countdown > 0
-        onTriggered: {
-            countdown--
-        }
     }
 }
