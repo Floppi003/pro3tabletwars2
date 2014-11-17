@@ -39,7 +39,7 @@ Item {
         tankBody.source: "../../assets/charBlue.png"
     }
 
-    Opponent {
+    Opponents {
         id: opponentSnowman
         x: scene.width / 2
         y: scene.height - 520
