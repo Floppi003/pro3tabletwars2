@@ -134,4 +134,13 @@ Item {
         rotation: 0
         obstacleBody.source: "../../assets/img/Obstacle.jpg"
     }
+
+    Ball {
+        id: ball
+        x: scene.width / 3
+        y: scene.height /3
+
+        rotation: 0
+        obstacleBody.source: "../../assets/img/Ball.png"
+    }
 }
