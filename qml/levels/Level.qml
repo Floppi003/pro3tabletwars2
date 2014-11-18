@@ -13,12 +13,21 @@ Item {
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
     property alias opponentSnowman: opponentSnowman
-    property alias obstacleMiddle: obstacleMiddle
+    //property alias obstacleMiddle: obstacleMiddle
 
     Rectangle {
         id: backgroundRectangle
         anchors.fill: parent
         color: "#eeeeee"
+    }
+
+    Lake {
+        id: lake
+        x: scene.width / 2
+        y: scene.height /2
+
+        rotation: 0
+        lakeBody.source: "../../assets/img/Lake.png"
     }
 
     Tank {

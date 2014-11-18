@@ -122,7 +122,6 @@ GameWindow {
     /*
     Scene {
         id: scene
-
         // the "logical size" - the scene content is auto-scaled to match the GameWindow size
         height: 1024
         width: 768

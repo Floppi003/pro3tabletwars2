@@ -5,13 +5,13 @@ EntityBase {
     id: obstacle
     entityType: "obstacle"
 
-    property alias obstacleBody: obstacleBody
+    property alias lakeBody: lakeBody
     property alias boxCollider: boxCollider
 
     Image {
-        id: obstacleBody
-        width: 40
-        height: 40
+        id: lakeBody
+        width: 500
+        height: 500
         //rotation: 0
         anchors.centerIn: parent
     }
@@ -20,10 +20,10 @@ EntityBase {
         id: boxCollider
 
         // the image and the physics will use this size
-        anchors.fill: obstacleBody
+        anchors.fill: lakeBody
 
         anchors.centerIn: parent
 
-        density: 100000000
+        sensor:true
     }
 }

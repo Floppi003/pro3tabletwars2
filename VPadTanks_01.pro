@@ -66,5 +66,6 @@ OTHER_FILES += \
     SceneBase.qml \
     LevelBase.qml \
     Level1.qml \
-    qml/Opponents.qml
+    qml/Opponents.qml \
+    Lake.qml
 
