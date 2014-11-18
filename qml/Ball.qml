@@ -18,20 +18,19 @@ EntityBase {
 
     BoxCollider {
         id: boxCollider
-
         // the image and the physics will use this size
         anchors.fill: ballBody
 
         anchors.centerIn: parent
-        friction: 0
-        restitution: 0.0
+        friction: 1
+        restitution: 0.5
         body.bullet: true
-        body.linearDamping: 0
+        body.linearDamping: 0.5
         body.angularDamping: 0
-        density: 0
+        density: 3
 
         // this is applied every physics update tick
-        linearVelocity: Qt.point(twoAxisController.xAxis * 100, twoAxisController.yAxis * (-100))
+        //linearVelocity: Qt.point(twoAxisController.xAxis * 100, twoAxisController.yAxis * (-100))
         //force: Qt.point(twoAxisController.xAxis * 1000, twoAxisController.yAxis * 1000)
         //torque: 1000
     }
