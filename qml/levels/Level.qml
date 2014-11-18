@@ -28,7 +28,7 @@ Item {
 
         // rotation in degrees clockwise
         rotation: 0
-        tankBody.source: "../../assets/charRed.png"
+        tankBody.source: "../../assets/img/charRed.png"
     }
 
     Tank {
@@ -37,7 +37,7 @@ Item {
         y: scene.height - 120
 
         rotation: 0
-        tankBody.source: "../../assets/charBlue.png"
+        tankBody.source: "../../assets/img/charBlue.png"
     }
 
     Opponents {
@@ -46,7 +46,7 @@ Item {
         y: scene.height - 520
 
         rotation: 0
-        opponentBody.source: "../../assets/opponentSnowman.png"
+        opponentBody.source: "../../assets/img/opponentSnowman.png"
 /*
         MovementAnimation {
             target: Tank
@@ -123,6 +123,6 @@ Item {
         y: scene.height - 700
 
         rotation: 0
-        obstacleBody.source: "../../assets/opponentSnowman.png"
+        obstacleBody.source: "../../assets/img/Obstacle.jpg"
     }
 }
