@@ -13,6 +13,7 @@ Item {
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
     property alias opponentSnowman: opponentSnowman
+    property alias obstacleMiddle: obstacleMiddle
 
     Rectangle {
         id: backgroundRectangle
@@ -114,5 +115,14 @@ Item {
             bottom: parent.bottom
             top: parent.top
         }
+    }
+
+    Obstacle {
+        id: obstacleMiddle
+        x: scene.width / 2
+        y: scene.height - 700
+
+        rotation: 0
+        obstacleBody.source: "../../assets/opponentSnowman.png"
     }
 }
