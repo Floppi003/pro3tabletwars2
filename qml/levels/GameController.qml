@@ -159,7 +159,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle - 90
+            return angle
         }
     }
 
@@ -301,7 +301,7 @@ Common.LevelBase {
             angle = 360 - angle
             console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle - 90
+            return angle
         }
     }
 }
