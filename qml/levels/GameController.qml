@@ -11,7 +11,6 @@ Common.LevelBase {
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
 
-
     // physics world for collision detection
     PhysicsWorld {
         id: world
@@ -20,7 +19,7 @@ Common.LevelBase {
 
 
 
-/*
+    /*
     states: [
         State {
             name: "1"

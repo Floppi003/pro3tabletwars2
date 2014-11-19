@@ -9,7 +9,7 @@ Item {
     width: parent.width
     height: parent.height
 
-    // make tanks accessible from outside
+    //make tanks accessible from outside
     //property alias tankRed: tankRed
     //property alias tankBlue: tankBlue
     property alias opponentSnowman: opponentSnowman
@@ -50,6 +50,8 @@ Item {
         tankBody.source: "../../assets/img/charBlue.png"
     }
 */
+
+
     Opponents {
         id: opponentSnowman
         x: scene.width / 2

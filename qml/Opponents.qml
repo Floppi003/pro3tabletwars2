@@ -6,10 +6,12 @@ EntityBase {
     entityType: "opponent"
 
     // make the twoAxisController acessible from outside
+    property alias opponent: opponent
     property alias controller: twoAxisController
     property alias opponentBody: opponentBody
     property alias opponentCannon: opponentCannon
     property alias boxCollider: boxCollider
+    property bool targetTankRed: true
 
     // this is used as input for the BoxCollider force & torque properties
     TwoAxisController {
@@ -62,31 +64,30 @@ EntityBase {
     MoveToPointHelper {
         id: moveToPointHelper
         // the entity to move towards
-        targetObject: tankRed
+        targetObject: tankBlue
 
         distanceToTargetThreshold: 100
 
+        onDistanceToTargetChanged: {
+            targetObject = targetTankRed ? tankRed : tankBlue;
+        }
 
-        onTargetReached: {
-            targetObject = tankBlue
+        Timer {
+            interval: 100; running: true; repeat: true;
+
+            onTriggered: {
+                MoveToPointHelper.targetObject = tankBlue;
+
+                var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
+                var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
+                targetTankRed = (distanceRed >= distanceBlue) ? false : true;
+                MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
+                console.debug("DisRed = ", distanceRed);
+                console.debug("DisBlue = ", distanceBlue);
+                console.debug("target = ", targetTankRed);
+            }
         }
     }
-
-    /*
-    Timer {
-        interval: 100; running: true; repeat: true;
-
-        onTriggered: MoveToPointHelper.targetObject= tankBlue;
-
-
-            var distanceRed = sqrt(pow(tankRed.x-opponent.x, 2) + pow(tankRed.y-opponent.y, 2));
-            var distanceBlue = sqrt(pow(tankBlue.x-opponent.x, 2) + pow(tankBlue.y-opponent.y, 2));
-
-            MoveToPointHelper.targetObject= (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
-
-
-    }
-    */
 
     MovementAnimation {
         target: opponent
