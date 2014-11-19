@@ -22,8 +22,8 @@ EntityBase {
 
         // the image and the physics will use this size
         //anchors.fill: lakeBody
-        width: lakeBody.width-200
-        height: lakeBody.height-200
+        width: lakeBody.width-140
+        height: lakeBody.height-140
 
         anchors.centerIn: parent
 
