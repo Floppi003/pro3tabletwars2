@@ -2,7 +2,7 @@ import QtQuick 2.0
 import VPlay 2.0
 
 Scene {
-
+    id: levelBaseScene
     width: 768
     height: 1024
 

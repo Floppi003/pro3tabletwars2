@@ -36,6 +36,7 @@ GameWindow {
     // create and remove entities at runtime
     EntityManager {
         id: entityManager
+        entityContainer: gameScene
     }
 
 

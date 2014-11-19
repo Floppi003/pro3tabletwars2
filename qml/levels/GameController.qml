@@ -8,6 +8,7 @@ Common.LevelBase {
     id:scene
     state: "1"
 
+
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
 
@@ -55,6 +56,7 @@ Common.LevelBase {
         y: 50
 
         Rectangle {
+            id: cannonControlArea
             anchors.fill: parent
             color: "#aaaaaa"
             opacity: 0.3
@@ -184,7 +186,60 @@ Common.LevelBase {
 
             return angle
         }
+
+        Timer {
+            interval: 500; running: true; repeat: true;
+
+            onTriggered: {
+                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0)
+                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0)
+                console.log("----------------------------------------------------------------------")
+                console.log("----------------------------------------------------------------------")
+                console.log("xDir: " + xDirection + ", yDir: " + yDirection)
+
+                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < scene.width + 5) &&
+                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < scene.height + 5)) {
+                    xDirection = xDirection * 2
+                    yDirection = yDirection * 2
+
+                    console.log("xDir: " + xDirection + ", yDir: " + yDirection)
+                }
+
+                xDirection = tankRed.x + xDirection + tankRed.width / 2
+                yDirection = tankRed.y + yDirection + tankRed.height / 2 - 4
+                var distance = Math.sqrt(xDirection * xDirection + yDirection * yDirection)
+                var time = distance / 480 // pixel per second
+                time = time * 1000 // milliseconds
+
+                console.log("distance: " + distance)
+                console.log("time: " + time)
+                console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
+                console.log("player.x: " + tankRed.x + ", player.y: " + tankRed.y)
+
+                var destination = Qt.point(xDirection, yDirection)
+
+/*
+                Bullet: {
+                    start: Qt.point(x, y)
+                    destination: Qt.point(1500, 2000)
+                    moveDuration: 300
+                }
+
+                singleBullet.start = Qt.point(x, y);
+                singleBullet.destination = Qt.point(1500, 2000);
+                singleBullet.moveDuration = 300;
+
+*/
+                // create and remove entities at runtime
+                //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Box.qml"), {"x": 100, "y": 50});
+                //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Bullet.qml"), {"start": Qt.point(x, y), "destination": Qt.point(1500, 2000), "moveDuration": 300});
+                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(destination.x, destination.y), "moveDuration": 1000});
+                console.log("from x: " + start.x + " to x: " + destination.x);
+            }
+        }
     }
+
+
 
 
 
@@ -345,5 +400,59 @@ Common.LevelBase {
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
+    }
+
+    Component {
+        id: bullet
+
+        EntityBase {
+            id: singleBullet
+            entityType: "singleBullet"
+
+            Rectangle {
+                width: 10
+                height: 10
+                //anchors.fill: parent
+                color: "#000000"
+            }
+
+            onXChanged: console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration)
+
+            property point start
+            property point destination
+            property int moveDuration
+
+            BoxCollider {
+                id: boxCollider
+
+                width: 10
+                height: 10
+                anchors.centerIn: parent
+                collisionTestingOnlyMode: true
+
+                density: 0
+                friction: 0
+                restitution: 0
+                body.bullet: true
+                body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
+            }
+
+            PropertyAnimation on x {
+                from: start.x + start.width / 2
+                to: destination.x
+                duration: moveDuration
+            }
+
+            PropertyAnimation on y {
+                from: start.y + start.height / 2 - 4
+                to: destination.y
+                duration: moveDuration
+
+                onStopped: {
+                    console.log("did Destroy")
+                    //bullet.destroy()
+                }
+            }
+        }
     }
 }
