@@ -19,23 +19,6 @@ Common.LevelBase {
         updatesPerSecondForPhysics: 60
     }
 
-    /*
-    states: [
-        State {
-            name: "1"
-            Level1 {
-                id: level1
-            }
-        },
-        State {
-            name: "2"
-            Level2 {
-                id: level2
-            }
-        }
-    ]
-*/
-
     Level1 {
         id: level1
     }
@@ -214,7 +197,7 @@ Common.LevelBase {
                 console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
                 console.log("player.x: " + tankRed.x + ", player.y: " + tankRed.y)
 
-                //var destination = Qt.point(xDirection, yDirection)/*
+                //var destination = Qt.point(xDirection, yDirection)				
 /*
                 Bullet: {
                     start: Qt.point(x, y)
@@ -225,7 +208,6 @@ Common.LevelBase {
                 singleBullet.start = Qt.point(x, y);
                 singleBullet.destination = Qt.point(1500, 2000);
                 singleBullet.moveDuration = 300;
-
 */
                 // create and remove entities at runtime
                 //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Box.qml"), {"x": 100, "y": 50});
@@ -242,6 +224,7 @@ Common.LevelBase {
     // Joystick Controller tankBlue
     // ---------------------------------------------------
     JoystickControllerHUD {
+        rotation: 0
         id: joystickBlue
         width: 180
         height: 180
@@ -263,15 +246,15 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankBlue.tankBody.rotation = angle
-            tankBlue.boxCollider.rotation = angle
+            tankBlue.tankBody.rotation = angle +180
+            tankBlue.boxCollider.rotation = angle +180
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankBlue.tankBody.rotation = angle
-            tankBlue.boxCollider.rotation = angle
+            tankBlue.tankBody.rotation = angle +180
+            tankBlue.boxCollider.rotation = angle +180
         }
 
         function calcAngle(touchX, touchY) {
@@ -301,9 +284,14 @@ Common.LevelBase {
 
             angle = (angle * 180 / Math.PI)
             angle = 360 - angle
-            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
+            //console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
-            return angle - 90
+
+
+            angle = angle - 270
+            console.log("angle tankBlue: " + angle)
+
+            return angle +180
         }
     }
 
@@ -366,8 +354,9 @@ Common.LevelBase {
 
             angle = (angle * 180 / Math.PI)
             angle = 360 - angle
-            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
 
+
+            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
             return angle
         }
     }
@@ -387,7 +376,7 @@ Common.LevelBase {
         x: scene.width / 2
         y: scene.height - 120
 
-        rotation: 180
+        rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
     }
 
@@ -422,8 +411,8 @@ Common.LevelBase {
                 restitution: 0
                 body.bullet: true
                 body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
-
             }
+
 
             PropertyAnimation on x {
                 from: start.x //+ start.width / 2
