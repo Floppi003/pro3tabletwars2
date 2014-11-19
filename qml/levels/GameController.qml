@@ -18,8 +18,6 @@ Common.LevelBase {
         updatesPerSecondForPhysics: 60
     }
 
-
-
     /*
     states: [
         State {
@@ -50,6 +48,7 @@ Common.LevelBase {
     // Joystick Controller tankRed
     // ---------------------------------------------------
     JoystickControllerHUD {
+        id: joystickRed
         width: 180
         height: 180
         x: 50
@@ -251,6 +250,7 @@ Common.LevelBase {
     // Joystick Controller tankBlue
     // ---------------------------------------------------
     JoystickControllerHUD {
+        id: joystickBlue
         width: 180
         height: 180
         x: scene.width - 230

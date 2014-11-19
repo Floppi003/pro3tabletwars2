@@ -21,7 +21,9 @@ EntityBase {
         id: boxCollider
 
         // the image and the physics will use this size
-        anchors.fill: lakeBody
+        //anchors.fill: lakeBody
+        width: lakeBody.width-200
+        height: lakeBody.height-200
 
         anchors.centerIn: parent
 
@@ -35,16 +37,18 @@ EntityBase {
 
             var collidedColliderComponent = other.parent.parent;
             var collidedEntity = collidedColliderComponent.parent;
-               console.log(collidedEntity.entityId)
+            console.log("object collides with lake:" + collidedEntity.entityId)
 
             if("tank_1"===collidedEntity.entityId){
                 tankRed.opacity = 0.5
                 console.log("tankRed is inside the lake!")
+                joystickRed.enabled=false;
             }
 
             if("tank_0"===collidedEntity.entityId){
                 tankBlue.opacity = 0.5
                 console.log("tankBlue is inside the lake!")
+                joystickBlue.enabled=false;
             }
 
             console.log("contact!")
@@ -55,16 +59,18 @@ EntityBase {
 
             var collidedColliderComponent = other.parent.parent;
             var collidedEntity = collidedColliderComponent.parent;
-               console.log(collidedEntity.entityId)
+            console.log(collidedEntity.entityId)
 
             if("tank_1"===collidedEntity.entityId){
                 tankRed.opacity = 1
                 console.log("tankRed is outside the lake!")
+                                joystickRed.enabled=true;
             }
 
             if("tank_0"===collidedEntity.entityId){
                 tankBlue.opacity = 1
                 console.log("tankBlue is outside the lake!")
+                                joystickBlue.enabled=true;
             }
 
             console.log("contact!")
