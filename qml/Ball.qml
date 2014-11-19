@@ -23,11 +23,11 @@ EntityBase {
 
         anchors.centerIn: parent
         friction: 1
-        restitution: 0.5
+        restitution: 1
         body.bullet: true
         body.linearDamping: 0.5
         body.angularDamping: 0
-        density: 3
+        density: 1
 
         // this is applied every physics update tick
         //linearVelocity: Qt.point(twoAxisController.xAxis * 100, twoAxisController.yAxis * (-100))

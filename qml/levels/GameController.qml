@@ -17,8 +17,6 @@ Common.LevelBase {
         updatesPerSecondForPhysics: 60
     }
 
-
-
     /*
     states: [
         State {

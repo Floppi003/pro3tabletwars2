@@ -21,7 +21,9 @@ EntityBase {
         id: boxCollider
 
         // the image and the physics will use this size
-        anchors.fill: lakeBody
+        //anchors.fill: lakeBody
+        width: lakeBody.width-200
+        height: lakeBody.height-200
 
         anchors.centerIn: parent
 
