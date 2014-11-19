@@ -64,13 +64,9 @@ EntityBase {
     MoveToPointHelper {
         id: moveToPointHelper
         // the entity to move towards
-        targetObject: tankBlue
+        targetObject: targetTankRed ? tankRed : tankBlue;
 
         distanceToTargetThreshold: 100
-
-        onDistanceToTargetChanged: {
-            targetObject = targetTankRed ? tankRed : tankBlue;
-        }
 
         Timer {
             interval: 100; running: true; repeat: true;
@@ -82,9 +78,9 @@ EntityBase {
                 var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
                 targetTankRed = (distanceRed >= distanceBlue) ? false : true;
                 MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
-                console.debug("DisRed = ", distanceRed);
-                console.debug("DisBlue = ", distanceBlue);
-                console.debug("target = ", targetTankRed);
+                //console.debug("DisRed = ", distanceRed);
+                //console.debug("DisBlue = ", distanceBlue);
+                //console.debug("target = ", targetTankRed);
             }
         }
     }
