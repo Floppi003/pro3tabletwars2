@@ -50,7 +50,7 @@ EntityBase {
         friction: 1
         restitution: 1.0
         body.bullet: true
-        body.linearDamping: 1
+        body.linearDamping: 0
         body.angularDamping: 1
 
         // this is applied every physics update tick
