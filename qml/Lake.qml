@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import VPlay 2.0
+import "levels"
 
 EntityBase {
     id: obstacle
@@ -24,6 +25,49 @@ EntityBase {
 
         anchors.centerIn: parent
 
-        sensor:true
+        //sensor:true
+
+        collisionTestingOnlyMode: true
+
+
+        fixture.onBeginContact: {
+            // handle the collision and make the image semi-transparent
+
+            var collidedColliderComponent = other.parent.parent;
+            var collidedEntity = collidedColliderComponent.parent;
+               console.log(collidedEntity.entityId)
+
+            if("tank_1"===collidedEntity.entityId){
+                tankRed.opacity = 0.5
+                console.log("tankRed is inside the lake!")
+            }
+
+            if("tank_0"===collidedEntity.entityId){
+                tankBlue.opacity = 0.5
+                console.log("tankBlue is inside the lake!")
+            }
+
+            console.log("contact!")
+        }
+
+        fixture.onEndContact: {
+            // handle the collision and make the image visible
+
+            var collidedColliderComponent = other.parent.parent;
+            var collidedEntity = collidedColliderComponent.parent;
+               console.log(collidedEntity.entityId)
+
+            if("tank_1"===collidedEntity.entityId){
+                tankRed.opacity = 1
+                console.log("tankRed is outside the lake!")
+            }
+
+            if("tank_0"===collidedEntity.entityId){
+                tankBlue.opacity = 1
+                console.log("tankBlue is outside the lake!")
+            }
+
+            console.log("contact!")
+        }
     }
 }
