@@ -14,7 +14,7 @@ Common.LevelBase {
         updatesPerSecondForPhysics: 60
     }
 
-    Level {
+    Level1 {
         id: level
     }
 

@@ -5,7 +5,7 @@ import ".."
 
 Item {
     //levelName: "Level1"
-    id: level
+    id: level2
     width: parent.width
     height: parent.height
 
@@ -21,6 +21,7 @@ Item {
         color: "#eeeeee"
     }
 
+    /*
     Lake {
         id: lake
         x: scene.width / 2
@@ -29,6 +30,7 @@ Item {
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
     }
+*/
 
     Tank {
         id: tankRed
