@@ -8,14 +8,14 @@ Common.LevelBase {
     id:scene
     state: "1"
 
-
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
-    property int moveDuration: 50
+    property int moveDuration: 250
 
     // physics world for collision detection
     PhysicsWorld {
         id: world
+        debugDrawVisible: false
         updatesPerSecondForPhysics: 60
     }
 
@@ -39,10 +39,7 @@ Common.LevelBase {
     Level1 {
         id: level1
     }
-
-
     focus: true
-
 
 
     // ---------------------------------------------------
@@ -83,8 +80,6 @@ Common.LevelBase {
             tankRed.tankBody.rotation = angle
             tankRed.boxCollider.rotation = angle
         }
-
-
 
 
         // Custom Javascript Functions
@@ -156,11 +151,10 @@ Common.LevelBase {
         }
 
         function calcAngle(touchX, touchY) {
-
-            console.log("touchX: " + touchX + ", touchY: " + touchY)
+            console.log("touchX: " + touchX + ", touchY: " + touchX + ", ----------------------------------------------")
 
             // Avoid division by zero!
-            if (touchX == 0) {
+            if (touchX === 0) {
                 return tankRed.tankCannon.rotation
             }
 
@@ -187,16 +181,19 @@ Common.LevelBase {
             return angle
         }
 
+
         Timer {
             interval: 500; running: true; repeat: true;
 
             onTriggered: {
+
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0)
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0)
                 console.log("----------------------------------------------------------------------")
                 console.log("----------------------------------------------------------------------")
                 console.log("xDir: " + xDirection + ", yDir: " + yDirection)
 
+                // Determine where we wish to shoot the projectile to
                 while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < scene.width + 5) &&
                        (tankRed.y + yDirection > -5 && tankRed.y + yDirection < scene.height + 5)) {
                     xDirection = xDirection * 2
@@ -207,17 +204,17 @@ Common.LevelBase {
 
                 xDirection = tankRed.x + xDirection + tankRed.width / 2
                 yDirection = tankRed.y + yDirection + tankRed.height / 2 - 4
-                var distance = Math.sqrt(xDirection * xDirection + yDirection * yDirection)
+                var distance = Math.sqrt(xDirection * xDirection + yDirection * yDirection) // Determine the length of how far we're shooting
                 var time = distance / 480 // pixel per second
                 time = time * 1000 // milliseconds
 
+                console.log("scene.height: " + scene.height + ", scene.width: " + scene.width)
                 console.log("distance: " + distance)
                 console.log("time: " + time)
                 console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
                 console.log("player.x: " + tankRed.x + ", player.y: " + tankRed.y)
 
-                var destination = Qt.point(xDirection, yDirection)
-
+                //var destination = Qt.point(xDirection, yDirection)/*
 /*
                 Bullet: {
                     start: Qt.point(x, y)
@@ -233,15 +230,10 @@ Common.LevelBase {
                 // create and remove entities at runtime
                 //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Box.qml"), {"x": 100, "y": 50});
                 //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Bullet.qml"), {"start": Qt.point(x, y), "destination": Qt.point(1500, 2000), "moveDuration": 300});
-                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(destination.x, destination.y), "moveDuration": moveDuration});
+                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(xDirection, yDirection), "moveDuration": time});
             }
         }
     }
-
-
-
-
-
 
 
 
@@ -282,7 +274,6 @@ Common.LevelBase {
             tankBlue.boxCollider.rotation = angle
         }
 
-
         function calcAngle(touchX, touchY) {
 
             console.log("touchX: " + touchX + ", touchY: " + touchY)
@@ -317,7 +308,6 @@ Common.LevelBase {
     }
 
 
-
     // ---------------------------------------------------
     // Joystick Controller blue tankCannon
     // ---------------------------------------------------
@@ -348,7 +338,6 @@ Common.LevelBase {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             tankBlue.tankCannon.rotation = angle
         }
-
 
         function calcAngle(touchX, touchY) {
 
@@ -421,37 +410,48 @@ Common.LevelBase {
             property int moveDuration
 
             BoxCollider {
-                id: boxCollider
+                id: boxCollider                
 
                 width: 10
                 height: 10
                 anchors.fill: parent
-                //collisionTestingOnlyMode: true
-/*
+                collisionTestingOnlyMode: true
+
                 density: 0
                 friction: 0
                 restitution: 0
                 body.bullet: true
                 body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
-*/
+
             }
 
             PropertyAnimation on x {
-                from: start.x + start.width / 2
+                from: start.x //+ start.width / 2
                 to: destination.x
                 duration: moveDuration
-                onPropertiesChanged:
-                console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration)
+                onPropertiesChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onAlwaysRunToEndChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onFromChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onToChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onLoopCountChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onStarted: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+                onStopped: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
             }
 
             PropertyAnimation on y {
-                from: start.y + start.height / 2 - 4
+                from: start.y //+ start.height / 2 - 4
                 to: destination.y
                 duration: moveDuration
 
+                onPropertiesChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                onAlwaysRunToEndChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                onFromChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                onToChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                onLoopCountChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                onStarted: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
                 onStopped: {
                     console.log("did Destroy")
-                    //bullet.destroy()
+                    bullet.destroy()
                 }
             }
         }

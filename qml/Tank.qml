@@ -2,8 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 
 EntityBase {
-    id: tank
     entityType: "tank"
+    id: tank
 
     // make the twoAxisController acessible from outside
     property alias controller: twoAxisController
@@ -59,3 +59,4 @@ EntityBase {
         //torque: 1000
     }
 }
+
