@@ -11,6 +11,7 @@ Common.LevelBase {
 
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
+    property int moveDuration: 50
 
     // physics world for collision detection
     PhysicsWorld {
@@ -232,8 +233,7 @@ Common.LevelBase {
                 // create and remove entities at runtime
                 //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Box.qml"), {"x": 100, "y": 50});
                 //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Bullet.qml"), {"start": Qt.point(x, y), "destination": Qt.point(1500, 2000), "moveDuration": 300});
-                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(destination.x, destination.y), "moveDuration": 1000});
-                console.log("from x: " + start.x + " to x: " + destination.x);
+                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(destination.x, destination.y), "moveDuration": moveDuration});
             }
         }
     }
@@ -398,7 +398,7 @@ Common.LevelBase {
         x: scene.width / 2
         y: scene.height - 120
 
-        rotation: 0
+        rotation: 180
         tankBody.source: "../../assets/img/charBlue.png"
     }
 
@@ -416,8 +416,6 @@ Common.LevelBase {
                 color: "#000000"
             }
 
-            onXChanged: console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration)
-
             property point start
             property point destination
             property int moveDuration
@@ -427,20 +425,23 @@ Common.LevelBase {
 
                 width: 10
                 height: 10
-                anchors.centerIn: parent
-                collisionTestingOnlyMode: true
-
+                anchors.fill: parent
+                //collisionTestingOnlyMode: true
+/*
                 density: 0
                 friction: 0
                 restitution: 0
                 body.bullet: true
                 body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
+*/
             }
 
             PropertyAnimation on x {
                 from: start.x + start.width / 2
                 to: destination.x
                 duration: moveDuration
+                onPropertiesChanged:
+                console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration)
             }
 
             PropertyAnimation on y {
