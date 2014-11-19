@@ -60,25 +60,46 @@ EntityBase {
     }
 
     MoveToPointHelper {
-         id: moveToPointHelper
-         // the entity to move towards
-         targetObject: tankRed
+        id: moveToPointHelper
+        // the entity to move towards
+        targetObject: tankRed
 
-         distanceToTargetThreshold: 20
-       }
+        distanceToTargetThreshold: 100
+
+
+        onTargetReached: {
+            targetObject = tankBlue
+        }
+    }
+
+    /*
+    Timer {
+        interval: 100; running: true; repeat: true;
+
+        onTriggered: MoveToPointHelper.targetObject= tankBlue;
+
+
+            var distanceRed = sqrt(pow(tankRed.x-opponent.x, 2) + pow(tankRed.y-opponent.y, 2));
+            var distanceBlue = sqrt(pow(tankBlue.x-opponent.x, 2) + pow(tankBlue.y-opponent.y, 2));
+
+            MoveToPointHelper.targetObject= (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
+
+
+    }
+    */
 
     MovementAnimation {
-         target: opponent
-         property: "rotation"
+        target: opponent
+        property: "rotation"
 
-         // outputXAxis is +1 if target is to the right, -1 when to the left and 0 when aiming towards it
-         velocity: 300*moveToPointHelper.outputXAxis
-         // alternatively, also the acceleration could be set, depends on how you want the followerEntity to behave
+        // outputXAxis is +1 if target is to the right, -1 when to the left and 0 when aiming towards it
+        velocity: 300*moveToPointHelper.outputXAxis
+        // alternatively, also the acceleration could be set, depends on how you want the followerEntity to behave
 
-         // start rotating towards the target immediately
-         running: true
+        // start rotating towards the target immediately
+        running: true
 
-         // this avoids over-rotating, so rotating further than allowed
-         maxPropertyValueDifference: moveToPointHelper.absoluteRotationDifference
-       }
+        // this avoids over-rotating, so rotating further than allowed
+        maxPropertyValueDifference: moveToPointHelper.absoluteRotationDifference
+    }
 }
