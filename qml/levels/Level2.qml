@@ -30,7 +30,7 @@ Item {
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
     }
-*/
+    */
 
     Tank {
         id: tankRed

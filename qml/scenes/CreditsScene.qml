@@ -29,4 +29,3 @@ SceneBase {
         anchors.centerIn: parent
     }
 }
-

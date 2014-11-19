@@ -6,6 +6,10 @@ import ".."
 Common.LevelBase {
     //levelName: "Level1"
     id:scene
+    state: "1"
+
+    property alias tankRed: tankRed
+    property alias tankBlue: tankBlue
 
 
     // physics world for collision detection
@@ -14,9 +18,29 @@ Common.LevelBase {
         updatesPerSecondForPhysics: 60
     }
 
+
+
+/*
+    states: [
+        State {
+            name: "1"
+            Level1 {
+                id: level1
+            }
+        },
+        State {
+            name: "2"
+            Level2 {
+                id: level2
+            }
+        }
+    ]
+*/
+
     Level1 {
-        id: level
+        id: level1
     }
+
 
     focus: true
 
@@ -43,20 +67,20 @@ Common.LevelBase {
 
 
         // Touch Methods
-        property variant playerTwoAxisController: level.tankRed.getComponent("TwoAxisController")
+        property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle
-            level.tankRed.boxCollider.rotation = angle
+            tankRed.tankBody.rotation = angle
+            tankRed.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankBody.rotation = angle
-            level.tankRed.boxCollider.rotation = angle
+            tankRed.tankBody.rotation = angle
+            tankRed.boxCollider.rotation = angle
         }
 
 
@@ -69,7 +93,7 @@ Common.LevelBase {
 
             // Avoid division by zero!
             if (touchX == 0) {
-                return level.tankRed.boxCollider.rotation
+                return tankRed.boxCollider.rotation
             }
 
             var angle = Math.atan(touchY / touchX)
@@ -119,15 +143,15 @@ Common.LevelBase {
         source: "../assets/img/null"
         thumbSource: "../assets/img/null"
 
-        property variant playerTwoAxisController: level.tankRed.getComponent("TwoAxisController")
+        property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankCannon.rotation = angle
+            tankRed.tankCannon.rotation = angle
         }
 
         onControllerYPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankRed.tankCannon.rotation = angle
+            tankRed.tankCannon.rotation = angle
         }
 
         function calcAngle(touchX, touchY) {
@@ -136,7 +160,7 @@ Common.LevelBase {
 
             // Avoid division by zero!
             if (touchX == 0) {
-                return level.tankRed.tankCannon.rotation
+                return tankRed.tankCannon.rotation
             }
 
             var angle = Math.atan(touchY / touchX)
@@ -188,20 +212,20 @@ Common.LevelBase {
         source: "../assets/img/null"
         thumbSource: "../assets/img/null"
 
-        property variant playerTwoAxisController: level.tankBlue.getComponent("TwoAxisController")
+        property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle
-            level.tankBlue.boxCollider.rotation = angle
+            tankBlue.tankBody.rotation = angle
+            tankBlue.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankBody.rotation = angle
-            level.tankBlue.boxCollider.rotation = angle
+            tankBlue.tankBody.rotation = angle
+            tankBlue.boxCollider.rotation = angle
         }
 
 
@@ -211,7 +235,7 @@ Common.LevelBase {
 
             // Avoid division by zero!
             if (touchX == 0) {
-                return level.tankBlue.boxCollider.rotation
+                return tankBlue.boxCollider.rotation
             }
 
             var angle = Math.atan(touchY / touchX)
@@ -259,16 +283,16 @@ Common.LevelBase {
         source: "../assets/img/null"
         thumbSource: "../assets/img/null"
 
-        property variant playerTwoAxisController: level.tankBlue.getComponent("TwoAxisController")
+        property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankCannon.rotation = angle
+            tankBlue.tankCannon.rotation = angle
         }
 
         onControllerYPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            level.tankBlue.tankCannon.rotation = angle
+            tankBlue.tankCannon.rotation = angle
         }
 
 
@@ -278,7 +302,7 @@ Common.LevelBase {
 
             // Avoid division by zero!
             if (touchX == 0) {
-                return level.tankBlue.tankCannon.rotation
+                return tankBlue.tankCannon.rotation
             }
 
             var angle = Math.atan(touchY / touchX)
@@ -303,5 +327,24 @@ Common.LevelBase {
 
             return angle
         }
+    }
+
+    Tank {
+        id: tankRed
+        x: scene.width / 2
+        y: 100
+
+        // rotation in degrees clockwise
+        rotation: 0
+        tankBody.source: "../../assets/img/charRed.png"
+    }
+
+    Tank {
+        id: tankBlue
+        x: scene.width / 2
+        y: scene.height - 120
+
+        rotation: 0
+        tankBody.source: "../../assets/img/charBlue.png"
     }
 }

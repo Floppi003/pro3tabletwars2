@@ -58,4 +58,27 @@ EntityBase {
         //force: Qt.point(twoAxisController.xAxis * 1000, twoAxisController.yAxis * 1000)
         //torque: 1000
     }
+
+    MoveToPointHelper {
+         id: moveToPointHelper
+         // the entity to move towards
+         targetObject: tankRed
+
+         distanceToTargetThreshold: 20
+       }
+
+    MovementAnimation {
+         target: opponent
+         property: "rotation"
+
+         // outputXAxis is +1 if target is to the right, -1 when to the left and 0 when aiming towards it
+         velocity: 300*moveToPointHelper.outputXAxis
+         // alternatively, also the acceleration could be set, depends on how you want the followerEntity to behave
+
+         // start rotating towards the target immediately
+         running: true
+
+         // this avoids over-rotating, so rotating further than allowed
+         maxPropertyValueDifference: moveToPointHelper.absoluteRotationDifference
+       }
 }
