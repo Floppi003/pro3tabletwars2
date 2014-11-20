@@ -1,6 +1,9 @@
 import QtQuick 2.0
+import VPlay 2.0
 
-Rectangle {
-    width: 100
-    height: 62
+EntityBase {
+    id: playerBlue
+    entityType: "playerBlue"
+
+    property int life: 3
 }

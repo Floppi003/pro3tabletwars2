@@ -28,44 +28,45 @@ EntityBase {
 
 
         fixture.onBeginContact: {
-                        // handle the collision and make the image semi-transparent
+            // handle the collision and make the image semi-transparent
 
-                        var collidedColliderComponent = other.parent.parent;
-                        var collidedEntity = collidedColliderComponent.parent;
-                        console.log("bullet collides with something:" + collidedEntity.entityId)
+            var collidedColliderComponent = other.parent.parent;
+            var collidedEntity = collidedColliderComponent.parent;
+            console.log("bullet collides with something:" + collidedEntity.entityId)
 
-                        if("tank_1"===collidedEntity.entityId){
-                            tankRed.opacity = 0.2
-                            console.log("tankRed is inside the lake!")
-                            tankRed.life=tankRed.life-1
-                        }
+            if("tank_1"===collidedEntity.entityId){
+                tankRed.opacity = 0.2
+                console.log("tankRed is inside the lake!")
+                playerRed.life=playerRed.life-1
+            }
 
-                        if("tank_0"===collidedEntity.entityId){
-                            tankBlue.opacity = 0.2
-                            console.log("tankRed is inside the lake!")
-                            tankBlue.life=tankRed.life-1
-                        }
-                    }
+            if("tank_0"===collidedEntity.entityId){
+                tankBlue.opacity = 0.2
+                console.log("tankRed is inside the lake!")
+                playerBlue.life=playerBlue.life-1
+            }
+        }
 
-                    fixture.onEndContact: {
-                        // handle the collision and make the image visible
+        fixture.onEndContact: {
+            // handle the collision and make the image visible
 
-                        var collidedColliderComponent = other.parent.parent;
-                        var collidedEntity = collidedColliderComponent.parent;
-                        console.log(collidedEntity.entityId)
+            var collidedColliderComponent = other.parent.parent;
+            var collidedEntity = collidedColliderComponent.parent;
+            console.log(collidedEntity.entityId)
 
-                        if("tank_1"===collidedEntity.entityId){
-                            tankRed.opacity = 1
-                            console.log("tankRed is free!")
-                        }
+            if("tank_1"===collidedEntity.entityId){
+                tankRed.opacity = 1
+                console.log("tankRed is free!")
+            }
 
-                        if("tank_0"===collidedEntity.entityId){
-                            tankBlue.opacity = 1
-                            console.log("tankBlue is free!")
-                        }
+            if("tank_0"===collidedEntity.entityId){
+                tankBlue.opacity = 1
+                console.log("tankBlue is free!")
+            }
 
-                        console.log("bullet is gone!")
-                    }
+            console.log("bullet is gone!")
+        }
+
 
     }
 }

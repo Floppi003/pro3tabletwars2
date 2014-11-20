@@ -11,6 +11,9 @@ Common.LevelBase {
     property alias tankBlue: tankBlue
     property alias joystickRed: joystickRed
     property alias joystickBlue: joystickBlue
+    property alias playerRed: playerRed
+    property alias playerBlue: playerBlue
+
     //property int moveDuration: 250
 
     focus: true
@@ -185,6 +188,17 @@ Common.LevelBase {
         }
     }
 
+    PlayerRed {
+        id: playerRed
+        life: 3
+    }
+
+    PlayerBlue {
+        id: playerBlue
+        life: 3
+    }
+
+
     Tank {
         id: tankRed
         x: scene.width / 2
@@ -232,7 +246,7 @@ Common.LevelBase {
 
 
             BoxCollider {
-                id: boxCollider                
+                id: boxCollider
 
                 width: 10
                 height: 10
@@ -270,23 +284,35 @@ Common.LevelBase {
 
     // energy tankred
     Text {
-        anchors.right: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 30
+        z:1
+        anchors.left: parent.horizontalCenter
+        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.topMargin: 80
         color: "black"
-        font.pixelSize: 40
-        text: tankRed.life
+        font.pixelSize: 30
+        text: playerRed.life
     }
 
     // energy tankBlue
     Text {
-        anchors.left: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 30
+        z:1
+        anchors.right: parent.horizontalCenter
+        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.topMargin: 80
         color: "black"
-        font.pixelSize: 50
-        text: tankBlue.life
+        font.pixelSize: 30
+        text: playerBlue.life
     }
+
+    Text {
+        z :1
+        anchors.centerIn: parent
+        color: "green"
+        font.pixelSize: 50
+        //text: countdown > 0 ? countdown : "tap!"
+        text: playerRed.life<=0 || playerBlue.life==0 ? "Game Over" : ""
+    }
+
 
     function calcAngle(touchX, touchY) {
         return -180 / Math.PI * Math.atan2(touchY, touchX)
