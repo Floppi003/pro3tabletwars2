@@ -3,23 +3,27 @@ import VPlay 2.0
 import "../common" as Common
 import ".."
 
-Item {
+Common.LevelBase {
     //levelName: "Level1"
-    id: level1
-    width: parent.width
-    height: parent.height
+    id: scene
+    state: "1"
 
-    //make tanks accessible from outside
-    //property alias tankRed: tankRed
-    //property alias tankBlue: tankBlue
+
     property alias opponentSnowman: opponentSnowman
-    //property alias obstacleMiddle: obstacleMiddle
 
     Rectangle {
         id: backgroundRectangle
         anchors.fill: parent
         color: "#eeeeee"
+        width: parent.width
+        height: parent.height
     }
+
+    //load controller-elements
+    GameController {
+        id: gameCtrl
+    }
+    focus: true
 
     Lake {
         id: lake
@@ -29,28 +33,6 @@ Item {
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
     }
-
-    /*
-    Tank {
-        id: tankRed
-        x: scene.width / 2
-        y: 100
-
-        // rotation in degrees clockwise
-        rotation: 0
-        tankBody.source: "../../assets/img/charRed.png"
-    }
-
-    Tank {
-        id: tankBlue
-        x: scene.width / 2
-        y: scene.height - 120
-
-        rotation: 0
-        tankBody.source: "../../assets/img/charBlue.png"
-    }
-*/
-
 
     Opponents {
         id: opponentSnowman
@@ -85,8 +67,7 @@ Item {
             // this is the same as setting running to true, only for demonstration purpose
             Component.onCompleted: movement.start()
           }
-  */
-
+*/
     }
 
     Wall {

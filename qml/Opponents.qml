@@ -72,15 +72,15 @@ EntityBase {
             interval: 100; running: true; repeat: true;
 
             onTriggered: {
-                MoveToPointHelper.targetObject = tankBlue;
+                //MoveToPointHelper.targetObject = tankBlue;
 
                 var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
                 var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
                 targetTankRed = (distanceRed >= distanceBlue) ? false : true;
-                MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
-                //console.debug("DisRed = ", distanceRed);
-                //console.debug("DisBlue = ", distanceBlue);
-                //console.debug("target = ", targetTankRed);
+                //MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
+                console.debug("distanceToRed = ", distanceRed);
+                console.debug("distanceToBlue = ", distanceBlue);
+                console.debug("current target = ", (distanceRed >= distanceBlue) ? "tankBlue" : "tankRed");
             }
         }
     }

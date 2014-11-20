@@ -9,16 +9,16 @@ MAKEFILE      = Makefile.Debug
 
 ####### Compiler, tools and options
 
-CC            = gcc
-CXX           = g++
-DEFINES       = -DUNICODE -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_QUICK_LIB -DQT_MULTIMEDIA_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_NEEDS_QMAIN
-CFLAGS        = -pipe -fno-keep-inline-dllexport -g -Wall -Wextra $(DEFINES)
-CXXFLAGS      = -pipe -fno-keep-inline-dllexport -g -frtti -Wall -Wextra -fexceptions -mthreads $(DEFINES)
-INCPATH       = -I. -I"..\..\..\QT\5.3\mingw482_32\include\VPlay" -I"..\..\..\QT\5.3\mingw482_32\include" -I"..\..\..\QT\5.3\mingw482_32\include\QtQuick" -I"..\..\..\QT\5.3\mingw482_32\include\QtMultimedia" -I"..\..\..\QT\5.3\mingw482_32\include\QtQml" -I"..\..\..\QT\5.3\mingw482_32\include\QtWidgets" -I"..\..\..\QT\5.3\mingw482_32\include\QtSql" -I"..\..\..\QT\5.3\mingw482_32\include\QtNetwork" -I"..\..\..\QT\5.3\mingw482_32\include\QtGui" -I"..\..\..\QT\5.3\mingw482_32\include\QtCore" -I"debug" -I"..\..\..\QT\5.3\mingw482_32\mkspecs\win32-g++"
-LINKER      =        g++
-LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        -lglu32 -lopengl32 -lgdi32 -luser32 -lmingw32 -LD:/FH/QT/5.3/mingw482_32/lib -lqtmaind -LC:\mingw482\mingw32\lib -LC:\Utils\icu32_52_1_mingw482\lib -LC:\utils\postgresql\pgsql\lib -LC:\utils\mysql\mysql\lib -LC:\opensll\lib -LD:\FH\QT\5.3\mingw482_32/lib -lVPlayd -lQt5Quickd -lQt5Multimediad -lQt5Qmld -lQt5Widgetsd -lQt5Sqld -lQt5Networkd -lQt5Guid -lQt5Cored 
-QMAKE         = D:\FH\QT\5.3\mingw482_32\bin\qmake.exe
+CC            = cl
+CXX           = cl
+DEFINES       = -DUNICODE -DWIN32 -DWIN64 -DQT_QML_DEBUG -DQT_DECLARATIVE_DEBUG -DQT_QUICK_LIB -DQT_MULTIMEDIA_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_SQL_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE
+CFLAGS        = -nologo -Zm200 -Zc:wchar_t -FS -Zi -MDd -W3 /Fddebug\VPadTanks_01.pdb $(DEFINES)
+CXXFLAGS      = -nologo -Zm200 -Zc:wchar_t -FS -Zi -MDd -GR -W3 -w34100 -w34189 -EHsc /Fddebug\VPadTanks_01.pdb $(DEFINES)
+INCPATH       = -I"..\..\QT_vPlay\5.3\msvc2013_64\include\VPlay" -I"..\..\QT_vPlay\5.3\msvc2013_64\include" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtQuick" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtMultimedia" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtSql" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtNetwork" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtANGLE" -I"..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore" -I"debug" -I"..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\win32-msvc2013"
+LINKER        = link
+LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /DEBUG /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
+LIBS          = /LIBPATH:D:\Tools\QT_vPlay\5.3\msvc2013_64\lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\qtmaind.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\VPlayd.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Quickd.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Multimediad.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Qmld.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Widgetsd.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Sqld.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Networkd.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Guid.lib D:\Tools\QT_vPlay\5.3\msvc2013_64\lib\Qt5Cored.lib libEGLd.lib libGLESv2d.lib gdi32.lib user32.lib 
+QMAKE         = D:\Tools\QT_vPlay\5.3\msvc2013_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
@@ -44,7 +44,7 @@ OBJECTS_DIR   = debug
 ####### Files
 
 SOURCES       = main.cpp 
-OBJECTS       = debug/main.o
+OBJECTS       = debug\main.obj
 
 DIST          = 
 QMAKE_TARGET  = VPadTanks_01
@@ -54,40 +54,64 @@ DESTDIR_TARGET = debug\VPadTanks_01.exe
 
 ####### Implicit rules
 
-.SUFFIXES: .cpp .cc .cxx .c
+.SUFFIXES: .c .cpp .cc .cxx
 
-.cpp.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+{.}.cpp{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
 
-.cc.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+{.}.cc{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
 
-.cxx.o:
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+{.}.cxx{debug\}.obj::
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
 
-.c.o:
-	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+{.}.c{debug\}.obj::
+	$(CC) -c $(CFLAGS) $(INCPATH) -Fodebug\ @<<
+	$<
+<<
 
 ####### Build rules
 
 first: all
-all: Makefile.Debug  $(DESTDIR_TARGET)
+all: Makefile.Debug $(DESTDIR_TARGET)
 
 $(DESTDIR_TARGET):  $(OBJECTS) 
-	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+	echo 1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "debug\\VPadTanks_01.exe.embed.manifest">debug\VPadTanks_01.exe_manifest.rc
+	if not exist $(DESTDIR_TARGET) if exist debug\VPadTanks_01.exe.embed.manifest del debug\VPadTanks_01.exe.embed.manifest
+	if exist debug\VPadTanks_01.exe.embed.manifest copy /Y debug\VPadTanks_01.exe.embed.manifest debug\VPadTanks_01.exe_manifest.bak
+	$(LINKER) $(LFLAGS) /MANIFEST /MANIFESTFILE:debug\VPadTanks_01.exe.embed.manifest /OUT:$(DESTDIR_TARGET) @<<
+$(OBJECTS) $(LIBS) 
+!IF EXIST(debug\VPadTanks_01.exe_manifest.res)
+debug\VPadTanks_01.exe_manifest.res
+!ENDIF
+<<
+	if exist debug\VPadTanks_01.exe_manifest.bak fc /b debug\VPadTanks_01.exe.embed.manifest debug\VPadTanks_01.exe_manifest.bak >NUL || del debug\VPadTanks_01.exe_manifest.bak
+	if not exist debug\VPadTanks_01.exe_manifest.bak rc.exe /fodebug\VPadTanks_01.exe_manifest.res debug\VPadTanks_01.exe_manifest.rc
+	if not exist debug\VPadTanks_01.exe_manifest.bak $(LINKER) $(LFLAGS) /MANIFEST /MANIFESTFILE:debug\VPadTanks_01.exe.embed.manifest /OUT:$(DESTDIR_TARGET) @<<
+$(OBJECTS) $(LIBS) debug\VPadTanks_01.exe_manifest.res
+<<
+	if exist debug\VPadTanks_01.exe_manifest.bak del debug\VPadTanks_01.exe_manifest.bak
 
 qmake: FORCE
-	@$(QMAKE) -spec win32-g++ CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile.Debug VPadTanks_01.pro
+	@$(QMAKE) -spec win32-msvc2013 CONFIG+=debug CONFIG+=declarative_debug CONFIG+=qml_debug -o Makefile.Debug VPadTanks_01.pro
 
 qmake_all: FORCE
 
 dist:
-	$(ZIP) VPadTanks_01.zip $(SOURCES) $(DIST) VPadTanks_01.pro ..\..\..\QT\5.3\mingw482_32\mkspecs\features\spec_pre.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\qdevice.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\features\device_config.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\common\shell-win32.conf ..\..\..\QT\5.3\mingw482_32\mkspecs\qconfig.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axbase.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axbase_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axcontainer.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axserver.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_axserver_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_bluetooth.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_clucene_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_concurrent.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_core.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_core_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_declarative.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_declarative_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_designer.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_designer_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_enginio.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_enginio_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_gui.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_gui_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_help.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_help_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_multimedia.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_network.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_network_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_nfc.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_nfc_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_opengl.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_opengl_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_openglextensions.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_platformsupport_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_positioning.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_positioning_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_printsupport.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qml.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qml_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qmltest.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_quick.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_quick_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_script.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_script_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_scripttools.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_sensors.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_sensors_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_serialport.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_serialport_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_sql.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_sql_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_svg.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_svg_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_testlib.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_testlib_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_uitools.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_uitools_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_webkit.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_webkit_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_webkitwidgets.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_webkitwidgets_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_websockets.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_websockets_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_widgets.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_widgets_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_winextras.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_winextras_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_xml.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_xml_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\..\QT\5.3\mingw482_32\mkspecs\features\qt_functions.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\qt_config.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\win32\qt_config.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\win32-g++\qmake.conf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\spec_post.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\exclusive_builds.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\default_pre.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\win32\default_pre.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\resolve_config.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\exclusive_builds_post.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\default_post.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\build_pass.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\v-play.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\qml_debug.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\declarative_debug.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\win32\rtti.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\precompile_header.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\warn_on.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\qt.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\resources.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\moc.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\win32\opengl.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\uic.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\win32\windows.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\testcase_targets.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\exceptions.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\yacc.prf ..\..\..\QT\5.3\mingw482_32\mkspecs\features\lex.prf VPadTanks_01.pro D:/FH/QT/5.3/mingw482_32/lib/qtmaind.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Cored.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Quickd.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Multimediad.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Qmld.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Widgetsd.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Sqld.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Networkd.prl D:/FH/QT/5.3/mingw482_32/lib/Qt5Guid.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
+	$(ZIP) VPadTanks_01.zip $(SOURCES) $(DIST) VPadTanks_01.pro ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\spec_pre.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\common\shell-win32.conf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\qconfig.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axbase.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axbase_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axcontainer.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axcontainer_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axserver.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_axserver_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_bluetooth.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_bluetooth_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_bootstrap_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_clucene_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_concurrent.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_concurrent_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_core.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_core_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_declarative.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_declarative_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_designer.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_designer_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_designercomponents_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_enginio.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_enginio_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_gui.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_gui_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_help.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_help_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_multimedia.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_multimedia_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_multimediawidgets_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_network.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_network_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_nfc.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_nfc_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_opengl.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_opengl_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_openglextensions.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_openglextensions_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_platformsupport_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_positioning.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_positioning_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_printsupport.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_printsupport_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qml.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qml_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qmldevtools_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qmltest.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qmltest_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_qtmultimediaquicktools_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_quick.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_quick_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_quickparticles_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_quickwidgets_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_script.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_script_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_scripttools.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_scripttools_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_sensors.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_sensors_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_serialport.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_serialport_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_sql.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_sql_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_svg.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_svg_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_testlib.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_testlib_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_uitools.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_uitools_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_webkit.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_webkit_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_webkitwidgets_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_websockets.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_websockets_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_widgets.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_widgets_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_winextras.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_winextras_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_xml.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_xml_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\modules\qt_lib_xmlpatterns_private.pri ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\qt_functions.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\qt_config.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\win32\qt_config.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\win32-msvc2013\qmake.conf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\spec_post.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\exclusive_builds.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\default_pre.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\win32\default_pre.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\resolve_config.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\exclusive_builds_post.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\default_post.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\build_pass.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\v-play.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\qml_debug.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\declarative_debug.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\win32\rtti.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\precompile_header.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\warn_on.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\qt.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\resources.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\moc.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\win32\opengl.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\uic.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\win32\windows.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\testcase_targets.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\exceptions.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\yacc.prf ..\..\QT_vPlay\5.3\msvc2013_64\mkspecs\features\lex.prf VPadTanks_01.pro D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/qtmaind.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Cored.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Quickd.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Multimediad.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Qmld.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Widgetsd.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Sqld.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Networkd.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/Qt5Guid.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/libEGLd.prl D:/Tools/QT_vPlay/5.3/msvc2013_64/lib/libGLESv2d.prl  NO_PCH_SOURCES RESOURCES HEADERS SOURCES OBJECTIVE_SOURCES FORMS YACCSOURCES YACCSOURCES LEXSOURCES 
 
 clean: compiler_clean 
-	-$(DEL_FILE) debug\main.o
+	-$(DEL_FILE) debug\main.obj
+	-$(DEL_FILE) debug\VPadTanks_01.exp debug\VPadTanks_01.ilk debug\VPadTanks_01.idb debug\VPadTanks_01.exe.embed.manifest debug\VPadTanks_01.exe_manifest.rc debug\VPadTanks_01.exe_manifest.res
 
 distclean: clean 
+	-$(DEL_FILE) debug\VPadTanks_01.pdb
 	-$(DEL_FILE) $(DESTDIR_TARGET)
 	-$(DEL_FILE) Makefile.Debug
 
@@ -119,128 +143,127 @@ compiler_clean:
 
 ####### Compile
 
-debug/main.o: main.cpp ../../../QT/5.3/mingw482_32/include/QtWidgets/QApplication \
-		../../../QT/5.3/mingw482_32/include/QtWidgets/qapplication.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qcoreapplication.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qglobal.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qconfig.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qfeatures.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qsystemdetection.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qprocessordetection.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qcompilerdetection.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qtypeinfo.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qtypetraits.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qsysinfo.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qlogging.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qflags.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qbasicatomic.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_bootstrap.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qgenericatomic.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_msvc.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_armv7.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_armv6.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_armv5.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_ia64.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_mips.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_x86.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_cxx11.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_gcc.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qatomic_unix.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qglobalstatic.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qmutex.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qnumeric.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qstring.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qchar.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qbytearray.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qrefcount.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qnamespace.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qarraydata.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qstringbuilder.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qobject.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qobjectdefs.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qobjectdefs_impl.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qlist.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qalgorithms.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qiterator.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qcoreevent.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qscopedpointer.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qmetatype.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qvarlengtharray.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qcontainerfwd.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qisenum.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qobject_impl.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qeventloop.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qwindowdefs.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qwindowdefs_win.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qpoint.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qsize.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qcursor.h \
-		../../../QT/5.3/mingw482_32/include/QtWidgets/qdesktopwidget.h \
-		../../../QT/5.3/mingw482_32/include/QtWidgets/qwidget.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qmargins.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qpaintdevice.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qrect.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qpalette.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qcolor.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qrgb.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qstringlist.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qdatastream.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qiodevice.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qpair.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qregexp.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qstringmatcher.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qbrush.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qvector.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qmatrix.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qpolygon.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qregion.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qline.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qtransform.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qpainterpath.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qimage.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qpixmap.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qsharedpointer.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qshareddata.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qsharedpointer_impl.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qhash.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qfont.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qfontmetrics.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qfontinfo.h \
-		../../../QT/5.3/mingw482_32/include/QtWidgets/qsizepolicy.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qkeysequence.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qevent.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qvariant.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qmap.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qdebug.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qtextstream.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qlocale.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qset.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qcontiguouscache.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qurl.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qurlquery.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qfile.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/qfiledevice.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qvector2d.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qtouchdevice.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qguiapplication.h \
-		../../../QT/5.3/mingw482_32/include/QtGui/qinputmethod.h \
-		../../../QT/5.3/mingw482_32/include/VPlay/VPApplication \
-		../../../QT/5.3/mingw482_32/include/VPlay/vpapplication.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/QObject \
-		../../../QT/5.3/mingw482_32/include/QtCore/QAbstractAnimation \
-		../../../QT/5.3/mingw482_32/include/QtCore/qabstractanimation.h \
-		../../../QT/5.3/mingw482_32/include/QtCore/QStringList \
-		../../../QT/5.3/mingw482_32/include/QtCore/QVariantMap \
-		../../../QT/5.3/mingw482_32/include/QtQml/QQmlApplicationEngine \
-		../../../QT/5.3/mingw482_32/include/QtQml/qqmlapplicationengine.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qqmlengine.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qjsengine.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qjsvalue.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qtqmlglobal.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qqmlerror.h \
-		../../../QT/5.3/mingw482_32/include/QtQml/qqmldebug.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o main.cpp
+debug\main.obj: main.cpp ..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets\QApplication \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets\qapplication.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qcoreapplication.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qglobal.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qconfig.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qfeatures.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qsystemdetection.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qprocessordetection.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qcompilerdetection.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qtypeinfo.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qtypetraits.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qsysinfo.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qlogging.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qflags.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qbasicatomic.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_bootstrap.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qgenericatomic.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_msvc.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_armv7.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_armv6.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_armv5.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_ia64.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_mips.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_x86.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_cxx11.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_gcc.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qatomic_unix.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qglobalstatic.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qmutex.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qnumeric.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qstring.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qchar.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qbytearray.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qrefcount.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qnamespace.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qarraydata.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qstringbuilder.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qobject.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qobjectdefs.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qlist.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qalgorithms.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qiterator.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qcoreevent.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qscopedpointer.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qmetatype.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qvarlengtharray.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qcontainerfwd.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qisenum.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qobject_impl.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qeventloop.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qwindowdefs.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qwindowdefs_win.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qpoint.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qsize.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qcursor.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets\qwidget.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qmargins.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qpaintdevice.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qrect.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qpalette.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qcolor.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qrgb.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qstringlist.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qdatastream.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qiodevice.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qpair.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qregexp.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qstringmatcher.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qbrush.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qvector.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qmatrix.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qpolygon.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qregion.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qline.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qtransform.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qpainterpath.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qimage.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qpixmap.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qsharedpointer.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qshareddata.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qhash.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qfont.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qfontmetrics.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qfontinfo.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtWidgets\qsizepolicy.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qkeysequence.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qevent.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qvariant.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qmap.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qdebug.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qtextstream.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qlocale.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qset.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qcontiguouscache.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qurl.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qurlquery.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qfile.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qfiledevice.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qvector2d.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qtouchdevice.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qguiapplication.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtGui\qinputmethod.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\VPlay\VPApplication \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\VPlay\vpapplication.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\QObject \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\QAbstractAnimation \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\qabstractanimation.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\QStringList \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtCore\QVariantMap \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\QQmlApplicationEngine \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qqmlapplicationengine.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qqmlengine.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qjsengine.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qjsvalue.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qtqmlglobal.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qqmlerror.h \
+		..\..\QT_vPlay\5.3\msvc2013_64\include\QtQml\qqmldebug.h
 
 ####### Install
 

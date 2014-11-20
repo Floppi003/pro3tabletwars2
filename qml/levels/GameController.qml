@@ -3,14 +3,13 @@ import VPlay 2.0
 import "../common" as Common
 import ".."
 
-Common.LevelBase {
-    //levelName: "Level1"
-    id:scene
-    state: "1"
+Item {
+    id: sceneCtrl
+    anchors.fill: parent
 
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
-    property int moveDuration: 250
+    //property int moveDuration: 250
 
     // physics world for collision detection
     PhysicsWorld {
@@ -18,12 +17,13 @@ Common.LevelBase {
         debugDrawVisible: false
         updatesPerSecondForPhysics: 60
     }
-
+/*
+    //levelName: "Level1"
     Level1 {
         id: level1
     }
     focus: true
-
+*/
 
     // ---------------------------------------------------
     // Joystick Controller tankRed
@@ -109,7 +109,7 @@ Common.LevelBase {
     JoystickControllerHUD {
         width: 180
         height: 180
-        x: scene.width - 230
+        x: sceneCtrl.width - 230
         y: 50
 
         Rectangle {
@@ -177,8 +177,8 @@ Common.LevelBase {
                 console.log("xDir: " + xDirection + ", yDir: " + yDirection)
 
                 // Determine where we wish to shoot the projectile to
-                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < scene.width + 5) &&
-                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < scene.height + 5)) {
+                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < sceneCtrl.width + 5) &&
+                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < sceneCtrl.height + 5)) {
                     xDirection = xDirection * 2
                     yDirection = yDirection * 2
 
@@ -191,7 +191,7 @@ Common.LevelBase {
                 var time = distance / 480 // pixel per second
                 time = time * 1000 // milliseconds
 
-                console.log("scene.height: " + scene.height + ", scene.width: " + scene.width)
+                console.log("scene.height: " + sceneCtrl.height + ", scene.width: " + sceneCtrl.width)
                 console.log("distance: " + distance)
                 console.log("time: " + time)
                 console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
@@ -228,8 +228,8 @@ Common.LevelBase {
         id: joystickBlue
         width: 180
         height: 180
-        x: scene.width - 230
-        y: scene.height - 230
+        x: sceneCtrl.width - 230
+        y: sceneCtrl.height - 230
 
         Rectangle {
             anchors.fill: parent
@@ -303,7 +303,7 @@ Common.LevelBase {
         width: 180
         height: 180
         x: 50
-        y: scene.height - 230
+        y: sceneCtrl.height - 230
 
         Rectangle {
             anchors.fill: parent
@@ -363,7 +363,7 @@ Common.LevelBase {
 
     Tank {
         id: tankRed
-        x: scene.width / 2
+        x: sceneCtrl.width / 2
         y: 100
 
         // rotation in degrees clockwise
@@ -373,8 +373,8 @@ Common.LevelBase {
 
     Tank {
         id: tankBlue
-        x: scene.width / 2
-        y: scene.height - 120
+        x: sceneCtrl.width / 2
+        y: sceneCtrl.height - 120
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"

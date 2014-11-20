@@ -35,7 +35,7 @@ SceneBase {
             width: 50
             height: 50
             onClicked: {
-                levelPressed("GameController.qml")//1
+                levelPressed("Level1.qml")
             }
         }
         MenuButton {
@@ -43,15 +43,16 @@ SceneBase {
             width: 50
             height: 50
             onClicked: {
-                levelPressed("GameController.qml")//2
+                levelPressed("Level2.qml")
             }
         }
+/*
         MenuButton {
             text: "3"
             width: 50
             height: 50
             onClicked: {
-                levelPressed("GameController.qml")//3
+                levelPressed("GameController.qml") // Level 3
             }
         }
         Repeater {
@@ -62,6 +63,7 @@ SceneBase {
                 height: 50
             }
         }
+ */
     }
 }
 
