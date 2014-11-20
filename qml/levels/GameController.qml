@@ -445,4 +445,24 @@ Item {
             }
         }
     }
+
+    // energy tankred
+    Text {
+        anchors.right: parent.horizontalCenter
+        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.topMargin: 30
+        color: "black"
+        font.pixelSize: 40
+        text: tankRed.life
+    }
+
+    // energy tankBlue
+    Text {
+        anchors.left: parent.horizontalCenter
+        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.topMargin: 30
+        color: "black"
+        font.pixelSize: 50
+        text: tankBlue.life
+    }
 }

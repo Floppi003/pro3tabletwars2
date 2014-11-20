@@ -11,6 +11,11 @@ EntityBase {
     property alias tankCannon: tankCannon
     property alias boxCollider: boxCollider
 
+    property int life: 3
+        // flag indicating if dead
+     property bool gameRunning: life == 0
+
+
     // this is used as input for the BoxCollider force & torque properties
     TwoAxisController {
         id: twoAxisController
