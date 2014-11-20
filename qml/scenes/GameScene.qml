@@ -7,34 +7,31 @@ SceneBase {
     // the filename of the current level gets stored here, it is used for loading the
     property string activeLevelFileName
     // the currently loaded level gets stored here
-    property variant activeLevel
+    property var activeLevel
 
     // set the name of the current level, this will cause the Loader to load the corresponding level
     function setLevel(fileName) {
         activeLevelFileName = fileName
     }
 
-    width: 768
-    height: 1024
-
-    // background
-    Rectangle {
-        anchors.fill: parent.gameWindowAnchorItem
-        color: "#dd94da"
+    // physics world for collision detection
+    PhysicsWorld {
+        id: world
+        //debugDrawVisible: false
+        updatesPerSecondForPhysics: 60
     }
 
     // back button to leave scene
     MenuButton {
+        z: 1
         text: "Back to menu"
         // anchor the button to the gameWindowAnchorItem to be on the edge of the screen on any device
-        anchors.right: gameScene.gameWindowAnchorItem.right
+        anchors.right: gameScene.right
         anchors.rightMargin: 10
-        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.top: gameScene.top
         anchors.topMargin: 10
         onClicked: {
             backPressed()
-            activeLevel = undefined
-            activeLevelFileName = ""
         }
     }
 
@@ -57,11 +54,5 @@ SceneBase {
             // store the loaded level as activeLevel for easier access
             activeLevel = item
         }
-    }
-
-    // we connect the gameScene to the loaded level
-    Connections {
-        // only connect if a level is loaded, to prevent errors
-        target: activeLevel !== undefined ? activeLevel : null
     }
 }

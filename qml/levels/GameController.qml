@@ -5,23 +5,14 @@ import ".."
 
 Common.LevelBase {
     id: scene
-    state: "1"
+    state: "0"
 
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
+    property alias joystickRed: joystickRed
+    property alias joystickBlue: joystickBlue
     //property int moveDuration: 250
 
-    // physics world for collision detection
-    PhysicsWorld {
-        id: world
-        //debugDrawVisible: false
-        updatesPerSecondForPhysics: 60
-    }
-
-    //levelName: "Level1"
-    Level1 {
-        id: level1
-    }
     focus: true
 
     // ---------------------------------------------------
@@ -42,8 +33,8 @@ Common.LevelBase {
         }
 
         // delete the default images
-        source: "../assets/img/null"
-        thumbSource: "../assets/img/null"
+        source: ""
+        thumbSource: ""
 
 
         // Touch Methods
@@ -51,50 +42,16 @@ Common.LevelBase {
 
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
+            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
             tankRed.tankBody.rotation = angle
             tankRed.boxCollider.rotation = angle
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
+            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
             tankRed.tankBody.rotation = angle
             tankRed.boxCollider.rotation = angle
-        }
-
-
-        // Custom Javascript Functions
-        function calcAngle(touchX, touchY) {
-
-            console.log("touchX: " + touchX + ", touchY: " + touchY)
-
-            // Avoid division by zero!
-            if (touchX == 0) {
-                return tankRed.boxCollider.rotation
-            }
-
-            var angle = Math.atan(touchY / touchX)
-
-            // find out in which quadrant this happened.
-            if (touchX < 0 && touchY >= 0) {
-                // upper left quadrant
-                angle = Math.PI - (Math.abs(angle))
-
-            } else if (touchX < 0 && touchY < 0) {
-                // lower left quadrant
-                angle = Math.PI + (Math.abs(angle))
-
-            } else if (touchX >= 0 && touchY < 0) {
-                // lower right quadrant
-                angle = (Math.PI * 2) - (Math.abs(angle))
-            }
-
-            angle = (angle * 180 / Math.PI)
-            angle = 360 - angle
-            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
-
-            return angle - 90
         }
     }
 
@@ -118,8 +75,8 @@ Common.LevelBase {
         }
 
         // delete the default images
-        source: "../assets/img/null"
-        thumbSource: "../assets/img/null"
+        source: ""
+        thumbSource: ""
 
         property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
         onControllerXPositionChanged: {
@@ -132,36 +89,6 @@ Common.LevelBase {
             tankRed.tankCannon.rotation = angle
         }
 
-        function calcAngle(touchX, touchY) {
-            console.log("touchX: " + touchX + ", touchY: " + touchX + ", ----------------------------------------------")
-
-            // Avoid division by zero!
-            if (touchX === 0) {
-                return tankRed.tankCannon.rotation
-            }
-
-            var angle = Math.atan(touchY / touchX)
-
-            // find out in which quadrant this happened.
-            if (touchX < 0 && touchY >= 0) {
-                // upper left quadrant
-                angle = Math.PI - (Math.abs(angle))
-
-            } else if (touchX < 0 && touchY < 0) {
-                // lower left quadrant
-                angle = Math.PI + (Math.abs(angle))
-
-            } else if (touchX >= 0 && touchY < 0) {
-                // lower right quadrant
-                angle = (Math.PI * 2) - (Math.abs(angle))
-            }
-
-            angle = (angle * 180 / Math.PI)
-            angle = 360 - angle
-            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
-
-            return angle
-        }
 
 
         Timer {
@@ -169,49 +96,16 @@ Common.LevelBase {
 
             onTriggered: {
 
-                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0)
-                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0)
-                console.log("----------------------------------------------------------------------")
-                console.log("----------------------------------------------------------------------")
-                console.log("xDir: " + xDirection + ", yDir: " + yDirection)
+                var speed = 250
+                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
-                // Determine where we wish to shoot the projectile to
-                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < scene.width + 5) &&
-                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < scene.height + 5)) {
-                    xDirection = xDirection * 2
-                    yDirection = yDirection * 2
-
-                    console.log("xDir: " + xDirection + ", yDir: " + yDirection)
-                }
-
-                xDirection = tankRed.x + xDirection + tankRed.width / 2
-                yDirection = tankRed.y + yDirection + tankRed.height / 2 - 4
-                var distance = Math.sqrt(xDirection * xDirection + yDirection * yDirection) // Determine the length of how far we're shooting
-                var time = distance / 480 // pixel per second
-                time = time * 1000 // milliseconds
-
-                console.log("scene.height: " + scene.height + ", scene.width: " + scene.width)
-                console.log("distance: " + distance)
-                console.log("time: " + time)
-                console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
-                console.log("player.x: " + tankRed.x + ", player.y: " + tankRed.y)
-
-                //var destination = Qt.point(xDirection, yDirection)				
-/*
-                Bullet: {
-                    start: Qt.point(x, y)
-                    destination: Qt.point(1500, 2000)
-                    moveDuration: 300
-                }
-
-                singleBullet.start = Qt.point(x, y);
-                singleBullet.destination = Qt.point(1500, 2000);
-                singleBullet.moveDuration = 300;
-*/
                 // create and remove entities at runtime
-                //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("entities/Box.qml"), {"x": 100, "y": 50});
-                //entityManager.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Bullet.qml"), {"start": Qt.point(x, y), "destination": Qt.point(1500, 2000), "moveDuration": 300});
-                entityManager.createEntityFromComponentWithProperties(bullet, {"start": Qt.point(tankRed.x, tankRed.y), "destination": Qt.point(xDirection, yDirection), "moveDuration": time});
+                entityManager.createEntityFromComponentWithProperties(
+                            bullet, {
+                                start: Qt.point(tankRed.x, tankRed.y),
+                                velocity: Qt.point(xDirection, yDirection)
+                            });
             }
         }
     }
@@ -237,8 +131,8 @@ Common.LevelBase {
         }
 
         // delete the default images
-        source: "../assets/img/null"
-        thumbSource: "../assets/img/null"
+        source: ""
+        thumbSource: ""
 
         property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
@@ -256,42 +150,6 @@ Common.LevelBase {
             tankBlue.boxCollider.rotation = angle +180
         }
 
-        function calcAngle(touchX, touchY) {
-
-            console.log("touchX: " + touchX + ", touchY: " + touchY)
-
-            // Avoid division by zero!
-            if (touchX == 0) {
-                return tankBlue.boxCollider.rotation
-            }
-
-            var angle = Math.atan(touchY / touchX)
-
-            // find out in which quadrant this happened.
-            if (touchX < 0 && touchY >= 0) {
-                // upper left quadrant
-                angle = Math.PI - (Math.abs(angle))
-
-            } else if (touchX < 0 && touchY < 0) {
-                // lower left quadrant
-                angle = Math.PI + (Math.abs(angle))
-
-            } else if (touchX >= 0 && touchY < 0) {
-                // lower right quadrant
-                angle = (Math.PI * 2) - (Math.abs(angle))
-            }
-
-            angle = (angle * 180 / Math.PI)
-            angle = 360 - angle
-            //console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
-
-
-
-            angle = angle - 270
-            console.log("angle tankBlue: " + angle)
-
-            return angle +180
-        }
     }
 
 
@@ -311,8 +169,8 @@ Common.LevelBase {
         }
 
         // delete the default images
-        source: "../assets/img/null"
-        thumbSource: "../assets/img/null"
+        source: ""
+        thumbSource: ""
 
         property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
@@ -325,45 +183,15 @@ Common.LevelBase {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             tankBlue.tankCannon.rotation = angle
         }
-
-        function calcAngle(touchX, touchY) {
-
-            console.log("touchX: " + touchX + ", touchY: " + touchY)
-
-            // Avoid division by zero!
-            if (touchX == 0) {
-                return tankBlue.tankCannon.rotation
-            }
-
-            var angle = Math.atan(touchY / touchX)
-
-            // find out in which quadrant this happened.
-            if (touchX < 0 && touchY >= 0) {
-                // upper left quadrant
-                angle = Math.PI - (Math.abs(angle))
-
-            } else if (touchX < 0 && touchY < 0) {
-                // lower left quadrant
-                angle = Math.PI + (Math.abs(angle))
-
-            } else if (touchX >= 0 && touchY < 0) {
-                // lower right quadrant
-                angle = (Math.PI * 2) - (Math.abs(angle))
-            }
-
-            angle = (angle * 180 / Math.PI)
-            angle = 360 - angle
-
-
-            console.log("angle: " + angle + ", (x: " + touchX + ", y: " + touchY + ")")
-            return angle
-        }
     }
 
     Tank {
         id: tankRed
         x: scene.width / 2
         y: 100
+        z: 1
+
+        entityId: "tank_0"
 
         // rotation in degrees clockwise
         rotation: 0
@@ -374,6 +202,9 @@ Common.LevelBase {
         id: tankBlue
         x: scene.width / 2
         y: scene.height - 120
+        z: 1
+
+        entityId: "tank_1"
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
@@ -394,8 +225,11 @@ Common.LevelBase {
             }
 
             property point start
-            property point destination
-            property int moveDuration
+            property point velocity
+
+            x: start.x
+            y: start.y
+
 
             BoxCollider {
                 id: boxCollider                
@@ -413,33 +247,22 @@ Common.LevelBase {
             }
 
 
-            PropertyAnimation on x {
-                from: start.x //+ start.width / 2
-                to: destination.x
-                duration: moveDuration
-                onPropertiesChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onAlwaysRunToEndChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onFromChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onToChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onLoopCountChanged: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onStarted: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
-                onStopped: { console.log("from x: " + start.x + " to x: " + destination.x + " Duration: " + moveDuration); }
+            MovementAnimation {
+                target: singleBullet
+
+                property: "x"
+                velocity: singleBullet.velocity.x
+                running: true
             }
 
-            PropertyAnimation on y {
-                from: start.y //+ start.height / 2 - 4
-                to: destination.y
-                duration: moveDuration
+            MovementAnimation {
+                target: singleBullet
 
-                onPropertiesChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
-                onAlwaysRunToEndChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
-                onFromChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
-                onToChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
-                onLoopCountChanged: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
-                onStarted: { console.log("from y: " + start.y + " to y: " + destination.y + " Duration: " + moveDuration); }
+                property: "y"
+                velocity: singleBullet.velocity.y
+                running: true
                 onStopped: {
-                    console.log("did Destroy")
-                    bullet.destroy()
+                    singleBullet.destroy()
                 }
             }
         }
@@ -448,7 +271,7 @@ Common.LevelBase {
     // energy tankred
     Text {
         anchors.right: parent.horizontalCenter
-        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.top: parent.top
         anchors.topMargin: 30
         color: "black"
         font.pixelSize: 40
@@ -458,10 +281,14 @@ Common.LevelBase {
     // energy tankBlue
     Text {
         anchors.left: parent.horizontalCenter
-        anchors.top: gameScene.gameWindowAnchorItem.top
+        anchors.top: parent.top
         anchors.topMargin: 30
         color: "black"
         font.pixelSize: 50
         text: tankBlue.life
+    }
+
+    function calcAngle(touchX, touchY) {
+        return -180 / Math.PI * Math.atan2(touchY, touchX)
     }
 }

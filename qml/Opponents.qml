@@ -78,9 +78,9 @@ EntityBase {
                 var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
                 targetTankRed = (distanceRed >= distanceBlue) ? false : true;
                 //MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
-                console.debug("distanceToRed = ", distanceRed);
-                console.debug("distanceToBlue = ", distanceBlue);
-                console.debug("current target = ", (distanceRed >= distanceBlue) ? "tankBlue" : "tankRed");
+               // console.debug("distanceToRed = ", distanceRed);
+               // console.debug("distanceToBlue = ", distanceBlue);
+               // console.debug("current target = ", (distanceRed >= distanceBlue) ? "tankBlue" : "tankRed");
             }
         }
     }

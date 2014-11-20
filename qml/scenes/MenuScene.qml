@@ -12,9 +12,7 @@ SceneBase {
 
     // background
     Rectangle {
-        //anchors.fill: parent.gameWindowAnchorItem
-        width: 1536
-        height: 2048
+        anchors.fill: parent
 
         color: "#47688e"
     }

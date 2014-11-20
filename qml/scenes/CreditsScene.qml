@@ -7,7 +7,7 @@ SceneBase {
 
     // background
     Rectangle {
-        anchors.fill: parent.gameWindowAnchorItem
+        anchors.fill: parent
         color: "#49a349"
     }
 
@@ -15,9 +15,9 @@ SceneBase {
     MenuButton {
         text: "Back"
         // anchor the button to the gameWindowAnchorItem to be on the edge of the screen on any device
-        anchors.right: creditsScene.gameWindowAnchorItem.right
+        anchors.right: creditsScene.right
         anchors.rightMargin: 10
-        anchors.top: creditsScene.gameWindowAnchorItem.top
+        anchors.top: creditsScene.top
         anchors.topMargin: 10
         onClicked: backPressed()
     }

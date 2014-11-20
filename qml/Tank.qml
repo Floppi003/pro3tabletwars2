@@ -44,7 +44,6 @@ EntityBase {
 
     BoxCollider {
         id: boxCollider
-
         // the image and the physics will use this size
         width: 40
         height: 40

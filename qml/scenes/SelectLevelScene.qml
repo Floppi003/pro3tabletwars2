@@ -5,12 +5,14 @@ import "../common"
 SceneBase {
     id: selectLevelScene
 
+    //property int levelSelected: 0
+
     // signal indicating that a level has been selected
     signal levelPressed(string selectedLevel)
 
     // background
     Rectangle {
-        anchors.fill: parent.gameWindowAnchorItem
+        anchors.fill: parent
         color: "#ece468"
     }
 
@@ -18,9 +20,9 @@ SceneBase {
     MenuButton {
         text: "Back"
         // anchor the button to the gameWindowAnchorItem to be on the edge of the screen on any device
-        anchors.right: selectLevelScene.gameWindowAnchorItem.right
+        anchors.right: selectLevelScene.right
         anchors.rightMargin: 10
-        anchors.top: selectLevelScene.gameWindowAnchorItem.top
+        anchors.top: selectLevelScene.top
         anchors.topMargin: 10
         onClicked: backPressed()
     }
@@ -35,7 +37,7 @@ SceneBase {
             width: 50
             height: 50
             onClicked: {
-                levelPressed("GameController.qml")
+                levelPressed("Level1.qml")
             }
         }
         MenuButton {
@@ -43,7 +45,7 @@ SceneBase {
             width: 50
             height: 50
             onClicked: {
-                levelPressed("GameController.qml")
+                levelPressed("Level2.qml")
             }
         }
 /*

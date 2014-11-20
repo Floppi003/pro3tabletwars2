@@ -1,26 +1,19 @@
 import QtQuick 2.0
 import VPlay 2.0
-import "../common" as Common
 import ".."
 
-Item {
+GameController {
     //levelName: "Level1"
-    id: level1
-    width: parent.width
-    height: parent.height
+    id: scene
 
     property alias opponentSnowman: opponentSnowman
 
-    Rectangle {
-        id: backgroundRectangle
-        anchors.fill: parent
-        color: "#eeeeee"        
-    }
-
     Lake {
         id: lake
-        x: scene.width / 2
-        y: scene.height / 2
+        anchors.centerIn: parent
+
+        joystickRed: scene.joystickRed
+        joystickBlue: scene.joystickBlue
 
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
@@ -98,7 +91,7 @@ Item {
         id: wallRight
         width: 20
         anchors {
-            left: parent.right
+            right: parent.right
             bottom: parent.bottom
             top: parent.top
         }

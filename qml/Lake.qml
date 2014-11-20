@@ -9,6 +9,9 @@ EntityBase {
     property alias lakeBody: lakeBody
     property alias boxCollider: boxCollider
 
+    property JoystickControllerHUD joystickRed
+    property JoystickControllerHUD joystickBlue
+
     Image {
         id: lakeBody
         width: 500
@@ -39,15 +42,15 @@ EntityBase {
             var collidedEntity = collidedColliderComponent.parent;
             console.log("object collides with lake:" + collidedEntity.entityId)
 
-            if("tank_1"===collidedEntity.entityId){
+            if(tankRed.entityId === collidedEntity.entityId){
                 tankRed.opacity = 0.5
-                console.log("tankRed is inside the lake!")
+                console.log("tankRed is inside the lake, joystick = " + joystickRed)
                 joystickRed.enabled=false;
             }
 
-            if("tank_0"===collidedEntity.entityId){
+            if(tankBlue.entityId === collidedEntity.entityId){
                 tankBlue.opacity = 0.5
-                console.log("tankBlue is inside the lake!")
+                console.log("tankRed is inside the lake, joystick = " + joystickRed)
                 joystickBlue.enabled=false;
             }
 
@@ -61,16 +64,16 @@ EntityBase {
             var collidedEntity = collidedColliderComponent.parent;
             console.log(collidedEntity.entityId)
 
-            if("tank_1"===collidedEntity.entityId){
+            if(tankRed.entityId ===collidedEntity.entityId){
                 tankRed.opacity = 1
                 console.log("tankRed is outside the lake!")
-                                joystickRed.enabled=true;
+                joystickRed.enabled=true;
             }
 
-            if("tank_0"===collidedEntity.entityId){
+            if(tankBlue.entityId ===collidedEntity.entityId){
                 tankBlue.opacity = 1
                 console.log("tankBlue is outside the lake!")
-                                joystickBlue.enabled=true;
+                joystickBlue.enabled=true;
             }
 
             console.log("contact!")
