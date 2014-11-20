@@ -3,32 +3,24 @@ import VPlay 2.0
 import "../common" as Common
 import ".."
 
-Common.LevelBase {
+Item {
     //levelName: "Level1"
-    id: scene
-    state: "1"
-
+    id: level1
+    width: parent.width
+    height: parent.height
 
     property alias opponentSnowman: opponentSnowman
 
     Rectangle {
         id: backgroundRectangle
         anchors.fill: parent
-        color: "#eeeeee"
-        width: parent.width
-        height: parent.height
+        color: "#eeeeee"        
     }
-
-    //load controller-elements
-    GameController {
-        id: gameCtrl
-    }
-    focus: true
 
     Lake {
         id: lake
         x: scene.width / 2
-        y: scene.height /2
+        y: scene.height / 2
 
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
@@ -70,15 +62,7 @@ Common.LevelBase {
 */
     }
 
-    Wall {
-        id: wallBottom
-        height: 20
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-    }
+
 
     Wall {
         id: wallTop
@@ -87,6 +71,16 @@ Common.LevelBase {
             left: parent.left
             right: parent.right
             top:parent.top
+        }
+    }
+
+    Wall {
+        id: wallBottom
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
     }
 
@@ -122,9 +116,16 @@ Common.LevelBase {
     Ball {
         id: ball
         x: scene.width / 3
-        y: scene.height /3
+        y: scene.height / 3
 
         rotation: 0
         obstacleBody.source: "../../assets/img/Ball.png"
     }
+/*
+    //load controller-elements
+    GameController {
+        id: gameCtrl
+    }
+    focus: true
+*/
 }

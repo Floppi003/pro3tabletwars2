@@ -3,9 +3,9 @@ import VPlay 2.0
 import "../common" as Common
 import ".."
 
-Item {
-    id: sceneCtrl
-    anchors.fill: parent
+Common.LevelBase {
+    id: scene
+    state: "1"
 
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
@@ -14,16 +14,15 @@ Item {
     // physics world for collision detection
     PhysicsWorld {
         id: world
-        debugDrawVisible: false
+        //debugDrawVisible: false
         updatesPerSecondForPhysics: 60
     }
-/*
+
     //levelName: "Level1"
     Level1 {
         id: level1
     }
     focus: true
-*/
 
     // ---------------------------------------------------
     // Joystick Controller tankRed
@@ -109,7 +108,7 @@ Item {
     JoystickControllerHUD {
         width: 180
         height: 180
-        x: sceneCtrl.width - 230
+        x: scene.width - 230
         y: 50
 
         Rectangle {
@@ -177,8 +176,8 @@ Item {
                 console.log("xDir: " + xDirection + ", yDir: " + yDirection)
 
                 // Determine where we wish to shoot the projectile to
-                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < sceneCtrl.width + 5) &&
-                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < sceneCtrl.height + 5)) {
+                while ((tankRed.x + xDirection > -5 && tankRed.x + xDirection < scene.width + 5) &&
+                       (tankRed.y + yDirection > -5 && tankRed.y + yDirection < scene.height + 5)) {
                     xDirection = xDirection * 2
                     yDirection = yDirection * 2
 
@@ -191,7 +190,7 @@ Item {
                 var time = distance / 480 // pixel per second
                 time = time * 1000 // milliseconds
 
-                console.log("scene.height: " + sceneCtrl.height + ", scene.width: " + sceneCtrl.width)
+                console.log("scene.height: " + scene.height + ", scene.width: " + scene.width)
                 console.log("distance: " + distance)
                 console.log("time: " + time)
                 console.log("xDirection: " + xDirection + ", yDirection: " + yDirection)
@@ -228,8 +227,8 @@ Item {
         id: joystickBlue
         width: 180
         height: 180
-        x: sceneCtrl.width - 230
-        y: sceneCtrl.height - 230
+        x: scene.width - 230
+        y: scene.height - 230
 
         Rectangle {
             anchors.fill: parent
@@ -303,7 +302,7 @@ Item {
         width: 180
         height: 180
         x: 50
-        y: sceneCtrl.height - 230
+        y: scene.height - 230
 
         Rectangle {
             anchors.fill: parent
@@ -363,7 +362,7 @@ Item {
 
     Tank {
         id: tankRed
-        x: sceneCtrl.width / 2
+        x: scene.width / 2
         y: 100
 
         // rotation in degrees clockwise
@@ -373,8 +372,8 @@ Item {
 
     Tank {
         id: tankBlue
-        x: sceneCtrl.width / 2
-        y: sceneCtrl.height - 120
+        x: scene.width / 2
+        y: scene.height - 120
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
