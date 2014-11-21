@@ -5,9 +5,6 @@ EntityBase {
     id: powerUpShield
     entityType: "powerUpShield"
 
-    property alias powerUpShieldBody: powerUpShieldBody
-    property alias boxCollider: boxCollider
-
     Rectangle {
         id: powerUpShieldBody
         width: 50
@@ -33,14 +30,15 @@ EntityBase {
         fixture.onBeginContact: {
             var collidedColliderComponent = other.parent.parent;
             var collidedEntity = collidedColliderComponent.parent;
-            console.log("onBeginContact: " + collidedEntity.entityId)
+            //console.log("onBeginContact: " + collidedEntity.entityId)
 
             if(tankRed.entityId === collidedEntity.entityId){
                 playerRed.activateShield = true
+                powerUpShield.destroy()
             } else if(tankBlue.entityId === collidedEntity.entityId){
                 playerBlue.activateShield = true
+                powerUpShield.destroy()
             }
-            powerUpShield.destroy()
         }
     }
 }

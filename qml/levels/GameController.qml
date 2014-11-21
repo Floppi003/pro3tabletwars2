@@ -351,8 +351,13 @@ Common.LevelBase {
                     //   if(tankRed.entityId !== collidedEntity.entityId &&
                     //   tankBlue.entityId !== collidedEntity.entityId &&
                     //   collidedEntity.entityId !== "lake"){
-                    if(collidedEntity.entityId !== "lake"){
-                        //                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+
+                    var str = collidedEntity.entityId;
+                    var res = str.substring(0, 13);
+
+                    console.log ("SubString: " + res)
+                    if(collidedEntity.entityId !== "lake" && res !== "powerUpShield"){
+                        // console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
                         singleBullet.destroy()
                     }
 
