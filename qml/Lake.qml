@@ -47,8 +47,7 @@ EntityBase {
         fixture.onBeginContact: {
             // handle the collision and make the image semi-transparent
 
-            var collidedColliderComponent = other.parent.parent;
-            var collidedEntity = collidedColliderComponent.parent;
+            var collidedEntity = other.parent.parent.parent;
             console.log("object collides with lake:" + collidedEntity.entityId)
 
             if(tankRed.entityId === collidedEntity.entityId){

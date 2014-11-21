@@ -344,8 +344,7 @@ Common.LevelBase {
                 fixture.onBeginContact: {
                     // handle the collision
 
-                    var collidedColliderComponent = other.parent.parent;
-                    var collidedEntity = collidedColliderComponent.parent;
+                    var collidedEntity = other.parent.parent.parent;
                     //                    console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
                     //   if(tankRed.entityId !== collidedEntity.entityId &&
@@ -353,11 +352,11 @@ Common.LevelBase {
                     //   collidedEntity.entityId !== "lake"){
 
                     var str = collidedEntity.entityId;
-                    var res = str.substring(0, 13);
+                    var resId = str.substring(0, 4);
 
                     console.log ("SubString: " + res)
-                    if(collidedEntity.entityId !== "lake" && res !== "powerUpShield"){
-                        // console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+                    if(resId.entityId !== "lake" && resId !== "powShield"){
+                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
                         singleBullet.destroy()
                     }
 

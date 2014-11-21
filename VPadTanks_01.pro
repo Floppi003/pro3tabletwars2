@@ -69,5 +69,5 @@ OTHER_FILES += \
     qml/Opponents.qml \
     Lake.qml \
     qml/levels/Level1.qml \
-    qml/ShieldPowerUp.qml
+    qml/PowerUpShield.qml
 

@@ -8,12 +8,12 @@ GameController {
 
     property alias opponentSnowman: opponentSnowman
     property alias opponentSnowman2: opponentSnowman2
-    property alias shieldPowerUp: shieldPowerUp
+    property alias powShield: powShield
     //property alias lake: lake
 
 
-    ShieldPowerUp {
-        id: shieldPowerUp
+    PowerUpShield {
+        id: powShield
         x: 205
         y: 300
     }

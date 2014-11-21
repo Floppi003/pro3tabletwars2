@@ -7,7 +7,14 @@ GameController {
     id: scene
 
     property alias opponentSnowman: opponentSnowman
+    property alias powShield: powShield
     //property alias lake: lake
+
+    PowerUpShield {
+        id: powShield
+        x: 205
+        y: 700
+    }
 
     Lake {
         id: lake
