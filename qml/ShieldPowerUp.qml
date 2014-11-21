@@ -9,6 +9,7 @@ EntityBase {
     property alias shieldPowerUpBodyInner: shieldPowerUpBodyInner
     property alias boxCollider: boxCollider
 
+
     Rectangle {
         id: shieldPowerUpBody
         width: 50
@@ -31,8 +32,10 @@ EntityBase {
         sensor:true
 
         fixture.onBeginContact: {
+
             var collidedEntity = other.parent.parent.parent;
             //var collidedEntity = collidedColliderComponent.parent;
+
             //console.log("onBeginContact: " + collidedEntity.entityId)
 
             if(tankRed.entityId === collidedEntity.entityId){
