@@ -51,7 +51,8 @@ EntityBase {
         body.bullet: true
         body.linearDamping: 0
         body.angularDamping: 0
-        density: 100000000
+        //density: 100000000
+        bodyType: Body.Static
 
         // this is applied every physics update tick
         linearVelocity: Qt.point(twoAxisController.xAxis * 100, twoAxisController.yAxis * (-100))

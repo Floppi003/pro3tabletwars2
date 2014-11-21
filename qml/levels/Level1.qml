@@ -14,6 +14,14 @@ GameController {
         id: powShield
         x: 205
         y: 700
+	}
+    Iglu {
+        id: iglu
+        x: scene.width / 3 *2
+        y: scene.height / 3 *2
+
+        rotation: 145
+        igluBody.source: "../../assets/img/Iglu.png"
     }
 
     Lake {

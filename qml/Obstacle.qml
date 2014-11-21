@@ -24,8 +24,8 @@ EntityBase {
 
         anchors.centerIn: parent
 
-        density: 100000000
-
+        //density: 100000000
+        bodyType: Body.Static
 
         fixture.onBeginContact: {
             // handle the collision and make the image semi-transparent
