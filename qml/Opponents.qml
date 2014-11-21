@@ -83,14 +83,10 @@ EntityBase {
         }
 
         Timer {
-            interval: 2000; running: true; repeat: true;
+            interval: 3000; running: true; repeat: true;
 
             onTriggered: {
                 if (parent.opponentShooting) {
-                    console.log("Opponent Snowman: onTargetItemChanged")
-                    var speed = 250/*
-                    var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
-                    var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed*/
                     var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
                     var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
 
@@ -104,11 +100,16 @@ EntityBase {
                         tankX=tankBlue.x
                         tankY=tankBlue.y
                     }
-                    console.log("tankX: " + tankX + " Tank Y: " + tankY);
+
+                    var angle = Math.atan2(tankY-opponent.y, tankX-opponent.x) * 180 / Math.PI
+                    var speed = 500
+                    var xDirection = Math.cos(angle * Math.PI / 180.0) * speed
+                    var yDirection = Math.sin(angle * Math.PI / 180.0) * speed
+
                     entityManager.createEntityFromComponentWithProperties(
                                 bulletOpponent, {
                                     start: Qt.point(opponent.x, opponent.y),
-                                    velocity: Qt.point(tankX, tankY)
+                                    velocity: Qt.point(xDirection, yDirection)
                                 });
                 }
             }
