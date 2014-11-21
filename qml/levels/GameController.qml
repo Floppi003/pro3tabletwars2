@@ -172,9 +172,6 @@ Common.LevelBase {
                 var y = touchPoints[0].y
                 x = x - (playerMovementControlAreaRed.width / 2)
                 y = (y - (playerMovementControlAreaRed.height / 2)) * (-1)
-                //                var angle = calcAngle(x, y)
-                //                cannon.rotation = angle
-
                 var angle = calcAngle(x, y)
                 tankRed.tankCannon.rotation = angle
             }

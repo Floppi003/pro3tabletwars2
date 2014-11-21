@@ -64,6 +64,7 @@ EntityBase {
         // the entity to move towards
         targetObject: targetTankRed ? tankRed : tankBlue;
 
+
         property bool opponentShooting: false
 
         distanceToTargetThreshold: 200
@@ -77,25 +78,38 @@ EntityBase {
                 var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
                 var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
                 targetTankRed = (distanceRed >= distanceBlue) ? false : true;
+
             }
         }
 
         Timer {
-            interval: 500; running: true; repeat: true;
+            interval: 2000; running: true; repeat: true;
 
             onTriggered: {
                 if (parent.opponentShooting) {
-                console.log("Opponent Snowman: onTargetItemChanged")
-                var speed = 250
-                var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
-                var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+                    console.log("Opponent Snowman: onTargetItemChanged")
+                    var speed = 250/*
+                    var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+                    var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed*/
+                    var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
+                    var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
 
-                // create and remove entities at runtime
-                entityManager.createEntityFromComponentWithProperties(
-                    bulletOpponent, {
-                        start: Qt.point(opponent.x, opponent.y),
-                        velocity: Qt.point(xDirection, yDirection)
-                    });
+                    var tankX
+                    var tankY
+                    if(distanceRed <= distanceBlue){
+                        tankX=tankRed.x
+                        tankY=tankRed.y
+                    }
+                    else{
+                        tankX=tankBlue.x
+                        tankY=tankBlue.y
+                    }
+                    console.log("tankX: " + tankX + " Tank Y: " + tankY);
+                    entityManager.createEntityFromComponentWithProperties(
+                                bulletOpponent, {
+                                    start: Qt.point(opponent.x, opponent.y),
+                                    velocity: Qt.point(tankX, tankY)
+                                });
                 }
             }
         }
@@ -165,7 +179,7 @@ EntityBase {
                     var collidedEntity = collidedColliderComponent.parent;
 
                     if(collidedEntity.entityId !== opponent.entityId && collidedEntity.entityId !== lake.entityId){
-                        console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId)
+                        //                        console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId)
                         singleBulletOpponent.destroy()
                     }
 
@@ -185,7 +199,6 @@ EntityBase {
 
             MovementAnimation {
                 target: singleBulletOpponent
-
                 property: "x"
                 velocity: singleBulletOpponent.velocity.x
                 running: true
@@ -193,7 +206,6 @@ EntityBase {
 
             MovementAnimation {
                 target: singleBulletOpponent
-
                 property: "y"
                 velocity: singleBulletOpponent.velocity.y
                 running: true
@@ -202,5 +214,9 @@ EntityBase {
                 }
             }
         }
+    }
+    function calcAngle(touchX, touchY) {
+        //console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
+        return -180 / Math.PI * Math.atan2(touchY, touchX)
     }
 }
