@@ -17,7 +17,6 @@ SceneBase {
     }
 
 
-
     // back button to leave scene
     MenuButton {
         z: 1

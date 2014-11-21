@@ -47,9 +47,9 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.xAxis = controllerXPosition
-//            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
+            //            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-//            console.debug("Winkel rot: " +angle)
+            //            console.debug("Winkel rot: " +angle)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankRed.tankBody.rotation = angle
                 tankRed.boxCollider.rotation = angle
@@ -60,9 +60,9 @@ Common.LevelBase {
         onControllerYPositionChanged: {
             //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.yAxis = controllerYPosition
-//            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
+            //            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-//            console.debug("Winkel rot: " +angle)
+            //            console.debug("Winkel rot: " +angle)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankRed.tankBody.rotation = angle
                 tankRed.boxCollider.rotation = angle
@@ -149,12 +149,12 @@ Common.LevelBase {
 
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
-//            onReleased: {
-//                console.log("PlayerCA: onReleased")
-//            }
+            //            onReleased: {
+            //                console.log("PlayerCA: onReleased")
+            //            }
 
             onPressed: {
-//                console.log("PlayerCA: onPressed")
+                //                console.log("PlayerCA: onPressed")
                 var speed = 250
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
@@ -245,12 +245,12 @@ Common.LevelBase {
 
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
-//            onReleased: {
-//                console.log("PlayerCA: onReleased")
-//            }
+            //            onReleased: {
+            //                console.log("PlayerCA: onReleased")
+            //            }
 
             onPressed: {
-//                console.log("PlayerCA: onPressed")
+                //                console.log("PlayerCA: onPressed")
                 var speed = 250
                 var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
@@ -279,12 +279,10 @@ Common.LevelBase {
 
     PlayerRed {
         id: playerRed
-        life: 3
     }
 
     PlayerBlue {
         id: playerBlue
-        life: 3
     }
 
     Tank {
@@ -310,7 +308,6 @@ Common.LevelBase {
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
-
     }
 
     Component {
@@ -352,26 +349,30 @@ Common.LevelBase {
 
                     var collidedColliderComponent = other.parent.parent;
                     var collidedEntity = collidedColliderComponent.parent;
-//                    console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+                    //                    console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
                     //   if(tankRed.entityId !== collidedEntity.entityId &&
                     //   tankBlue.entityId !== collidedEntity.entityId &&
                     //   collidedEntity.entityId !== "lake"){
                     if(collidedEntity.entityId !== "lake"){
-//                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+                        //                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
                         singleBullet.destroy()
                     }
 
                     if(tankRed.entityId===collidedEntity.entityId){
-                        //tankRed.opacity = 0.2
-//                        console.log("tankRed hit!")
-                        playerRed.life=playerRed.life-1
-                        damage()
+                        if(!playerRed.activeShield) {
+                            //tankRed.opacity = 0.2
+                            //                        console.log("tankRed hit!")
+                            playerRed.life=playerRed.life-1
+                            damage()
+                        }
                     } else if(tankBlue.entityId===collidedEntity.entityId){
-                        //tankBlue.opacity = 0.2
-//                        console.log("tankBlue hit!")
-                        playerBlue.life=playerBlue.life-1
-                        damage()
+                        if(!playerBlue.activeShield) {
+                            //tankBlue.opacity = 0.2
+                            //                        console.log("tankBlue hit!")
+                            playerBlue.life=playerBlue.life-1
+                            damage()
+                        }
                     }
                 }
             }
@@ -450,7 +451,7 @@ Common.LevelBase {
     Loader { id: baseLoader }
 
     onDamage: {
-//        console.log("DamageSignal!!!!!!!!!!!!!!!!!!!!!!")
+        //        console.log("DamageSignal!!!!!!!!!!!!!!!!!!!!!!")
         if (playerRed.life<=0 || playerBlue.life<=0){
             //window.state = "credits"
             //gameOver()

@@ -45,8 +45,6 @@ GameController {
 */
     }
 
-
-
     Wall {
         id: wallTop
         height: 20
@@ -103,6 +101,12 @@ GameController {
 
         rotation: 0
         obstacleBody.source: "../../assets/img/Ball.png"
+    }
+
+    PowerUpShield {
+        id: powerUpShield
+        x: 200
+        y: 700
     }
 /*
     //load controller-elements
