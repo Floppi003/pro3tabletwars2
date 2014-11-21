@@ -21,13 +21,21 @@ EntityBase {
         anchors.centerIn: parent
     }
 
-    BoxCollider {
+    PolygonCollider {
         id: boxCollider
 
+        /*
         // the image and the physics will use this size
         //anchors.fill: lakeBody
         width: lakeBody.width-140
         height: lakeBody.height-140
+        */
+
+        vertices: [
+            Qt.point(lakeBody.x+50,lakeBody.y+50),
+            Qt.point(lakeBody.x+lakeBody.width-50, lakeBody.y+50),
+            Qt.point(lakeBody.x+50, lakeBody.y+lakeBody.height-50)
+        ]
 
         anchors.centerIn: parent
 

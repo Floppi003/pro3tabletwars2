@@ -7,6 +7,7 @@ GameController {
     id: scene
 
     property alias opponentSnowman: opponentSnowman
+    property alias opponentSnowman2: opponentSnowman2
     //property alias lake: lake
 
     Opponents {
@@ -16,7 +17,7 @@ GameController {
 
         rotation: 0
         opponentBody.source: "../../assets/img/opponentSnowman.png"
-/*
+        /*
         MovementAnimation {
             target: Tank
             property: "x"
@@ -43,6 +44,15 @@ GameController {
             Component.onCompleted: movement.start()
           }
 */
+    }
+
+    Opponents {
+        id: opponentSnowman2
+        x: scene.width / 2
+        y: scene.height - 520
+
+        rotation: 0
+        opponentBody.source: "../../assets/img/opponentSnowman.png"
     }
 
     Wall {
