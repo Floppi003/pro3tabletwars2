@@ -3,8 +3,9 @@ import VPlay 2.0
 import "levels"
 
 EntityBase {
-    id: obstacle
-    entityType: "obstacle"
+    id: lake
+    entityId: "lake"
+    entityType: "lake"
 
     property alias lakeBody: lakeBody
     property alias boxCollider: boxCollider

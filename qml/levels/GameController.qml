@@ -116,8 +116,8 @@ Common.LevelBase {
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
 
-                        xDirection = xDirection * 20
-                        yDirection = yDirection * 20
+//                        xDirection = xDirection * 20
+//                        yDirection = yDirection * 20
 
 
                 // create and remove entities at runtime
@@ -288,7 +288,9 @@ Common.LevelBase {
                     var collidedEntity = collidedColliderComponent.parent;
                     console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
-                    if(tankRed.entityId !== collidedEntity.entityId && tankBlue.entityId !== collidedEntity.entityId){
+                    if(tankRed.entityId !== collidedEntity.entityId &&
+                       tankBlue.entityId !== collidedEntity.entityId &&
+                       collidedEntity.entityId !== "lake"){
                         console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
                         singleBullet.removeEntity()
                         singleBullet.destroy()
