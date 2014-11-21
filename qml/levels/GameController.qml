@@ -398,14 +398,12 @@ Common.LevelBase {
                         singleBullet.destroy()
                     }
 
-                    else if(tankRed.entityId===collidedEntity.entityId){
+                    if(tankRed.entityId===collidedEntity.entityId){
                         //tankRed.opacity = 0.2
                         console.log("tankRed hit!")
                         playerRed.life=playerRed.life-1
                         damage()
-                    }
-
-                    else if(tankBlue.entityId===collidedEntity.entityId){
+                    } else if(tankBlue.entityId===collidedEntity.entityId){
                         //tankBlue.opacity = 0.2
                         console.log("tankBlue hit!")
                         playerBlue.life=playerBlue.life-1
