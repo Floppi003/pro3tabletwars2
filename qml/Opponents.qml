@@ -164,7 +164,7 @@ EntityBase {
                     var collidedColliderComponent = other.parent.parent;
                     var collidedEntity = collidedColliderComponent.parent;
 
-                    if(collidedEntity.entityId !== opponent.entityId && collidedEntity.entityId !== lake.entityId){
+                    if(collidedEntity.entityId !== opponent.entityId && collidedEntity.entityId !== "lake"){
                         console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId)
                         singleBulletOpponent.destroy()
                     }
