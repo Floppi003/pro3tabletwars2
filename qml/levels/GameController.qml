@@ -380,4 +380,11 @@ Common.LevelBase {
             baseLoader.source = "../scenes/GameOverScene.qml"
         }
     }
+
+    // physics world for collision detection
+    PhysicsWorld {
+        id: world
+        debugDrawVisible: false
+        updatesPerSecondForPhysics: 10
+    }
 }

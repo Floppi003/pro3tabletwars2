@@ -16,12 +16,7 @@ SceneBase {
         activeLevelFileName = fileName
     }
 
-    // physics world for collision detection
-    PhysicsWorld {
-        id: world
-        //debugDrawVisible: false
-        updatesPerSecondForPhysics: 60
-    }
+
 
     // back button to leave scene
     MenuButton {
@@ -47,6 +42,15 @@ SceneBase {
         font.pixelSize: 20
         text: activeLevel !== undefined ? activeLevel.levelName : ""
     }
+
+    /*
+    // physics world for collision detection
+    PhysicsWorld {
+        id: world
+        debugDrawVisible: false
+        updatesPerSecondForPhysics: 10
+    }
+*/
 
     // load levels at runtime
     Loader {
