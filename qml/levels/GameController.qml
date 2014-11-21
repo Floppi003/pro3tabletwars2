@@ -76,59 +76,125 @@ Common.LevelBase {
     // ---------------------------------------------------
     // Joystick Controller red tankCannon
     // ---------------------------------------------------
-    JoystickControllerHUD {
-        width: 180
-        height: 180
-        x: scene.width - 230
-        y: 50
+//    JoystickControllerHUD {
+//        width: 180
+//        height: 180
+//        x: scene.width - 230
+//        y: 50
 
-        Rectangle {
-            anchors.fill: parent
-            color: "#aaaaaa"
-            opacity: 0.3
-        }
+//        Rectangle {
+//            anchors.fill: parent
+//            color: "#aaaaaa"
+//            opacity: 0.3
+//        }
 
-        // delete the default images
-        source: ""
-        thumbSource: ""
+//        // delete the default images
+//        source: ""
+//        thumbSource: ""
 
-        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
-        onControllerXPositionChanged: {
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankRed.tankCannon.rotation = angle
-            }
-        }
+//        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+//        onControllerXPositionChanged: {
+//            var angle = calcAngle(controllerXPosition, controllerYPosition)
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankRed.tankCannon.rotation = angle
+//            }
+//        }
 
-        onControllerYPositionChanged: {
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankRed.tankCannon.rotation = angle
-            }
-        }
+//        onControllerYPositionChanged: {
+//            var angle = calcAngle(controllerXPosition, controllerYPosition)
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankRed.tankCannon.rotation = angle
+//            }
+//        }
 
-        Timer {
-            interval: 500; running: true; repeat: true;
+//        Timer {
+//            interval: 500; running: true; repeat: true;
 
-            onTriggered: {
-                var speed = 250
-                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-
-
-//                        xDirection = xDirection * 20
-//                        yDirection = yDirection * 20
+//            onTriggered: {
+//                var speed = 250
+//                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+//                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
 
-                // create and remove entities at runtime
-                entityManager.createEntityFromComponentWithProperties(
-                            bullet, {
-                                start: Qt.point(tankRed.x, tankRed.y),
-                                velocity: Qt.point(xDirection, yDirection)
-                            });
-            }
-        }
-    }
+////                        xDirection = xDirection * 20
+////                        yDirection = yDirection * 20
+
+
+//                // create and remove entities at runtime
+//                entityManager.createEntityFromComponentWithProperties(
+//                            bullet, {
+//                                start: Qt.point(tankRed.x, tankRed.y),
+//                                velocity: Qt.point(xDirection, yDirection)
+//                            });
+//            }
+//        }
+//    }
+    Rectangle {
+           // Object properties
+           id: playerMovementControlArea
+
+           opacity: 0.2
+           color: "#777777"
+           border.width: 4
+           border.color: "#ffaa00"
+
+           width: 180
+           height: 180
+           x: scene.width - 230
+           y: 50
+
+
+           MultiPointTouchArea {
+               anchors.fill: parent
+
+               // Javascript functions
+               width: 180
+               height: 180
+               x: scene.width - 230
+               y: 50
+
+               Rectangle {
+                   anchors.fill: parent
+                   color: "#aaaaaa"
+                   opacity: 0.3
+               }
+
+               property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+
+               onReleased: {
+                   console.log("PlayerCA: onReleased")
+               }
+
+               onPressed: {
+                   console.log("PlayerCA: onPressed")
+                   var speed = 250
+                   var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+                   var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+
+                   // create and remove entities at runtime
+                   entityManager.createEntityFromComponentWithProperties(
+                               bullet, {
+                                   start: Qt.point(tankRed.x, tankRed.y),
+                                   velocity: Qt.point(xDirection, yDirection)
+                               });
+               }
+
+               onTouchUpdated: {
+
+                   var x = touchPoints[0].x
+                   var y = touchPoints[0].y
+                   x = x - (playerMovementControlArea.width / 2)
+                   y = (y - (playerMovementControlArea.height / 2)) * (-1)
+                   //                var angle = calcAngle(x, y)
+                   //                cannon.rotation = angle
+
+                   var angle = calcAngle(x, y)
+                   tankRed.tankCannon.rotation = angle
+
+               }
+
+           }
+       }
 
     // ---------------------------------------------------
     // Joystick Controller tankBlue
