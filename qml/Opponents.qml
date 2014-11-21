@@ -103,7 +103,7 @@ EntityBase {
                     }
 
                     var angle = Math.atan2(tankY-opponent.y, tankX-opponent.x) * 180 / Math.PI
-                    var speed = 500
+                    var speed = 150
                     var xDirection = Math.cos(angle * Math.PI / 180.0) * speed
                     var yDirection = Math.sin(angle * Math.PI / 180.0) * speed
 

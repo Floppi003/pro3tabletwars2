@@ -354,9 +354,9 @@ Common.LevelBase {
                     var str = collidedEntity.entityId;
                     var resId = str.substring(0, 4);
 
-                    console.log ("SubString: " + res)
+                    //console.log ("SubString: " + resId)
                     if(resId.entityId !== "lake" && resId !== "powShield"){
-                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
+                        //console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
                         singleBullet.destroy()
                     }
 
