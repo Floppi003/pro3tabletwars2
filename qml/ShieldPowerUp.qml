@@ -2,45 +2,46 @@ import QtQuick 2.0
 import VPlay 2.0
 
 EntityBase {
-    id: powerUpShield
-    entityType: "powerUpShield"
+    id: shieldPowerUp
+    entityType: "shieldPowerUp"
 
-    property alias powerUpShieldBody: powerUpShieldBody
+    property alias shieldPowerUpBody: shieldPowerUpBody
+    property alias shieldPowerUpBodyInner: shieldPowerUpBodyInner
     property alias boxCollider: boxCollider
 
     Rectangle {
-        id: powerUpShieldBody
+        id: shieldPowerUpBody
         width: 50
         height: 50
         rotation: 45
         color: "orange"
-
         Rectangle {
-            id: powerUpShieldBodyInner
+            id: shieldPowerUpBodyInner
             width: 30
             height: 30
-            anchors.centerIn: parent
+            anchors.centerIn: shieldPowerUpBody
             color: "yellow"
         }
     }
 
     BoxCollider {
         id: boxCollider
-        anchors.fill: powerUpShieldBody
+        anchors.fill: shieldPowerUpBody
         anchors.centerIn: parent
         sensor:true
 
         fixture.onBeginContact: {
-            var collidedColliderComponent = other.parent.parent;
-            var collidedEntity = collidedColliderComponent.parent;
-            console.log("onBeginContact: " + collidedEntity.entityId)
+            var collidedEntity = other.parent.parent.parent;
+            //var collidedEntity = collidedColliderComponent.parent;
+            //console.log("onBeginContact: " + collidedEntity.entityId)
 
             if(tankRed.entityId === collidedEntity.entityId){
                 playerRed.activateShield = true
+                powerUpShield.destroy()
             } else if(tankBlue.entityId === collidedEntity.entityId){
                 playerBlue.activateShield = true
+                powerUpShield.destroy()
             }
-            powerUpShield.destroy()
         }
     }
 }

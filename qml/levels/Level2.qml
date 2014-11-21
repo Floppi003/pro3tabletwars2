@@ -8,7 +8,15 @@ GameController {
 
     property alias opponentSnowman: opponentSnowman
     property alias opponentSnowman2: opponentSnowman2
+    property alias shieldPowerUp: shieldPowerUp
     //property alias lake: lake
+
+
+    ShieldPowerUp {
+        id: shieldPowerUp
+        x: 205
+        y: 300
+    }
 
     Opponents {
         id: opponentSnowman
@@ -110,14 +118,10 @@ GameController {
         y: scene.height / 3
 
         rotation: 0
-        obstacleBody.source: "../../assets/img/Ball.png"
+        ballBody.source: "../../assets/img/Ball.png"
     }
 
-    PowerUpShield {
-        id: powerUpShield
-        x: 200
-        y: 700
-    }
+
 
 /*
     //load controller-elements

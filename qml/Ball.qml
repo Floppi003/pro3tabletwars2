@@ -5,7 +5,7 @@ EntityBase {
     id: ball
     entityType: "ball"
 
-    property alias obstacleBody: ballBody
+    property alias ballBody: ballBody
     property alias boxCollider: boxCollider
 
     Image {

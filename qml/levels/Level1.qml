@@ -113,7 +113,7 @@ GameController {
         y: scene.height / 3
 
         rotation: 0
-        obstacleBody.source: "../../assets/img/Ball.png"
+        ballBody.source: "../../assets/img/Ball.png"
     }
 /*
     //load controller-elements
