@@ -124,8 +124,8 @@ GameController {
 
     Ball {
         id: ball
-        x: scene.width / 3
-        y: scene.height / 3
+        x: scene.width / 4
+        y: scene.height / 4
 
         rotation: 0
         ballBody.source: "../../assets/img/Ball.png"
