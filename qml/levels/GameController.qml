@@ -174,7 +174,7 @@ Common.LevelBase {
                    // create and remove entities at runtime
                    entityManager.createEntityFromComponentWithProperties(
                                bullet, {
-                                   start: Qt.point(tankRed.x, tankRed.y),
+                                   start: Qt.point(tankRed.x, tankRed.y + 35),
                                    velocity: Qt.point(xDirection, yDirection)
                                });
                }
@@ -354,12 +354,11 @@ Common.LevelBase {
                     var collidedEntity = collidedColliderComponent.parent;
                     console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
-                    if(tankRed.entityId !== collidedEntity.entityId &&
-                       tankBlue.entityId !== collidedEntity.entityId &&
-                       collidedEntity.entityId !== "lake"){
+//                    if(tankRed.entityId !== collidedEntity.entityId &&
+//                       tankBlue.entityId !== collidedEntity.entityId &&
+//                       collidedEntity.entityId !== "lake"){
+                    if(collidedEntity.entityId !== "lake"){
                         console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
-                        singleBullet.removeEntity()
-                        singleBullet.destroy()
                         singleBullet.destroy()
                     }
                 }
