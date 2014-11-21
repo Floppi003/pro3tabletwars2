@@ -7,7 +7,7 @@ GameController {
     id: scene
 
     property alias opponentSnowman: opponentSnowman
-    property alias lake: lake
+    //property alias lake: lake
 
     Lake {
         id: lake
