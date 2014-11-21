@@ -28,14 +28,12 @@ EntityBase {
 
     Rectangle {
         id: opponentCannon
-
         x: opponentBody.x + opponentBody.width / 2
         y: opponentBody.y + opponentBody.height / 2 - 2
         width: 26
         height: 4
         transformOrigin: Item.Left
         //transformOriginPoint: Qt.point(13, 2)
-
         color: "#000000"
     }
 
@@ -77,11 +75,21 @@ EntityBase {
                 var distanceRed = Math.sqrt(Math.pow(tankRed.x - opponent.x, 2) + Math.pow(tankRed.y - opponent.y, 2));
                 var distanceBlue = Math.sqrt(Math.pow(tankBlue.x - opponent.x, 2) + Math.pow(tankBlue.y - opponent.y, 2));
                 targetTankRed = (distanceRed >= distanceBlue) ? false : true;
-                //MoveToPointHelper.targetObject = (distanceRed >= distanceBlue) ? tankBlue : tankBlue;
-               // console.debug("distanceToRed = ", distanceRed);
-               // console.debug("distanceToBlue = ", distanceBlue);
-               // console.debug("current target = ", (distanceRed >= distanceBlue) ? "tankBlue" : "tankRed");
             }
+        }
+
+        onTargetItemChanged: {
+            console.log("Opponent Snowman: onTargetItemChanged")
+            var speed = 250
+            var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+            var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+
+            // create and remove entities at runtime
+            entityManager.createEntityFromComponentWithProperties(
+                        bulletOpponent, {
+                            start: Qt.point(opponent.x, opponent.y + 35),
+                            velocity: Qt.point(xDirection, yDirection)
+                        });
         }
     }
 
@@ -98,5 +106,85 @@ EntityBase {
 
         // this avoids over-rotating, so rotating further than allowed
         maxPropertyValueDifference: moveToPointHelper.absoluteRotationDifference
+    }
+
+    Component {
+        id: bulletOpponent
+
+        EntityBase {
+            id: singleBulletOpponent
+            entityType: "singleBulletOpponent"
+
+            Rectangle {
+                width: 10
+                height: 10
+                //anchors.fill: parent
+                color: "#000000"
+            }
+
+            property point start
+            property point velocity
+
+            x: start.x
+            y: start.y
+
+            BoxCollider {
+                id: boxCollider
+
+                width: 10
+                height: 10
+                anchors.fill: parent
+                collisionTestingOnlyMode: true
+
+                density: 0
+                friction: 0
+                restitution: 0
+                body.bullet: true
+                body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
+
+                fixture.onBeginContact: {
+                    // handle the collision
+
+                    var collidedColliderComponent = other.parent.parent;
+                    var collidedEntity = collidedColliderComponent.parent;
+
+                    if(collidedEntity.entityId !== opponent.entityId && collidedEntity.entityId !== lake.entityId){
+                        console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId)
+                        singleBulletOpponent.destroy()
+                    }
+
+                    if(tankRed.entityId === collidedEntity.entityId){
+                        //tankRed.opacity = 0.2
+//                        console.log("tankRed hit!")
+                        playerRed.life = playerRed.life - 1
+                        damage()
+                    } else if(tankBlue.entityId === collidedEntity.entityId){
+                        //tankBlue.opacity = 0.2
+//                        console.log("tankBlue hit!")
+                        playerBlue.life = playerBlue.life - 1
+                        damage()
+                    }
+                }
+            }
+
+            MovementAnimation {
+                target: singleBulletOpponent
+
+                property: "x"
+                velocity: singleBulletOpponent.velocity.x
+                running: true
+            }
+
+            MovementAnimation {
+                target: singleBulletOpponent
+
+                property: "y"
+                velocity: singleBulletOpponent.velocity.y
+                running: true
+                onStopped: {
+                    singleBulletOpponent.destroy()
+                }
+            }
+        }
     }
 }
