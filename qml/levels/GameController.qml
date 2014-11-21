@@ -13,7 +13,7 @@ Common.LevelBase {
     property alias joystickBlue: joystickBlue
     property alias playerRed: playerRed
     property alias playerBlue: playerBlue
-
+    //signal damage
     //property int moveDuration: 250
 
     focus: true
@@ -44,22 +44,33 @@ Common.LevelBase {
         property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
+            //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.xAxis = controllerXPosition
+            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
+
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            tankRed.tankBody.rotation = angle
-            tankRed.boxCollider.rotation = angle
+
+            console.debug("Winkel rot: " +angle)
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+                tankRed.tankBody.rotation = angle
+                tankRed.boxCollider.rotation = angle
+            }
+            //}
         }
 
         onControllerYPositionChanged: {
+            //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.yAxis = controllerYPosition
+            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            tankRed.tankBody.rotation = angle
-            tankRed.boxCollider.rotation = angle
+            console.debug("Winkel rot: " +angle)
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+                tankRed.tankBody.rotation = angle
+                tankRed.boxCollider.rotation = angle
+            }
+            //}
         }
     }
-
-
-
 
 
     // ---------------------------------------------------
@@ -84,12 +95,16 @@ Common.LevelBase {
         property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankRed.tankCannon.rotation = angle
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+                tankRed.tankCannon.rotation = angle
+            }
         }
 
         onControllerYPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankRed.tankCannon.rotation = angle
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+                tankRed.tankCannon.rotation = angle
+            }
         }
 
 
@@ -142,15 +157,19 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankBlue.tankBody.rotation = angle +180
-            tankBlue.boxCollider.rotation = angle +180
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+            tankBlue.tankBody.rotation = angle +90
+            tankBlue.boxCollider.rotation = angle +90
+            }
         }
 
         onControllerYPositionChanged: {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
-            tankBlue.tankBody.rotation = angle +180
-            tankBlue.boxCollider.rotation = angle +180
+            if (controllerXPosition!=0 && controllerYPosition != 0){
+            tankBlue.tankBody.rotation = angle +90
+            tankBlue.boxCollider.rotation = angle +90
+            }
         }
 
     }
@@ -179,12 +198,16 @@ Common.LevelBase {
 
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
+            if (controllerXPosition!=0 && controllerYPosition != 0){
             tankBlue.tankCannon.rotation = angle
+            }
         }
 
         onControllerYPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
+            if (controllerXPosition!=0 && controllerYPosition != 0){
             tankBlue.tankCannon.rotation = angle
+            }
         }
     }
 
@@ -222,10 +245,12 @@ Common.LevelBase {
 
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
+
     }
 
     Component {
         id: bullet
+
 
         EntityBase {
             id: singleBullet
@@ -285,23 +310,38 @@ Common.LevelBase {
     // energy tankred
     Text {
         z:1
-        anchors.left: parent.horizontalCenter
-        anchors.top: gameScene.gameWindowAnchorItem.top
-        anchors.topMargin: 80
+        //anchors.: parent.horizontalCenter
+        //anchors.top: gameScene.gameWindowAnchorItem.top
+        //anchors.ce
+        //anchors.topMargin: 80
         color: "black"
-        font.pixelSize: 30
+        font.pixelSize: 40
         text: playerRed.life
+
+        anchors {
+            horizontalCenter: scene.horizontalCenter
+            //right: parent.right
+            top: scene.top
+            topMargin: 30
+        }
     }
 
     // energy tankBlue
     Text {
         z:1
-        anchors.right: parent.horizontalCenter
-        anchors.top: gameScene.gameWindowAnchorItem.top
-        anchors.topMargin: 80
+        //anchors.left: parent.horizontalCenter
+        //anchors.bottom: gameScene.gameWindowAnchorItem.bottom
+        //anchors.topMargin: 80
         color: "black"
-        font.pixelSize: 30
+        font.pixelSize: 40
         text: playerBlue.life
+
+        anchors {
+            horizontalCenter: scene.horizontalCenter
+            //right: parent.right
+            bottom: scene.bottom
+            bottomMargin: 30
+        }
     }
 
     Text {
@@ -309,12 +349,22 @@ Common.LevelBase {
         anchors.centerIn: parent
         color: "green"
         font.pixelSize: 50
-        //text: countdown > 0 ? countdown : "tap!"
-        text: playerRed.life<=0 || playerBlue.life==0 ? "Game Over" : ""
+        text: playerRed.life<=0 || playerBlue.life<=0 ? "Game Over" : ""
     }
 
-
     function calcAngle(touchX, touchY) {
+        console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
         return -180 / Math.PI * Math.atan2(touchY, touchX)
+    }
+
+    Loader { id: baseLoader }
+
+    onDamage: {
+        console.log("DamageSignal!!!!!!!!!!!!!!!!!!!!!!")
+        if (playerRed.life<=0 || playerBlue.life<=0){
+            //window.state = "credits"
+            //gameOver()
+            baseLoader.source = "../scenes/GameOverScene.qml"
+        }
     }
 }

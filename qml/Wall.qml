@@ -17,4 +17,5 @@ EntityBase {
         color: "brown"
         visible: true // set to 'true' for debugging
     }
+
 }

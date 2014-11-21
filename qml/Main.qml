@@ -5,6 +5,8 @@ import "levels"
 import "common"
 
 GameWindow {
+    //property bool end
+    //signal gameOver
     //id: gameWindow
     licenseKey: "ACE21390D11341ED2FBAD617F7C2F862FE5AACB2CFFC6D0D05F690F43F64C28AB8FB18C05D68FC3C73EEE9C188B5017D4DF874968083AB7CEEEFA7B6AEB21DADBA3F3E17942D6862D52ABD75C6E7066FBED0070639EDBB3DDB01CC7C3276BE01E676617D0D37467F90AE3A42173C63BD55FF3C935D3999CF751B47B7DE34A2CA4C22F553EAEB7EE210DE2F402BE33FB9C18CF77B199AFD1413C82A7AD75BCF6EA3FCBA53AA60918FB430C450FA8B229BC6C9930BCFDC8BB386D23B83935C81595EA15A6B116E9DC0C3D28B0A27A344BF511574720563ED8837ED177D4D5770A91C6A282654064B75D4A84422F2B33336FA5648E5FE8B549406604900C43EB33D19DAEB8F8FA0F5A14E821055D608DA87"
 
@@ -29,10 +31,13 @@ GameWindow {
         // listen to the button signals of the scene and change the state according to it
         onSelectLevelPressed: window.state = "selectLevel"
         onCreditsPressed: window.state = "credits"
+        //onGameOver: window.state = "gameOver"
+
         // the menu scene is our start scene, so if back is pressed there we ask the user if he wants to quit the application
         onBackPressed: {
             nativeUtils.displayMessageBox(qsTr("Really quit the game?"), "", 2);
         }
+
         // listen to the return value of the MessageBox
         Connections {
             target: nativeUtils
@@ -61,6 +66,12 @@ GameWindow {
         onBackPressed: window.state = "menu"
     }
 
+    // credits scene
+    GameOverScene {
+        id: gameOverScene
+        onBackPressed: window.state = "gameOver"
+    }
+
     // game scene to play a level
     GameScene {
         id: gameScene
@@ -87,6 +98,11 @@ GameWindow {
             name: "credits"
             PropertyChanges {target: creditsScene; opacity: 1}
             PropertyChanges {target: window; activeScene: creditsScene}
+        },
+        State {
+            name: "gameOver"
+            PropertyChanges {target: gameOverScene; opacity: 1}
+            PropertyChanges {target: window; activeScene: gameOverScene}
         },
         State {
             name: "game"

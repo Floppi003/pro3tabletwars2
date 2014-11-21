@@ -6,4 +6,6 @@ EntityBase {
     entityType: "playerBlue"
 
     property int life: 3
+
+
 }

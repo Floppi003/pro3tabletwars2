@@ -6,4 +6,6 @@ EntityBase {
     entityType: "playerRed"
 
     property int life: 3
+
+   // signal damageRed
 }

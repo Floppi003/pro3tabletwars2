@@ -9,6 +9,8 @@ SceneBase {
     // the currently loaded level gets stored here
     property var activeLevel
 
+    signal damage
+
     // set the name of the current level, this will cause the Loader to load the corresponding level
     function setLevel(fileName) {
         activeLevelFileName = fileName
