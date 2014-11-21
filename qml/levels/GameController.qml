@@ -119,6 +119,15 @@ Common.LevelBase {
     //                entityManager.createEntityFromComponentWithProperties(
     //                            bullet, {
     //                                start: Qt.point(tankRed.x, tankRed.y + 35),
+
+    ////                        xDirection = xDirection * 20
+    ////                        yDirection = yDirection * 20
+
+
+    //                // create and remove entities at runtime
+    //                entityManager.createEntityFromComponentWithProperties(
+    //                            bullet, {
+    //                                start: Qt.point(tankRed.x, tankRed.y),
     //                                velocity: Qt.point(xDirection, yDirection)
     //                            });
     //            }
@@ -381,12 +390,26 @@ Common.LevelBase {
                     var collidedEntity = collidedColliderComponent.parent;
                     console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
-                    //                    if(tankRed.entityId !== collidedEntity.entityId &&
-                    //                       tankBlue.entityId !== collidedEntity.entityId &&
-                    //                       collidedEntity.entityId !== "lake"){
+                    //   if(tankRed.entityId !== collidedEntity.entityId &&
+                    //   tankBlue.entityId !== collidedEntity.entityId &&
+                    //   collidedEntity.entityId !== "lake"){
                     if(collidedEntity.entityId !== "lake"){
                         console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
                         singleBullet.destroy()
+                    }
+
+                    else if(tankRed.entityId===collidedEntity.entityId){
+                        //tankRed.opacity = 0.2
+                        console.log("tankRed hit!")
+                        playerRed.life=playerRed.life-1
+                        damage()
+                    }
+
+                    else if(tankBlue.entityId===collidedEntity.entityId){
+                        //tankBlue.opacity = 0.2
+                        console.log("tankBlue hit!")
+                        playerBlue.life=playerBlue.life-1
+                        damage()
                     }
                 }
             }
@@ -458,7 +481,7 @@ Common.LevelBase {
     }
 
     function calcAngle(touchX, touchY) {
-        console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
+        //console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
         return -180 / Math.PI * Math.atan2(touchY, touchX)
     }
 
