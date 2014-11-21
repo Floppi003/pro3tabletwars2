@@ -58,22 +58,22 @@ GameController {
 
 
     Wall {
-        id: wallTop
-        height: 20
-        anchors {
-            left: parent.left
-            right: parent.right
-            top:parent.top
-        }
-    }
-
-    Wall {
         id: wallBottom
         height: 20
         anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+        }
+    }
+
+    Wall {
+        id: wallTop
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            top:parent.top
         }
     }
 
