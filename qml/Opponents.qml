@@ -64,7 +64,9 @@ EntityBase {
         // the entity to move towards
         targetObject: targetTankRed ? tankRed : tankBlue;
 
-        distanceToTargetThreshold: 100
+        property bool opponentShooting: false
+
+        distanceToTargetThreshold: 200
 
         Timer {
             interval: 100; running: true; repeat: true;
@@ -78,18 +80,32 @@ EntityBase {
             }
         }
 
-        onTargetItemChanged: {
-            console.log("Opponent Snowman: onTargetItemChanged")
-            var speed = 250
-            var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
-            var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+        Timer {
+            interval: 500; running: true; repeat: true;
 
-            // create and remove entities at runtime
-            entityManager.createEntityFromComponentWithProperties(
-                        bulletOpponent, {
-                            start: Qt.point(opponent.x, opponent.y + 35),
-                            velocity: Qt.point(xDirection, yDirection)
-                        });
+            onTriggered: {
+                if (parent.opponentShooting) {
+                console.log("Opponent Snowman: onTargetItemChanged")
+                var speed = 250
+                var xDirection = Math.cos(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+                var yDirection = Math.sin(opponent.opponentCannon.rotation * Math.PI / 180.0) * speed
+
+                // create and remove entities at runtime
+                entityManager.createEntityFromComponentWithProperties(
+                    bulletOpponent, {
+                        start: Qt.point(opponent.x, opponent.y),
+                        velocity: Qt.point(xDirection, yDirection)
+                    });
+                }
+            }
+        }
+
+        onDistanceToTargetChanged: {
+            if (distanceToTarget < distanceToTargetThreshold) {
+                opponentShooting = true
+            } else {
+                opponentShooting = false
+            }
         }
     }
 
@@ -155,12 +171,12 @@ EntityBase {
 
                     if(tankRed.entityId === collidedEntity.entityId){
                         //tankRed.opacity = 0.2
-//                        console.log("tankRed hit!")
+                        //                        console.log("tankRed hit!")
                         playerRed.life = playerRed.life - 1
                         damage()
                     } else if(tankBlue.entityId === collidedEntity.entityId){
                         //tankBlue.opacity = 0.2
-//                        console.log("tankBlue hit!")
+                        //                        console.log("tankBlue hit!")
                         playerBlue.life = playerBlue.life - 1
                         damage()
                     }
