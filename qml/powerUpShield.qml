@@ -5,7 +5,7 @@ EntityBase {
     id: powerUpShield
     entityType: "powerUpShield"
 
-    property alias obstacleBody: powerUpShieldBody
+    property alias powerUpShieldBody: powerUpShieldBody
     property alias boxCollider: boxCollider
 
     Rectangle {

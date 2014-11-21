@@ -118,6 +118,7 @@ GameController {
         x: 200
         y: 700
     }
+
 /*
     //load controller-elements
     GameController {

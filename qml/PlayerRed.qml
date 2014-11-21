@@ -17,9 +17,6 @@ EntityBase {
 
         //disable powerUpShield after 5 seconds
         onTriggered: {
-            console.log ("PlayerRed: activate PowerUpShield = " + activateShield)
-            console.log ("PlayerRed: activePowerUpShield = " + activeShield)
-
             if(activateShield) {
                 activeShield = true;
                 activateShield = false;
