@@ -23,7 +23,7 @@ EntityBase {
             color: "yellow"
         }
     }
-//
+
     BoxCollider {
         id: boxCollider
         anchors.fill: powerUpShieldBody
