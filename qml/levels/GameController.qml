@@ -76,125 +76,125 @@ Common.LevelBase {
     // ---------------------------------------------------
     // Joystick Controller red tankCannon
     // ---------------------------------------------------
-//    JoystickControllerHUD {
-//        width: 180
-//        height: 180
-//        x: scene.width - 230
-//        y: 50
+    //    JoystickControllerHUD {
+    //        width: 180
+    //        height: 180
+    //        x: scene.width - 230
+    //        y: 50
 
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "#aaaaaa"
-//            opacity: 0.3
-//        }
+    //        Rectangle {
+    //            anchors.fill: parent
+    //            color: "#aaaaaa"
+    //            opacity: 0.3
+    //        }
 
-//        // delete the default images
-//        source: ""
-//        thumbSource: ""
+    //        // delete the default images
+    //        source: ""
+    //        thumbSource: ""
 
-//        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
-//        onControllerXPositionChanged: {
-//            var angle = calcAngle(controllerXPosition, controllerYPosition)
-//            if (controllerXPosition!=0 && controllerYPosition != 0){
-//                tankRed.tankCannon.rotation = angle
-//            }
-//        }
+    //        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+    //        onControllerXPositionChanged: {
+    //            var angle = calcAngle(controllerXPosition, controllerYPosition)
+    //            if (controllerXPosition!=0 && controllerYPosition != 0){
+    //                tankRed.tankCannon.rotation = angle
+    //            }
+    //        }
 
-//        onControllerYPositionChanged: {
-//            var angle = calcAngle(controllerXPosition, controllerYPosition)
-//            if (controllerXPosition!=0 && controllerYPosition != 0){
-//                tankRed.tankCannon.rotation = angle
-//            }
-//        }
+    //        onControllerYPositionChanged: {
+    //            var angle = calcAngle(controllerXPosition, controllerYPosition)
+    //            if (controllerXPosition!=0 && controllerYPosition != 0){
+    //                tankRed.tankCannon.rotation = angle
+    //            }
+    //        }
 
-//        Timer {
-//            interval: 500; running: true; repeat: true;
+    //        Timer {
+    //            interval: 500; running: true; repeat: true;
 
-//            onTriggered: {
-//                var speed = 250
-//                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-//                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-
-
-////                        xDirection = xDirection * 20
-////                        yDirection = yDirection * 20
+    //            onTriggered: {
+    //                var speed = 250
+    //                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+    //                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
 
-//                // create and remove entities at runtime
-//                entityManager.createEntityFromComponentWithProperties(
-//                            bullet, {
-//                                start: Qt.point(tankRed.x, tankRed.y),
-//                                velocity: Qt.point(xDirection, yDirection)
-//                            });
-//            }
-//        }
-//    }
+    ////                        xDirection = xDirection * 20
+    ////                        yDirection = yDirection * 20
+
+
+    //                // create and remove entities at runtime
+    //                entityManager.createEntityFromComponentWithProperties(
+    //                            bullet, {
+    //                                start: Qt.point(tankRed.x, tankRed.y),
+    //                                velocity: Qt.point(xDirection, yDirection)
+    //                            });
+    //            }
+    //        }
+    //    }
     Rectangle {
-           // Object properties
-           id: playerMovementControlArea
+        // Object properties
+        id: playerMovementControlArea
 
-           opacity: 0.2
-           color: "#777777"
-           border.width: 4
-           border.color: "#ffaa00"
+        opacity: 0.2
+        color: "#777777"
+        border.width: 4
+        border.color: "#ffaa00"
 
-           width: 180
-           height: 180
-           x: scene.width - 230
-           y: 50
+        width: 180
+        height: 180
+        x: scene.width - 230
+        y: 50
 
 
-           MultiPointTouchArea {
-               anchors.fill: parent
+        MultiPointTouchArea {
+            anchors.fill: parent
 
-               // Javascript functions
-               width: 180
-               height: 180
-               x: scene.width - 230
-               y: 50
+            // Javascript functions
+            width: 180
+            height: 180
+            x: scene.width - 230
+            y: 50
 
-               Rectangle {
-                   anchors.fill: parent
-                   color: "#aaaaaa"
-                   opacity: 0.3
-               }
+            Rectangle {
+                anchors.fill: parent
+                color: "#aaaaaa"
+                opacity: 0.3
+            }
 
-               property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+            property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
-               onReleased: {
-                   console.log("PlayerCA: onReleased")
-               }
+            onReleased: {
+                console.log("PlayerCA: onReleased")
+            }
 
-               onPressed: {
-                   console.log("PlayerCA: onPressed")
-                   var speed = 250
-                   var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-                   var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+            onPressed: {
+                console.log("PlayerCA: onPressed")
+                var speed = 250
+                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
-                   // create and remove entities at runtime
-                   entityManager.createEntityFromComponentWithProperties(
-                               bullet, {
-                                   start: Qt.point(tankRed.x, tankRed.y + 35),
-                                   velocity: Qt.point(xDirection, yDirection)
-                               });
-               }
+                // create and remove entities at runtime
+                entityManager.createEntityFromComponentWithProperties(
+                            bullet, {
+                                start: Qt.point(tankRed.x, tankRed.y + 35),
+                                velocity: Qt.point(xDirection, yDirection)
+                            });
+            }
 
-               onTouchUpdated: {
+            onTouchUpdated: {
 
-                   var x = touchPoints[0].x
-                   var y = touchPoints[0].y
-                   x = x - (playerMovementControlArea.width / 2)
-                   y = (y - (playerMovementControlArea.height / 2)) * (-1)
-                   //                var angle = calcAngle(x, y)
-                   //                cannon.rotation = angle
+                var x = touchPoints[0].x
+                var y = touchPoints[0].y
+                x = x - (playerMovementControlArea.width / 2)
+                y = (y - (playerMovementControlArea.height / 2)) * (-1)
+                //                var angle = calcAngle(x, y)
+                //                cannon.rotation = angle
 
-                   var angle = calcAngle(x, y)
-                   tankRed.tankCannon.rotation = angle
+                var angle = calcAngle(x, y)
+                tankRed.tankCannon.rotation = angle
 
-               }
+            }
 
-           }
-       }
+        }
+    }
 
     // ---------------------------------------------------
     // Joystick Controller tankBlue
@@ -223,8 +223,8 @@ Common.LevelBase {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
-            tankBlue.tankBody.rotation = angle +90
-            tankBlue.boxCollider.rotation = angle +90
+                tankBlue.tankBody.rotation = angle +90
+                tankBlue.boxCollider.rotation = angle +90
             }
         }
 
@@ -232,8 +232,8 @@ Common.LevelBase {
             playerTwoAxisController.yAxis = controllerYPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
-            tankBlue.tankBody.rotation = angle +90
-            tankBlue.boxCollider.rotation = angle +90
+                tankBlue.tankBody.rotation = angle +90
+                tankBlue.boxCollider.rotation = angle +90
             }
         }
 
@@ -263,14 +263,14 @@ Common.LevelBase {
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
-            tankBlue.tankCannon.rotation = angle
+                tankBlue.tankCannon.rotation = angle
             }
         }
 
         onControllerYPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
-            tankBlue.tankCannon.rotation = angle
+                tankBlue.tankCannon.rotation = angle
             }
         }
     }
@@ -354,12 +354,26 @@ Common.LevelBase {
                     var collidedEntity = collidedColliderComponent.parent;
                     console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
-//                    if(tankRed.entityId !== collidedEntity.entityId &&
-//                       tankBlue.entityId !== collidedEntity.entityId &&
-//                       collidedEntity.entityId !== "lake"){
+                    //   if(tankRed.entityId !== collidedEntity.entityId &&
+                    //   tankBlue.entityId !== collidedEntity.entityId &&
+                    //   collidedEntity.entityId !== "lake"){
                     if(collidedEntity.entityId !== "lake"){
                         console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
                         singleBullet.destroy()
+                    }
+
+                    else if(tankRed.entityId===collidedEntity.entityId){
+                        //tankRed.opacity = 0.2
+                        console.log("tankRed hit!")
+                        playerRed.life=playerRed.life-1
+                        damage()
+                    }
+
+                    else if(tankBlue.entityId===collidedEntity.entityId){
+                        //tankBlue.opacity = 0.2
+                        console.log("tankBlue hit!")
+                        playerBlue.life=playerBlue.life-1
+                        damage()
                     }
                 }
             }
@@ -431,7 +445,7 @@ Common.LevelBase {
     }
 
     function calcAngle(touchX, touchY) {
-        console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
+        //console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
         return -180 / Math.PI * Math.atan2(touchY, touchX)
     }
 
