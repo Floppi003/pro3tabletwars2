@@ -9,6 +9,15 @@ GameController {
     property alias opponentSnowman: opponentSnowman
     //property alias lake: lake
 
+    Iglu {
+        id: iglu
+        x: scene.width / 3 *2
+        y: scene.height / 3 *2
+
+        rotation: 145
+        igluBody.source: "../../assets/img/Iglu.png"
+    }
+
     Lake {
         id: lake
         anchors.centerIn: parent
