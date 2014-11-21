@@ -13,7 +13,9 @@ Common.LevelBase {
     property alias joystickBlue: joystickBlue
     property alias playerRed: playerRed
     property alias playerBlue: playerBlue
+
     //signal damage
+    //property alias singleBullet: singleBullet
     //property int moveDuration: 250
 
     focus: true
@@ -39,9 +41,8 @@ Common.LevelBase {
         source: ""
         thumbSource: ""
 
-
         // Touch Methods
-        property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             //if (controllerXPosition!=0 || controllerYPosition != 0){
@@ -72,7 +73,6 @@ Common.LevelBase {
         }
     }
 
-
     // ---------------------------------------------------
     // Joystick Controller red tankCannon
     // ---------------------------------------------------
@@ -92,7 +92,7 @@ Common.LevelBase {
         source: ""
         thumbSource: ""
 
-        property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
@@ -107,16 +107,18 @@ Common.LevelBase {
             }
         }
 
-
-
         Timer {
             interval: 500; running: true; repeat: true;
 
             onTriggered: {
-
                 var speed = 250
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+
+
+                        xDirection = xDirection * 20
+                        yDirection = yDirection * 20
+
 
                 // create and remove entities at runtime
                 entityManager.createEntityFromComponentWithProperties(
@@ -127,9 +129,6 @@ Common.LevelBase {
             }
         }
     }
-
-
-
 
     // ---------------------------------------------------
     // Joystick Controller tankBlue
@@ -152,7 +151,7 @@ Common.LevelBase {
         source: ""
         thumbSource: ""
 
-        property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
+        property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
@@ -174,7 +173,6 @@ Common.LevelBase {
 
     }
 
-
     // ---------------------------------------------------
     // Joystick Controller blue tankCannon
     // ---------------------------------------------------
@@ -194,7 +192,7 @@ Common.LevelBase {
         source: ""
         thumbSource: ""
 
-        property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
+        property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
@@ -220,7 +218,6 @@ Common.LevelBase {
         id: playerBlue
         life: 3
     }
-
 
     Tank {
         id: tankRed
@@ -283,8 +280,22 @@ Common.LevelBase {
                 restitution: 0
                 body.bullet: true
                 body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
-            }
 
+                fixture.onBeginContact: {
+                    // handle the collision
+
+                    var collidedColliderComponent = other.parent.parent;
+                    var collidedEntity = collidedColliderComponent.parent;
+                    console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+
+                    if(tankRed.entityId !== collidedEntity.entityId && tankBlue.entityId !== collidedEntity.entityId){
+                        console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId)
+                        singleBullet.removeEntity()
+                        singleBullet.destroy()
+                        singleBullet.destroy()
+                    }
+                }
+            }
 
             MovementAnimation {
                 target: singleBullet

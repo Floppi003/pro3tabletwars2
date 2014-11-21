@@ -1,9 +1,10 @@
-
 import QtQuick 2.0
 import VPlay 2.0
+import "levels"
+
 
 Component {
-    /*
+/*
     id: bullet
 
     EntityBase {
@@ -52,10 +53,9 @@ Component {
 
             onStopped: {
                 console.log("did Destroy")
-                //bullet.destroy()
+                bullet.destroy()
             }
         }
     }
-
 */
 }

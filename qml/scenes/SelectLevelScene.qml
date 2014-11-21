@@ -5,8 +5,6 @@ import "../common"
 SceneBase {
     id: selectLevelScene
 
-    //property int levelSelected: 0
-
     // signal indicating that a level has been selected
     signal levelPressed(string selectedLevel)
 
@@ -48,24 +46,6 @@ SceneBase {
                 levelPressed("Level2.qml")
             }
         }
-/*
-        MenuButton {
-            text: "3"
-            width: 50
-            height: 50
-            onClicked: {
-                levelPressed("GameController.qml") // Level 3
-            }
-        }
-        Repeater {
-            model: 10
-            MenuButton {
-                text: " "
-                width: 50
-                height: 50
-            }
-        }
- */
     }
 }
 
