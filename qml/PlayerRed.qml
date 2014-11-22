@@ -9,20 +9,25 @@ EntityBase {
 
     property int life: 3
     property bool activateShield: false // for activating powerUpShield
-    property bool activeShield: false // powerUpShield
+    property int activeShieldCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
+    property bool activateAccelerator: false // for activating powerUpAccelerator
+    property int activeAcceleratorCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
 
     Timer {
         id: timerRed
-        interval: 8000; running: true; repeat: true;
+        interval: 100; running: true; repeat: true;
 
         //disable powerUpShield after 5 seconds
         onTriggered: {
-            if(activateShield) {
-                activeShield = true;
-                activateShield = false;
-            } else {
-                activeShield = false;
-            }
+            //console.log ("activateShield: " + activateShield + " / " + activeShieldCounter)
+            if (activateShield) { activeShieldCounter++; }
+            if (activeShieldCounter === 80) { activateShield = false; activeShieldCounter = 0; }
+
+            //console.log ("activateAccelerator: " + activateAccelerator + " / " + activeAcceleratorCounter)
+            if (activateAccelerator) { activeAcceleratorCounter++ }
+            if (activeAcceleratorCounter === 80) { activateAccelerator = false; activeAcceleratorCounter = 0; }
         }
     }
 }
+
+

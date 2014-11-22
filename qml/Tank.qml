@@ -13,7 +13,7 @@ EntityBase {
 
     property int life: 3
         // flag indicating if dead
-     property bool gameRunning: life == 0
+    property bool gameRunning: life == 0
 
 
     // this is used as input for the BoxCollider force & torque properties

@@ -176,26 +176,31 @@ EntityBase {
 
                 fixture.onBeginContact: {
                     // handle the collision
+                    var collidedEntity = other.parent.parent.parent;
 
-                    var collidedColliderComponent = other.parent.parent;
-                    var collidedEntity = collidedColliderComponent.parent;
+                    var str = collidedEntity.entityId;
+                    var resId = str.substring(0, 3);
 
-
-                    if(collidedEntity.entityId !== opponent.entityId && collidedEntity.entityId !== "lake"){
-                        console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId)
+                    // destroy bullet on collision with any component except lake and powerUpIcons
+                    if(collidedEntity.entityId !== opponent.entityId && resId !== "lak" && resId !== "pow"){
+                        console.log("opponent bullet collides with another object:" + singleBulletOpponent.entityId + " / " + collidedEntity.entityId + " / " + resId)
                         singleBulletOpponent.destroy()
                     }
 
                     if(tankRed.entityId === collidedEntity.entityId){
-                        //tankRed.opacity = 0.2
-                        //                        console.log("tankRed hit!")
-                        playerRed.life = playerRed.life - 1
-                        damage()
+                        if(!playerRed.activateShield) {
+                            //tankRed.opacity = 0.2
+                            //                        console.log("tankRed hit!")
+                            playerRed.life = playerRed.life - 1
+                            damage()
+                        }
                     } else if(tankBlue.entityId === collidedEntity.entityId){
-                        //tankBlue.opacity = 0.2
-                        //                        console.log("tankBlue hit!")
-                        playerBlue.life = playerBlue.life - 1
-                        damage()
+                        if(!playerBlue.activateShield) {
+                            //tankBlue.opacity = 0.2
+                            //                        console.log("tankBlue hit!")
+                            playerBlue.life = playerBlue.life - 1
+                            damage()
+                        }
                     }
                 }
             }

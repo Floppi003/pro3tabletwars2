@@ -2,46 +2,42 @@ import QtQuick 2.0
 import VPlay 2.0
 
 EntityBase {
-    id: powShield
-    entityType: "powShield"
+    id: powAccelerator
+    entityType: "powAccelerator"
     z: 1
 
-//    property alias powShieldBody: powShieldBody
-//    property alias powShieldBodyInner: powShieldBodyInner
-//    property alias boxCollider: boxCollider
-
     Rectangle {
-        id: powShieldBody
+        id: powAcceleratorBody
         width: 50
         height: 50
         rotation: 45
-        color: "orange"
+        color: "darkBlue"
         Rectangle {
-            id: powShieldBodyInner
+            id: powAcceleratorBodyInner
             width: 30
             height: 30
-            anchors.centerIn: powShieldBody
-            color: "yellow"
+            anchors.centerIn: powAcceleratorBody
+            color: "lightBlue"
         }
     }
 
     BoxCollider {
         id: boxCollider
-        anchors.fill: powShieldBody
+        anchors.fill: powAcceleratorBody
         anchors.centerIn: parent
         sensor:true
 
         fixture.onBeginContact: {
-
             var collidedEntity = other.parent.parent.parent;
 
             //console.log("onBeginContact: " + collidedEntity.entityId)
+
             if(tankRed.entityId === collidedEntity.entityId){
-                playerRed.activateShield = true
-                powShield.destroy()
+                playerRed.activateAccelerator = true
+                powAccelerator.destroy()
             } else if(tankBlue.entityId === collidedEntity.entityId){
-                playerBlue.activateShield = true
-                powShield.destroy()
+                playerBlue.activateAccelerator = true
+                powAccelerator.destroy()
             }
         }
     }

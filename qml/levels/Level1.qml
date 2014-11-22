@@ -3,11 +3,11 @@ import VPlay 2.0
 import ".."
 
 GameController {
-    //levelName: "Level1"
     id: scene
 
     property alias opponentSnowman: opponentSnowman
     property alias powShield: powShield
+    property alias powAccelerator: powAccelerator
     //property alias lake: lake
 
     PowerUpShield {
@@ -15,6 +15,13 @@ GameController {
         x: 205
         y: 700
 	}
+
+    PowerUpAccelerator {
+        id: powAccelerator
+        x: width / 3 * 2
+        y: 600
+    }
+
     Iglu {
         id: iglu
         x: scene.width / 3 *2
@@ -42,36 +49,7 @@ GameController {
 
         rotation: 0
         opponentBody.source: "../../assets/img/opponentSnowman.png"
-/*
-        MovementAnimation {
-            target: Tank
-            property: "x"
-            running: true
-
-            // the starting velocity
-            velocity: 960
-
-            // this forces the rectangle to move to the left (against the velocity direction), but it doesnt get faster than -20 px/second!
-            acceleration: -260
-            minVelocity: -20
-            // limits the initial velocity set to 960, now to 500
-            maxVelocity: 500
-
-            // limits the x property between a border of 10 and 100
-            minPropertyValue: 10
-            maxPropertyValue: 100
-
-            // never change the x value by more than 50 pixels in one step
-            // this is useful for example to limit the rotation from MoveToPointHelper
-            maxPropertyValueDifference: 50
-
-            // this is the same as setting running to true, only for demonstration purpose
-            Component.onCompleted: movement.start()
-          }
-*/
     }
-
-
 
     Wall {
         id: wallBottom
