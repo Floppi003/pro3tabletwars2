@@ -10,7 +10,7 @@ EntityBase {
     property alias controller: twoAxisController
     property alias opponentBody: opponentBody
     property alias opponentCannon: opponentCannon
-    property alias boxCollider: boxCollider
+    property alias circleCollider: circleCollider
     property bool targetTankRed: true
 
     // this is used as input for the BoxCollider force & torque properties
@@ -37,12 +37,12 @@ EntityBase {
         color: "#000000"
     }
 
-    BoxCollider {
-        id: boxCollider
+    CircleCollider {
+        id: circleCollider
+        radius: 20
+        x: radius
+        y: radius
 
-        // the image and the physics will use this size
-        width: 40
-        height: 40
 
         anchors.centerIn: parent
 

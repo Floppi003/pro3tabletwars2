@@ -9,17 +9,20 @@ EntityBase {
     property alias controller: twoAxisController
     property alias tankBody: tankBody
     property alias tankCannon: tankCannon
-    property alias boxCollider: boxCollider
+    //property alias boxCollider: boxCollider
+    property alias circleCollider: circleCollider
 
     property int life: 3
-        // flag indicating if dead
-    property bool gameRunning: life == 0
+    // flag indicating if dead
+    //property bool gameRunning: life == 0
 
 
     // this is used as input for the BoxCollider force & torque properties
+
     TwoAxisController {
         id: twoAxisController
     }
+
 
     Image {
         id: tankBody
@@ -42,12 +45,14 @@ EntityBase {
         color: "#000000"
     }
 
-    BoxCollider {
-        id: boxCollider
-        // the image and the physics will use this size
-        width: 40
-        height: 40
 
+
+
+    CircleCollider {
+        id: circleCollider
+        radius: 22
+        x: radius
+        y: radius
         anchors.centerIn: parent
 
         density: 0

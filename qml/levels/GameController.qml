@@ -208,7 +208,7 @@ Common.LevelBase {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankBlue.tankBody.rotation = angle +90
-                tankBlue.boxCollider.rotation = angle +90
+                tankBlue.circleCollider.rotation = angle +90
             }
         }
 
@@ -217,7 +217,7 @@ Common.LevelBase {
             var angle = calcAngle(controllerXPosition, controllerYPosition)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankBlue.tankBody.rotation = angle +90
-                tankBlue.boxCollider.rotation = angle +90
+                tankBlue.circleCollider.rotation = angle +90
             }
         }
 
@@ -300,10 +300,7 @@ Common.LevelBase {
         x: scene.width / 2
         y: 100
         z: 1
-
         entityId: "tank_0"
-
-        // rotation in degrees clockwise
         rotation: 0
         tankBody.source: "../../assets/img/charRed.png"
     }
@@ -313,9 +310,7 @@ Common.LevelBase {
         x: scene.width / 2
         y: scene.height - 120
         z: 1
-
         entityId: "tank_1"
-
         rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
     }
@@ -470,7 +465,7 @@ Common.LevelBase {
     // physics world for collision detection
     PhysicsWorld {
         id: world
-        debugDrawVisible: false
+        debugDrawVisible: true
         updatesPerSecondForPhysics: 10
     }
 }

@@ -1,0 +1,2 @@
+Intervall: nicht zu schnell hintereinander verletzen
+Random Spawn von Items
