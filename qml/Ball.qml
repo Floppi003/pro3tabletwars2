@@ -23,11 +23,11 @@ EntityBase {
         y: radius
 
         anchors.centerIn: parent
-        friction: 1
-        restitution: 1
+        friction: 0.5
+        restitution: 0.8
         body.bullet: true
         body.linearDamping: 0.5
         body.angularDamping: 0
-        density: 1
+        density: 0
     }
 }

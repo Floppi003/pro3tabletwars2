@@ -15,8 +15,8 @@ EntityBase {
 
     Image {
         id: lakeBody
-        width: 500
-        height: 500
+        width: 300
+        height: 300
         //rotation: 0
         anchors.centerIn: parent
     }

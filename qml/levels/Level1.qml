@@ -69,8 +69,9 @@ GameController {
 
     Lake {
         id: lake
-        anchors.centerIn: parent
-
+        //anchors.centerIn: parent
+        x: 200
+        y: 200
         joystickRed: scene.joystickRed
         joystickBlue: scene.joystickBlue
 
