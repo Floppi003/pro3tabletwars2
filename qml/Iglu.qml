@@ -13,7 +13,7 @@ EntityBase {
     property alias porter: porter
     property alias rectColliderLeft: rectColliderLeft
     property alias rectColliderRight: rectColliderRight
-    // property alias rectColliderBottom: rectColliderBottom
+    property alias rectColliderBottom: rectColliderBottom
     /*
     property JoystickControllerHUD joystickRed
     property JoystickControllerHUD joystickBlue
@@ -74,43 +74,40 @@ EntityBase {
     BoxCollider {
         density: 100000000
         id: porter
-
-        //anchors.fill: igluBody
         width: igluBody.width/2
         height: igluBody.height/2
-
         anchors.centerIn: parent
-        //anchors.top: igluBody.top+igluBody.height/3*2
-        //anchors.horizontalCenter: igluBody.horizontalCenter
-
-        //sensor:true
-
         collisionTestingOnlyMode: true
 
         fixture.onBeginContact: {
             var collidedColliderComponent = other.parent.parent;
             var collidedEntity = collidedColliderComponent.parent;
 
-            var random = Math.ceil(Math.random() * igluCount);
-            console.debug("Random: " + random)
             var igluX
             var igluY
             var igluR
+            var random = Math.ceil(Math.random() * (igluCount-1));
 
-
+            if (fixture === iglu1.porter.fixture){
+                random = (random==1) ? 2 : 3;
+            }else if (fixture === iglu2.porter.fixture){
+                random = (random==1) ? 1 : 3;
+            }else{
+                random = (random==1) ? 1 : 2;
+            }
 
             if (random == 1){
-                igluX = iglu1.x + (iglu1.width/2)
-                igluY = iglu1.y
-                igluR = iglu1.rotation
+                igluX= (100*Math.cos((iglu1.rotation-90)*Math.PI/180)) + iglu1.x - tankRed.width/2
+                igluY= (100*Math.sin((iglu1.rotation-90)*Math.PI/180)) + iglu1.y - tankRed.height/2
+                igluR = iglu1.rotation+90
             }else if (random == 2){
-                igluX = iglu2.x + (iglu2.width/2)
-                igluY = iglu2.y
-                igluR = iglu2.rotation
+                igluX= (100*Math.cos((iglu2.rotation-90)*Math.PI/180)) + iglu2.x - tankRed.width/2
+                igluY= (100*Math.sin((iglu2.rotation-90)*Math.PI/180)) + iglu2.y - tankRed.height/2
+                igluR = iglu2.rotation+90
             }else{
-                igluX = iglu3.x + (iglu3.width/2)
-                igluY = iglu3.y
-                igluR = iglu3.rotation
+                igluX= (100*Math.cos((iglu3.rotation-90)*Math.PI/180)) + iglu3.x - tankRed.width/2
+                igluY= (100*Math.sin((iglu3.rotation-90)*Math.PI/180)) + iglu3.y - tankRed.height/2
+                igluR = iglu3.rotation+90
             }
 
             if(tankRed.entityId === collidedEntity.entityId){

@@ -2,6 +2,7 @@ import QtQuick 2.0
 import VPlay 2.0
 
 EntityBase {
+
     id: powShield
     entityType: "powShield"
     z: 1
