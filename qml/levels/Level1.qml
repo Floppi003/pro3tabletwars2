@@ -12,20 +12,26 @@ GameController {
 
     PowerUpShield {
         id: powShield
-        x: 205
+        x: 50
         y: 700
 	}
 
     PowerUpAccelerator {
         id: powAccelerator
-        x: width / 3 * 2
+        x: 50
         y: 600
     }
 
     PowerUpPowershot {
         id: powPowershot
-        x: width / 15 * 13
-        y: 300
+        x: 50
+        y: 500
+    }
+
+    PowerUpLifeUp {
+        id: powLifeUp
+        x: 50
+        y: 400
     }
 
     Iglu {
