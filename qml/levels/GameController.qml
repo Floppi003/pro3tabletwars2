@@ -156,10 +156,13 @@ Common.LevelBase {
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
+                var startX= (45*Math.cos((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.x
+                var startY= (45*Math.sin((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.y
+
                 // create and remove entities at runtime
                 entityManager.createEntityFromComponentWithProperties(
                             bullet, {
-                                start: Qt.point(tankRed.x, tankRed.y + 35),
+                                start: Qt.point(startX, startY),
                                 velocity: Qt.point(xDirection, yDirection)
                             });
             }
@@ -259,10 +262,13 @@ Common.LevelBase {
                 var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
 
+                var startX= (45*Math.cos((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.x
+                var startY= (45*Math.sin((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.y
+
                 // create and remove entities at runtime
                 entityManager.createEntityFromComponentWithProperties(
                             bullet, {
-                                start: Qt.point(tankBlue.x, tankBlue.y + 35),
+                                start: Qt.point(startX, startY),
                                 velocity: Qt.point(xDirection, yDirection)
                             });
             }
@@ -315,7 +321,7 @@ Common.LevelBase {
     }
 
     Component {
-        id: bullet
+        id: bullet     
 
         EntityBase {
             id: singleBullet

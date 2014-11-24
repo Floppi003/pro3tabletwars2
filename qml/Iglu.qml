@@ -14,21 +14,16 @@ EntityBase {
     property alias rectColliderLeft: rectColliderLeft
     property alias rectColliderRight: rectColliderRight
     property alias rectColliderBottom: rectColliderBottom
-    /*
-    property JoystickControllerHUD joystickRed
-    property JoystickControllerHUD joystickBlue
-*/
+
     Image {
         id: igluBody
         width: 150
         height: 180
-        //rotation: 0
         anchors.centerIn: parent
     }
 
     PolygonCollider {
         bodyType: Body.Static
-        //density: 100000000
         id: rectColliderLeft
 
         vertices: [
@@ -43,9 +38,7 @@ EntityBase {
 
     PolygonCollider {
         bodyType: Body.Static
-        //density: 100000000
         id: rectColliderRight
-
 
         vertices: [
             Qt.point(igluBody.x + igluBody.width/5*4, igluBody.y),
@@ -59,7 +52,6 @@ EntityBase {
 
     PolygonCollider {
         bodyType: Body.Static
-        //density: 100000000
         id: rectColliderBottom
 
         vertices: [
