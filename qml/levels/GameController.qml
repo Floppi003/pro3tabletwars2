@@ -347,9 +347,8 @@ Common.LevelBase {
                 body.bullet: true
                 body.fixedRotation: false // if set to true the physics engine will NOT apply rotation to it
 
+                // handle the collision
                 fixture.onBeginContact: {
-                    // handle the collision
-
                     var collidedEntity = other.parent.parent.parent;
                     //                    console.log("bullet collides with tank or something else:" + singleBullet.entityId + " / " + collidedEntity.entityId)
 
@@ -360,25 +359,20 @@ Common.LevelBase {
                     var str = collidedEntity.entityId;
                     var resId = str.substring(0, 3);
 
-                    //console.log ("SubString: " + resId)
                     // destroy bullet on collision with any component except lake and powerUpIcons
                     if(resId !== "lak" && resId !== "pow"){
-                        //console.log("bullet collides with another object:" + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
+                        console.log("bullet collides with another object:" + singleBullet.parent.parent.entityId + "." + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
                         singleBullet.destroy()
                     }
 
                     if(tankRed.entityId===collidedEntity.entityId){
-                        if(!playerRed.activateShield) {
-                            //tankRed.opacity = 0.2
-                            //                        console.log("tankRed hit!")
-                            playerRed.life=playerRed.life-1
+                        if(!playerRed.activateShield) {                            
+                            playerRed.life = playerRed.life - ((playerBlue.activatePowershot) ? 2 : 1)
                             damage()
                         }
                     } else if(tankBlue.entityId===collidedEntity.entityId){
                         if(!playerBlue.activateShield) {
-                            //tankBlue.opacity = 0.2
-                            //                        console.log("tankBlue hit!")
-                            playerBlue.life=playerBlue.life-1
+                            playerBlue.life = playerBlue.life - ((playerRed.activatePowershot) ? 2 : 1)
                             damage()
                         }
                     }

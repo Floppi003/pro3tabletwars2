@@ -22,6 +22,12 @@ GameController {
         y: 600
     }
 
+    PowerUpPowershot {
+        id: powPowershot
+        x: width / 15 * 13
+        y: 300
+    }
+
     Iglu {
         id: iglu
         x: scene.width / 3 *2

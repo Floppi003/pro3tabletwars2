@@ -10,6 +10,8 @@ EntityBase {
     property int activeShieldCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
     property bool activateAccelerator: false // for activating powerUpAccelerator
     property int activeAcceleratorCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
+    property bool activatePowershot: false // for activating powerUpPowershot
+    property int activePowershotCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
 
     Timer {
         id: timerBlue
@@ -24,6 +26,10 @@ EntityBase {
             //console.log ("activateAccelerator: " + activateAccelerator + " / " + activeAcceleratorCounter)
             if (activateAccelerator) { activeAcceleratorCounter++ }
             if (activeAcceleratorCounter === 80) { activateAccelerator = false; activeAcceleratorCounter = 0; }
+
+            //console.log ("activatePowershot: " + activatePowershot + " / " + activePowershotCounter)
+            if (activatePowershot) { activePowershotCounter++ }
+            if (activePowershotCounter === 80) { activatePowershot = false; activePowershotCounter = 0; }
         }
     }
 }
