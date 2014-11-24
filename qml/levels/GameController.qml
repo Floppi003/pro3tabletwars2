@@ -148,14 +148,8 @@ Common.LevelBase {
 
             onPressed: {
                 //                console.log("PlayerCA: onPressed")
-                var speed = 250
-                if (playerRed.activateAccelerator) {
-                    speed = 500
-                } else {
-                    speed = 250
-                }
+                var speed = (playerRed.activateAccelerator) ? 500 : 250
 
-                var speed = playerRed.bulletSpeed
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
@@ -248,12 +242,13 @@ Common.LevelBase {
 
             onPressed: {
                 //                console.log("PlayerCA: onPressed")
-                var speed = 250
-                if (playerBlue.activateAccelerator) {
-                    speed = 500
-                } else {
-                    speed = 250
-                }
+                var speed = (playerBlue.activateAccelerator) ? 500 : 250
+//                var speed = 250
+//                if (playerBlue.activateAccelerator) {
+//                    speed = 500
+//                } else {
+//                    speed = 250
+//                }
 
                 var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
@@ -358,10 +353,9 @@ Common.LevelBase {
 
                     var str = collidedEntity.entityId;
                     var resId = str.substring(0, 3);
-
                     // destroy bullet on collision with any component except lake and powerUpIcons
                     if(resId !== "lak" && resId !== "pow"){
-                        console.log("bullet collides with another object:" + singleBullet.parent.parent.entityId + "." + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
+                        console.log("bullet collides with:" + singleBullet.entityId + " / " + collidedEntity.entityId + " / " + resId)
                         singleBullet.destroy()
                     }
 
