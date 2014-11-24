@@ -29,12 +29,14 @@ Common.LevelBase {
         height: 180
         x: 50
         y: 50
+        z: 5
 
         Rectangle {
             id: cannonControlArea
             anchors.fill: parent
             color: "#aaaaaa"
             opacity: 0.3
+            z: 5
         }
 
         // delete the default images
@@ -136,6 +138,7 @@ Common.LevelBase {
         height: 180
         x: scene.width - 230
         y: 50
+        z: 5
 
         MultiPointTouchArea {
             anchors.fill: parent
@@ -182,11 +185,13 @@ Common.LevelBase {
         height: 180
         x: scene.width - 230
         y: scene.height - 230
+        z: 5
 
         Rectangle {
             anchors.fill: parent
             color: "#aaaaaa"
             opacity: 0.3
+            z: 5
         }
 
         // delete the default images
@@ -230,6 +235,7 @@ Common.LevelBase {
         height: 180
         x: 50
         y: scene.height - 230
+        z: 5
 
         MultiPointTouchArea {
             anchors.fill: parent
