@@ -464,7 +464,7 @@ Common.LevelBase {
     // physics world for collision detection
     PhysicsWorld {
         id: world
-        debugDrawVisible: false
+        debugDrawVisible: true
         updatesPerSecondForPhysics: 10
     }
 }

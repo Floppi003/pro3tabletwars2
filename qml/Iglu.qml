@@ -8,10 +8,12 @@ EntityBase {
     entityId: "iglu"
     entityType: "iglu"
 
+    property int igluCount
     property alias igluBody: igluBody
     property alias porter: porter
     property alias rectColliderLeft: rectColliderLeft
     property alias rectColliderRight: rectColliderRight
+    // property alias rectColliderBottom: rectColliderBottom
     /*
     property JoystickControllerHUD joystickRed
     property JoystickControllerHUD joystickBlue
@@ -29,14 +31,6 @@ EntityBase {
         //density: 100000000
         id: rectColliderLeft
 
-        /*
-        vertices: [
-            Qt.point(igluBody.x,igluBody.y),
-            Qt.point(igluBody.x+igluBody.width, igluBody.y),
-            Qt.point(igluBody.x+igluBody.width, igluBody.y+igluBody.height),
-            Qt.point(igluBody.x, igluBody.y+igluBody.height)
-        ]
-        */
         vertices: [
             Qt.point(igluBody.x + igluBody.width/5, igluBody.y),
             Qt.point(igluBody.x, igluBody.y + igluBody.height/2),
@@ -52,18 +46,25 @@ EntityBase {
         //density: 100000000
         id: rectColliderRight
 
-        /*
-        vertices: [
-            Qt.point(igluBody.x,igluBody.y),
-            Qt.point(igluBody.x+igluBody.width, igluBody.y),
-            Qt.point(igluBody.x+igluBody.width, igluBody.y+igluBody.height),
-            Qt.point(igluBody.x, igluBody.y+igluBody.height)
-        ]
-        */
+
         vertices: [
             Qt.point(igluBody.x + igluBody.width/5*4, igluBody.y),
             Qt.point(igluBody.x + igluBody.width, igluBody.y + igluBody.height/2),
             Qt.point(igluBody.x + igluBody.width/7*6, igluBody.y + igluBody.height/7*6),
+            Qt.point(igluBody.x+igluBody.width/2, igluBody.y+igluBody.height)
+        ]
+
+        anchors.centerIn: parent
+    }
+
+    PolygonCollider {
+        bodyType: Body.Static
+        //density: 100000000
+        id: rectColliderBottom
+
+        vertices: [
+            Qt.point(igluBody.x + igluBody.width/5, igluBody.y + igluBody.height/5*2),
+            Qt.point(igluBody.x + igluBody.width/5*4, igluBody.y + igluBody.height/5*2),
             Qt.point(igluBody.x+igluBody.width/2, igluBody.y+igluBody.height)
         ]
 
@@ -75,8 +76,8 @@ EntityBase {
         id: porter
 
         //anchors.fill: igluBody
-        width: igluBody.width/3
-        height: igluBody.height/3
+        width: igluBody.width/2
+        height: igluBody.height/2
 
         anchors.centerIn: parent
         //anchors.top: igluBody.top+igluBody.height/3*2
@@ -90,31 +91,39 @@ EntityBase {
             var collidedColliderComponent = other.parent.parent;
             var collidedEntity = collidedColliderComponent.parent;
 
+            var random = Math.ceil(Math.random() * igluCount);
+            console.debug("Random: " + random)
+            var igluX
+            var igluY
+            var igluR
+
+
+
+            if (random == 1){
+                igluX = iglu1.x + (iglu1.width/2)
+                igluY = iglu1.y
+                igluR = iglu1.rotation
+            }else if (random == 2){
+                igluX = iglu2.x + (iglu2.width/2)
+                igluY = iglu2.y
+                igluR = iglu2.rotation
+            }else{
+                igluX = iglu3.x + (iglu3.width/2)
+                igluY = iglu3.y
+                igluR = iglu3.rotation
+            }
+
             if(tankRed.entityId === collidedEntity.entityId){
-                tankRed.x = 100
-                tankRed.y = 100
+                tankRed.x = igluX
+                tankRed.y = igluY
+                tankRed.rotation = igluR
             }
 
             if(tankBlue.entityId === collidedEntity.entityId){
-                tankBlue.x = 100
-                tankBlue.y = 100
+                tankBlue.x = igluX
+                tankBlue.y = igluY
+                tankBlue.rotation = igluR
             }
         }
-        /*
-        fixture.onEndContact: {
-            var collidedColliderComponent = other.parent.parent;
-            var collidedEntity = collidedColliderComponent.parent;
-
-            if(tankRed.entityId ===collidedEntity.entityId){
-                tankRed.opacity = 1
-                joystickRed.enabled=true;
-            }
-
-            if(tankBlue.entityId ===collidedEntity.entityId){
-                tankBlue.opacity = 1
-                joystickBlue.enabled=true;
-            }
-        }
-        */
     }
 }

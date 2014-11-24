@@ -121,6 +121,28 @@ GameController {
         ballBody.source: "../../assets/img/Ball.png"
     }
 
+    Iglu {
+        igluCount: 2
+        entityId: "iglu1"
+        id: iglu1
+        x: scene.width / 3 *2
+        y: scene.height / 3 *2
+
+        rotation: 145
+        //igluBody.source: "../../assets/img/Iglu.png"
+    }
+
+    Iglu {
+        igluCount: 2
+        entityId: "iglu2"
+        id: iglu2
+        x: scene.width / 7 *2
+        y: scene.height / 7 *6
+
+        rotation: 90
+        //igluBody.source: "../../assets/img/Iglu.png"
+    }
+
 
 
 /*

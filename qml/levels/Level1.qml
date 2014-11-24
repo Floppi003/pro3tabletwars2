@@ -14,7 +14,7 @@ GameController {
         id: powShield
         x: 50
         y: 700
-	}
+    }
 
     PowerUpAccelerator {
         id: powAccelerator
@@ -35,30 +35,36 @@ GameController {
     }
 
     Iglu {
+        igluCount: 3
+        entityId: "iglu1"
         id: iglu1
         x: scene.width / 3 *2
         y: scene.height / 3 *2
 
         rotation: 145
-        igluBody.source: "../../assets/img/Iglu.png"
+        //igluBody.source: "../../assets/img/Iglu.png"
     }
 
     Iglu {
+        igluCount: 3
+        entityId: "iglu2"
         id: iglu2
         x: scene.width / 7 *2
         y: scene.height / 7 *6
 
         rotation: 90
-        igluBody.source: "../../assets/img/Iglu.png"
+        //igluBody.source: "../../assets/img/Iglu.png"
     }
 
     Iglu {
+        igluCount: 3
+        entityId: "iglu3"
         id: iglu3
         x: scene.width / 4*3
         y: scene.height / 2
 
         rotation: 90
-        igluBody.source: "../../assets/img/Iglu.png"
+        //igluBody.source: "../../assets/img/Iglu.png"
     }
 
     Lake {
@@ -138,7 +144,7 @@ GameController {
         rotation: 0
         ballBody.source: "../../assets/img/Ball.png"
     }
-/*
+    /*
     //load controller-elements
     GameController {
         id: gameCtrl
