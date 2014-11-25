@@ -76,7 +76,7 @@ Common.LevelBase {
     // ---------------------------------------------------
     // Controller redTankCannon
     // ---------------------------------------------------
-/*
+    /*
         JoystickControllerHUD {
             width: 180
             height: 180
@@ -145,12 +145,15 @@ Common.LevelBase {
 
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
-            //            onReleased: {
-            //                console.log("PlayerCA: onReleased")
-            //            }
+            touchPoints: [
+                TouchPoint {id: point1}
+            ]
+
+            onTouchUpdated: upDateCannon()
 
             onPressed: {
-                //                console.log("PlayerCA: onPressed")
+                upDateCannon()
+
                 var speed = (playerRed.activateAccelerator) ? 500 : 250
 
                 var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
@@ -167,9 +170,9 @@ Common.LevelBase {
                             });
             }
 
-            onTouchUpdated: {
-                var x = touchPoints[0].x
-                var y = touchPoints[0].y
+            function upDateCannon(){
+                var x = point1.x
+                var y = point1.y
                 x = x - (playerMovementControlAreaRed.width / 2)
                 y = (y - (playerMovementControlAreaRed.height / 2)) * (-1)
                 var angle = calcAngle(x, y)
@@ -202,6 +205,7 @@ Common.LevelBase {
         thumbSource: ""
 
         property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
+
 
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
@@ -245,19 +249,22 @@ Common.LevelBase {
 
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
-            //            onReleased: {
-            //                console.log("PlayerCA: onReleased")
-            //            }
+            touchPoints: [
+                TouchPoint {id: point2}
+            ]
+
+            onTouchUpdated: upDateCannon()
 
             onPressed: {
-                //                console.log("PlayerCA: onPressed")
+                upDateCannon()
+
                 var speed = (playerBlue.activateAccelerator) ? 500 : 250
-//                var speed = 250
-//                if (playerBlue.activateAccelerator) {
-//                    speed = 500
-//                } else {
-//                    speed = 250
-//                }
+                //                var speed = 250
+                //                if (playerBlue.activateAccelerator) {
+                //                    speed = 500
+                //                } else {
+                //                    speed = 250
+                //                }
 
                 var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
                 var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
@@ -273,13 +280,13 @@ Common.LevelBase {
                             });
             }
 
-            onTouchUpdated: {
-                var x = touchPoints[0].x
-                var y = touchPoints[0].y
+
+
+            function upDateCannon(){
+                var x = point2.x
+                var y = point2.y
                 x = x - (playerMovementControlAreaBlue.width / 2)
                 y = (y - (playerMovementControlAreaBlue.height / 2)) * (-1)
-                //                var angle = calcAngle(x, y)
-                //                cannon.rotation = angle
 
                 var angle = calcAngle(x, y)
                 tankBlue.tankCannon.rotation = angle
@@ -316,7 +323,7 @@ Common.LevelBase {
     }
 
     Component {
-        id: bullet     
+        id: bullet
 
         EntityBase {
             id: singleBullet
@@ -367,7 +374,7 @@ Common.LevelBase {
                     }
 
                     if(tankRed.entityId===collidedEntity.entityId){
-                        if(!playerRed.activateShield) {                            
+                        if(!playerRed.activateShield) {
                             playerRed.life = playerRed.life - ((playerBlue.activatePowershot) ? 2 : 1)
                             damage()
                         }
