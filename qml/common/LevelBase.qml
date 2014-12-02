@@ -6,7 +6,7 @@ Item {
     width: 768
     height: 1024
 
-    //signal gameOver
+    signal gameOver
     signal damage
 
     // this will be displayed in the GameScene

@@ -47,29 +47,21 @@ Common.LevelBase {
         property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
         onControllerXPositionChanged: {
-            //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.xAxis = controllerXPosition
-            //            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            //            console.debug("Winkel rot: " +angle)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankRed.tankBody.rotation = angle
-                tankRed.boxCollider.rotation = angle
+                tankRed.circleCollider.rotation = angle
             }
-            //}
         }
 
         onControllerYPositionChanged: {
-            //if (controllerXPosition!=0 || controllerYPosition != 0){
             playerTwoAxisController.yAxis = controllerYPosition
-            //            console.debug("Input:  x: " + controllerXPosition + " / y: " + controllerYPosition)
             var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            //            console.debug("Winkel rot: " +angle)
             if (controllerXPosition!=0 && controllerYPosition != 0){
                 tankRed.tankBody.rotation = angle
-                tankRed.boxCollider.rotation = angle
+                tankRed.circleCollider.rotation = angle
             }
-            //}
         }
     }
 
@@ -143,6 +135,11 @@ Common.LevelBase {
         MultiPointTouchArea {
             anchors.fill: parent
 
+            property bool pressBool: false
+
+            property int minTimeDistanceMs: 1000
+            property var lastTime: 0
+
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
             touchPoints: [
@@ -153,21 +150,37 @@ Common.LevelBase {
 
             onPressed: {
                 upDateCannon()
+                pressBool= true
 
-                var speed = (playerRed.activateAccelerator) ? 500 : 250
+            }
 
-                var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
-                var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
 
-                var startX= (45*Math.cos((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.x
-                var startY= (45*Math.sin((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.y
+            onReleased: {
+                upDateCannon()
+                var currentTime = new Date().getTime()
+                var timeDiff = currentTime - lastTime
+                if (pressBool && timeDiff > minTimeDistanceMs) {
+                    lastTime = currentTime
 
-                // create and remove entities at runtime
-                entityManager.createEntityFromComponentWithProperties(
-                            bullet, {
-                                start: Qt.point(startX, startY),
-                                velocity: Qt.point(xDirection, yDirection)
-                            });
+                    console.debug("Shoot Cannon")
+
+
+                    var speed = (playerRed.activateAccelerator) ? 500 : 250
+
+                    var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+                    var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+
+                    var startX= (45*Math.cos((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.x + tankRed.width/2
+                    var startY= (45*Math.sin((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.y + tankRed.height/2
+
+                    // create and remove entities at runtime
+                    entityManager.createEntityFromComponentWithProperties(
+                                bullet, {
+                                    start: Qt.point(startX, startY),
+                                    velocity: Qt.point(xDirection, yDirection)
+                                });
+                }
+                pressBool= false
             }
 
             function upDateCannon(){
@@ -247,6 +260,11 @@ Common.LevelBase {
         MultiPointTouchArea {
             anchors.fill: parent
 
+            property bool pressBool: false
+
+            property int minTimeDistanceMs: 1000
+            property var lastTime: 0
+
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
             touchPoints: [
@@ -257,30 +275,36 @@ Common.LevelBase {
 
             onPressed: {
                 upDateCannon()
-
-                var speed = (playerBlue.activateAccelerator) ? 500 : 250
-                //                var speed = 250
-                //                if (playerBlue.activateAccelerator) {
-                //                    speed = 500
-                //                } else {
-                //                    speed = 250
-                //                }
-
-                var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
-                var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
-
-                var startX= (45*Math.cos((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.x
-                var startY= (45*Math.sin((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.y
-
-                // create and remove entities at runtime
-                entityManager.createEntityFromComponentWithProperties(
-                            bullet, {
-                                start: Qt.point(startX, startY),
-                                velocity: Qt.point(xDirection, yDirection)
-                            });
+                pressBool= true
             }
 
+            onReleased:  {
+                upDateCannon()
+                var currentTime = new Date().getTime()
+                var timeDiff = currentTime - lastTime
+                if (pressBool && timeDiff > minTimeDistanceMs) {
+                    lastTime = currentTime
 
+                    console.debug("Shoot Cannon")
+
+                    var speed = (playerBlue.activateAccelerator) ? 500 : 250
+
+                    var xDirection = Math.cos(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
+                    var yDirection = Math.sin(tankBlue.tankCannon.rotation * Math.PI / 180.0) * speed
+
+                    var startX= (45*Math.cos((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.x + tankBlue.width / 2
+                    var startY= (45*Math.sin((tankBlue.tankCannon.rotation)*Math.PI/180)) + tankBlue.y + tankBlue.height / 2
+
+                    // create and remove entities at runtime
+                    entityManager.createEntityFromComponentWithProperties(
+                                bullet, {
+                                    start: Qt.point(startX, startY),
+                                    velocity: Qt.point(xDirection, yDirection)
+                                });
+
+                }
+                pressBool = false
+            }
 
             function upDateCannon(){
                 var x = point2.x
@@ -305,7 +329,7 @@ Common.LevelBase {
     Tank {
         id: tankRed
         x: scene.width / 2
-        y: 100
+        y: 100 + height/2
         z: 1
         entityId: "tank_0"
         rotation: 0
@@ -315,7 +339,7 @@ Common.LevelBase {
     Tank {
         id: tankBlue
         x: scene.width / 2
-        y: scene.height - 120
+        y: scene.height - 100 - height/2
         z: 1
         entityId: "tank_1"
         rotation: 0
@@ -445,6 +469,7 @@ Common.LevelBase {
         }
     }
 
+    /*
     Text {
         z :1
         anchors.centerIn: parent
@@ -452,27 +477,15 @@ Common.LevelBase {
         font.pixelSize: 50
         text: playerRed.life<=0 || playerBlue.life<=0 ? "Game Over" : ""
     }
-
+*/
     function calcAngle(touchX, touchY) {
         //console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
         return -180 / Math.PI * Math.atan2(touchY, touchX)
     }
 
-    Loader { id: baseLoader }
-
     onDamage: {
-        //        console.log("DamageSignal!!!!!!!!!!!!!!!!!!!!!!")
         if (playerRed.life<=0 || playerBlue.life<=0){
-            //window.state = "credits"
-            //gameOver()
-            baseLoader.source = "../scenes/GameOverScene.qml"
+            gameOver()
         }
-    }
-
-    // physics world for collision detection
-    PhysicsWorld {
-        id: world
-        debugDrawVisible: false
-        updatesPerSecondForPhysics: 10
     }
 }

@@ -15,7 +15,7 @@ GameController {
     PowerUpShield {
         id: powShield
         x: 205
-        y: 300
+        y: 200
     }
 
     Opponents {
@@ -137,7 +137,7 @@ GameController {
         entityId: "iglu2"
         id: iglu2
         x: scene.width / 7 *2
-        y: scene.height / 7 *6
+        y: scene.height / 7 *5
 
         rotation: 90
         igluBody.source: "../../assets/img/Iglu.png"

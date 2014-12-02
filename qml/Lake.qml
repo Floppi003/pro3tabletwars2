@@ -13,10 +13,16 @@ EntityBase {
     property JoystickControllerHUD joystickRed
     property JoystickControllerHUD joystickBlue
 
+
+
+
+    width: 300
+    height: 300
+
     Image {
         id: lakeBody
-        width: 300
-        height: 300
+        width: parent.width
+        height: parent.height
         //rotation: 0
         anchors.centerIn: parent
     }

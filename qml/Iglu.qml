@@ -15,10 +15,14 @@ EntityBase {
     property alias rectColliderRight: rectColliderRight
     property alias rectColliderBottom: rectColliderBottom
 
+    width: 150
+    height: 180
+
     Image {
         id: igluBody
-        width: 150
-        height: 180
+        width: parent.width
+        height: parent.height
+        //rotation: 0
         anchors.centerIn: parent
     }
 
@@ -59,7 +63,6 @@ EntityBase {
             Qt.point(igluBody.x + igluBody.width/5*4, igluBody.y + igluBody.height/5*2),
             Qt.point(igluBody.x+igluBody.width/2, igluBody.y+igluBody.height)
         ]
-
         anchors.centerIn: parent
     }
 
@@ -89,17 +92,17 @@ EntityBase {
             }
 
             if (random == 1){
-                igluX= (100*Math.cos((iglu1.rotation-90)*Math.PI/180)) + iglu1.x - tankRed.width/2
-                igluY= (100*Math.sin((iglu1.rotation-90)*Math.PI/180)) + iglu1.y - tankRed.height/2
-                igluR = iglu1.rotation+90
+            igluX= (80*Math.cos((iglu1.rotation-10)*Math.PI/180)) + iglu1.x + tankRed.width/2
+            igluY= (80*Math.sin((iglu1.rotation-10)*Math.PI/180)) + iglu1.y + tankRed.width/2
+                igluR = iglu1.rotation
             }else if (random == 2){
-                igluX= (100*Math.cos((iglu2.rotation-90)*Math.PI/180)) + iglu2.x - tankRed.width/2
-                igluY= (100*Math.sin((iglu2.rotation-90)*Math.PI/180)) + iglu2.y - tankRed.height/2
-                igluR = iglu2.rotation+90
+                igluX= (80*Math.cos((iglu2.rotation-10)*Math.PI/180)) + iglu2.x - tankRed.width/2
+                igluY= (80*Math.sin((iglu2.rotation-10)*Math.PI/180)) + iglu2.y - tankRed.width/2
+                igluR = iglu2.rotation
             }else{
-                igluX= (100*Math.cos((iglu3.rotation-90)*Math.PI/180)) + iglu3.x - tankRed.width/2
-                igluY= (100*Math.sin((iglu3.rotation-90)*Math.PI/180)) + iglu3.y - tankRed.height/2
-                igluR = iglu3.rotation+90
+                igluX= (80*Math.cos((iglu3.rotation-10)*Math.PI/180)) + iglu3.x - tankRed.width/2
+                igluY= (80*Math.sin((iglu3.rotation-10)*Math.PI/180)) + iglu3.y - tankRed.width/2
+                igluR = iglu3.rotation
             }
 
             if(tankRed.entityId === collidedEntity.entityId){

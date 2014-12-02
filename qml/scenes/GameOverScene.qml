@@ -6,6 +6,8 @@ SceneBase {
     id:gameOverScene
     z: 1
 
+        property string winner
+
     // background
     Rectangle {
         anchors.fill: parent
@@ -20,12 +22,14 @@ SceneBase {
         anchors.rightMargin: 10
         anchors.top: gameOverScene.top
         anchors.topMargin: 10
-        onClicked: backPressed()
+        onClicked: {
+            backPressed()
+        }
     }
 
     // credits
     Text {
-        text: "Game Over, Loser!"
+        text: "Game Over, der Gewinner ist ???"
         color: "red"
         anchors.centerIn: parent
     }

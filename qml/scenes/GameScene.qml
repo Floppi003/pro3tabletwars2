@@ -16,6 +16,14 @@ SceneBase {
         activeLevelFileName = fileName
     }
 
+    // physics world for collision detection
+    PhysicsWorld {
+        id: world
+        debugDrawVisible: false
+        updatesPerSecondForPhysics: 10
+        //z: 1110
+    }
+
 
     // back button to leave scene
     MenuButton {
@@ -28,7 +36,13 @@ SceneBase {
         anchors.topMargin: 10
         onClicked: {
             backPressed()
+            activeLevelFileName = ""
         }
+    }
+
+    Connections {
+         target: gameScene.activeLevel || null
+         onGameOver: activeLevelFileName = ""
     }
 
     // name of the current level
@@ -39,25 +53,19 @@ SceneBase {
         anchors.topMargin: 10
         color: "white"
         font.pixelSize: 20
-        text: activeLevel !== undefined ? activeLevel.levelName : ""
+        text: activeLevel ? activeLevel.levelName : ""
     }
 
-    /*
-    // physics world for collision detection
-    PhysicsWorld {
-        id: world
-        debugDrawVisible: false
-        updatesPerSecondForPhysics: 10
-    }
-*/
+
 
     // load levels at runtime
     Loader {
         id: loader
-        source: activeLevelFileName != "" ? "../levels/" + activeLevelFileName : ""
+        source: activeLevelFileName ? "../levels/" + activeLevelFileName : ""
         onLoaded: {
             // store the loaded level as activeLevel for easier access
             activeLevel = item
         }
     }
+
 }

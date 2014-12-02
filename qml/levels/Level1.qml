@@ -45,14 +45,15 @@ GameController {
         igluBody.source: "../../assets/img/Iglu.png"
     }
 
+
     Iglu {
         igluCount: 3
         entityId: "iglu2"
         id: iglu2
-        x: scene.width / 7 *3
-        y: scene.height / 7 *5
+        x: scene.width / 7 *2
+        y: scene.height / 7 *5.5
 
-        rotation: 180
+        rotation: 90
         igluBody.source: "../../assets/img/Iglu.png"
     }
 
@@ -60,7 +61,7 @@ GameController {
         igluCount: 3
         entityId: "iglu3"
         id: iglu3
-        x: scene.width / 4*3
+        x: scene.width /7*6
         y: scene.height / 2
 
         rotation: 90
@@ -70,8 +71,8 @@ GameController {
     Lake {
         id: lake
         //anchors.centerIn: parent
-        x: 200
-        y: 200
+        x: 200 - width/2
+        y: 200 - height/2
         joystickRed: scene.joystickRed
         joystickBlue: scene.joystickBlue
 

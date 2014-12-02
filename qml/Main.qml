@@ -69,13 +69,18 @@ GameWindow {
     // credits scene
     GameOverScene {
         id: gameOverScene
-        onBackPressed: window.state = "gameOver"
+        onBackPressed: window.state = "menu"
     }
 
     // game scene to play a level
     GameScene {
         id: gameScene
         onBackPressed: window.state = "selectLevel"
+    }
+
+    Connections {
+         target: gameScene.activeLevel || null
+         onGameOver: window.state = "gameOver"
     }
 
     // menuScene is our first scene, so set the state to menu initially
