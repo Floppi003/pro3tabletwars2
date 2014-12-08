@@ -137,7 +137,7 @@ Common.LevelBase {
 
             property bool pressBool: false
 
-            property int minTimeDistanceMs: 1000
+            //property int minTimeDistanceBullet: 1000
             property var lastTime: 0
 
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
@@ -159,7 +159,7 @@ Common.LevelBase {
                 upDateCannon()
                 var currentTime = new Date().getTime()
                 var timeDiff = currentTime - lastTime
-                if (pressBool && timeDiff > minTimeDistanceMs) {
+                if (pressBool && timeDiff > playerRed.minTimeDistanceBullet) {
                     lastTime = currentTime
 
                     console.debug("Shoot Cannon")
@@ -219,7 +219,6 @@ Common.LevelBase {
 
         property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
-
         onControllerXPositionChanged: {
             playerTwoAxisController.xAxis = controllerXPosition
             var angle = calcAngle(controllerXPosition, controllerYPosition)
@@ -262,7 +261,7 @@ Common.LevelBase {
 
             property bool pressBool: false
 
-            property int minTimeDistanceMs: 1000
+            //property int minTimeDistanceBullet: 1000
             property var lastTime: 0
 
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
@@ -282,7 +281,7 @@ Common.LevelBase {
                 upDateCannon()
                 var currentTime = new Date().getTime()
                 var timeDiff = currentTime - lastTime
-                if (pressBool && timeDiff > minTimeDistanceMs) {
+                if (pressBool && timeDiff > playerBlue.minTimeDistanceBullet) {
                     lastTime = currentTime
 
                     console.debug("Shoot Cannon")
@@ -398,13 +397,15 @@ Common.LevelBase {
                     }
 
                     if(tankRed.entityId===collidedEntity.entityId){
-                        if(!playerRed.activateShield) {
+                        if(!playerRed.activateShield && !playerRed.activateHitShield) {
                             playerRed.life = playerRed.life - ((playerBlue.activatePowershot) ? 2 : 1)
+                            playerRed.activateHitShield = true
                             damage()
                         }
                     } else if(tankBlue.entityId===collidedEntity.entityId){
-                        if(!playerBlue.activateShield) {
+                        if(!playerBlue.activateShield && !playerBlue.activateHitShield) {
                             playerBlue.life = playerBlue.life - ((playerRed.activatePowershot) ? 2 : 1)
+                            playerBlue.activateHitShield = true
                             damage()
                         }
                     }

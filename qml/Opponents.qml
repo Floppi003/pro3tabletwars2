@@ -188,17 +188,15 @@ EntityBase {
                     }
 
                     if(tankRed.entityId === collidedEntity.entityId){
-                        if(!playerRed.activateShield) {
-                            //tankRed.opacity = 0.2
-                            //                        console.log("tankRed hit!")
+                        if(!playerRed.activateShield && !playerRed.activateHitShield) {
                             playerRed.life = playerRed.life - 1
+                            playerRed.activateHitShield = true
                             damage()
                         }
                     } else if(tankBlue.entityId === collidedEntity.entityId){
-                        if(!playerBlue.activateShield) {
-                            //tankBlue.opacity = 0.2
-                            //                        console.log("tankBlue hit!")
+                        if(!playerBlue.activateShield && !playerBlue.activateHitShield) {
                             playerBlue.life = playerBlue.life - 1
+                            playerBlue.activateHitShield = true
                             damage()
                         }
                     }

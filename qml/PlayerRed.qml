@@ -14,6 +14,10 @@ EntityBase {
     property int activeAcceleratorCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
     property bool activatePowershot: false // for activating powerUpPowershot
     property int activePowershotCounter: 0 // count from 0 to 80 every 100 millisecond for the duration of active powerUps
+    property int stdTimeDistanceBetweenBullets: 500 // standard time distance between two bullets
+    property int minTimeDistanceBullet: stdTimeDistanceBetweenBullets // time distance between two bullets
+    property bool activateHitShield: false // activate shield for short after a hit
+    property int activeHitShieldCounter: 0 // count from 0 to 5 every 100 millisecond for the duration between two bullet-hits
 
     Timer {
         id: timerRed
@@ -26,12 +30,15 @@ EntityBase {
             if (activeShieldCounter === 80) { activateShield = false; activeShieldCounter = 0; }
 
             //console.log ("activateAccelerator: " + activateAccelerator + " / " + activeAcceleratorCounter)
-            if (activateAccelerator) { activeAcceleratorCounter++ }
-            if (activeAcceleratorCounter === 80) { activateAccelerator = false; activeAcceleratorCounter = 0; }
+            if (activateAccelerator) { activeAcceleratorCounter++; minTimeDistanceBullet = 20; }
+            if (activeAcceleratorCounter === 80) { activateAccelerator = false; activeAcceleratorCounter = 0; minTimeDistanceBullet = stdTimeDistanceBetweenBullets; }
 
             //console.log ("activatePowershot: " + activatePowershot + " / " + activePowershotCounter)
             if (activatePowershot) { activePowershotCounter++ }
             if (activePowershotCounter === 80) { activatePowershot = false; activePowershotCounter = 0; }
+
+            if (activateHitShield) { activeHitShieldCounter++; tankRed.opacity = 0.2; }
+            if (activeHitShieldCounter === 10) { activateHitShield = false; activeHitShieldCounter = 0; tankRed.opacity = 1; }
         }
     }
 }

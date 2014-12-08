@@ -21,7 +21,6 @@ EntityBase {
 
         // the image and the physics will use this size
         anchors.fill: obstacleBody
-
         anchors.centerIn: parent
 
         //density: 100000000
@@ -30,45 +29,19 @@ EntityBase {
         fixture.onBeginContact: {
             // handle the collision and make the image semi-transparent
 
-            var collidedColliderComponent = other.parent.parent;
-            var collidedEntity = collidedColliderComponent.parent;
-            console.log("bullet collides with something:" + collidedEntity.entityId)
+            var collidedEntity = other.parent.parent.parent;
+            //console.log("bullet collides with something:" + collidedEntity.entityId)
 
-
-            if(tankRed.entityId===collidedEntity.entityId){
-                tankRed.opacity = 0.2
-                console.log("tankRed is inside the lake!")
+            if(!playerRed.activateHitShield && tankRed.entityId===collidedEntity.entityId){
                 playerRed.life=playerRed.life-1
-
+                playerRed.activateHitShield = true
             }
-
-            if(tankBlue.entityId===collidedEntity.entityId){
-                tankBlue.opacity = 0.2
-                console.log("tankRed is inside the lake!")
+            if(!playerBlue.activateHitShield && tankBlue.entityId===collidedEntity.entityId){
                 playerBlue.life=playerBlue.life-1
+                playerBlue.activateHitShield = true
             }
             damage()
             //window.state=""
-        }
-
-        fixture.onEndContact: {
-            // handle the collision and make the image visible
-
-            var collidedColliderComponent = other.parent.parent;
-            var collidedEntity = collidedColliderComponent.parent;
-            console.log(collidedEntity.entityId)
-
-            if(tankRed.entityId===collidedEntity.entityId){
-                tankRed.opacity = 1
-                console.log("tankRed is free!")
-            }
-
-            if(tankBlue.entityId===collidedEntity.entityId){
-                tankBlue.opacity = 1
-                console.log("tankBlue is free!")
-            }
-            damage()
-            console.log("bullet is gone!")
         }
     }
 }
