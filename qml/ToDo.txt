@@ -1,7 +1,14 @@
 TO DO:  (unsortierte Priorität, kann gerne geändert werden)
 ===========================================================
+
+Wie sollen GameOver und Result funktionieren? Soll nach jedem Teilsieg der GameOverScreen kommen
+oder nur die Nachricht eingeblendet werden? Soll es einen kurzen Counter geben, bevor das Spiel startet?
+Aus wievielen Siegen besteht ein Match bzw wann soll es enden? Soll die Statistik nur am Ende eines
+Matches angezeigt werden oder werden die Gesamtsiege im GameOverscreen mitgezeigt?
+Wie kann man aktiv ein Match beenden (zB durch Weg zum Hauptmenü)?
+Soll innerhalb eines Matches nur ein Level spielbar sein?
+
 - * Cannon: onReleased vs onClicked auf Tablet testen
-C * ist App am Tablet drehbar? darf nicht sein!
 - * Tablet testen: Joysticks für 2 Spieler, eventuell auf Multitouchpad umstellen
 
 B * Spielauswertung: eigene Klasse, die Siege, Modi, Fortschritt, etc verwaltet
@@ -16,7 +23,7 @@ I * Bilder einfügen
 
 B * Rutschen: Richtungsänderung/Stopp nach Rutschen, Steuerbarkeit
 ? * Rückstöße funktionieren noch nicht so wie sie sollen
-? * Beim Austritt aus TeleporterIglu muss Tank kurzfristig deaktiviert werden (Zeit zum orientieren)
+? * Beim Austritt aus TeleporterIglu muss Tank kurzfristig deaktiviert werden (Zeit zum Orientieren)
 ____________________________________________________________________________
 Wer macht was:
     C = Bartsch

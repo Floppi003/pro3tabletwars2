@@ -485,8 +485,22 @@ Common.LevelBase {
     }
 
     onDamage: {
-        if (playerRed.life<=0 || playerBlue.life<=0){
+        if (playerRed.life<=0){
+            GameInfo.winnerRed=false
+            GameInfo.redVictory+=1
+        }
+
+        if (playerBlue.life<=0){
+            GameInfo.winnerRed=true
+            GameInfo.blueVictory+=1
+        }
+
+        if (playerRed.life<=0||playerBlue.life<=0){
             gameOver()
+        }
+
+        if (GameInfo.blueVictory+GameInfo.redVictory>=GameInfo.maxGames){
+            result()
         }
     }
 }

@@ -1,9 +1,14 @@
+pragma Singleton
 import QtQuick 2.0
 import VPlay 2.0
 
-EntityBase {
+
+Item {
     id: gameInfo
-    entityType: "gameInfo"
 
     property string winner
+    property bool winnerRed: false
+    property int redVictory: 0
+    property int blueVictory: 0
+    property int maxGames: 3
 }

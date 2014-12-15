@@ -1,12 +1,13 @@
 import VPlay 2.0
 import QtQuick 2.0
 import "../common"
+import ".."
 
 SceneBase {
     id:gameOverScene
     z: 1
 
-        property string winner
+    property string winner: GameInfo.winnerRed ? "Rot" : "Blau" ;
 
     // background
     Rectangle {
@@ -29,7 +30,7 @@ SceneBase {
 
     // credits
     Text {
-        text: "Game Over, der Gewinner ist ???"
+        text: "Game Over, der Gewinner ist " + winner //GameInfo.winnerRed
         color: "red"
         anchors.centerIn: parent
     }

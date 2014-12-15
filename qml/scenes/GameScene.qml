@@ -9,7 +9,7 @@ SceneBase {
     // the currently loaded level gets stored here
     property var activeLevel
 
-    signal damage
+    //signal damage
 
     // set the name of the current level, this will cause the Loader to load the corresponding level
     function setLevel(fileName) {
@@ -23,7 +23,6 @@ SceneBase {
         updatesPerSecondForPhysics: 10
         //z: 1110
     }
-
 
     // back button to leave scene
     MenuButton {
@@ -43,6 +42,7 @@ SceneBase {
     Connections {
          target: gameScene.activeLevel || null
          onGameOver: activeLevelFileName = ""
+         onResult: activeLevelFileName = ""
     }
 
     // name of the current level
@@ -56,8 +56,6 @@ SceneBase {
         text: activeLevel ? activeLevel.levelName : ""
     }
 
-
-
     // load levels at runtime
     Loader {
         id: loader
@@ -67,5 +65,4 @@ SceneBase {
             activeLevel = item
         }
     }
-
 }

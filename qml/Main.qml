@@ -4,6 +4,7 @@ import "scenes"
 import "levels"
 import "common"
 
+
 GameWindow {
     //property bool end
     //signal gameOver
@@ -66,9 +67,15 @@ GameWindow {
         onBackPressed: window.state = "menu"
     }
 
-    // credits scene
+    // gameOver scene
     GameOverScene {
         id: gameOverScene
+        onBackPressed: window.state = "selectLevel"
+    }
+
+    // result scene
+    ResultScene {
+        id: resultScene
         onBackPressed: window.state = "menu"
     }
 
@@ -81,6 +88,7 @@ GameWindow {
     Connections {
          target: gameScene.activeLevel || null
          onGameOver: window.state = "gameOver"
+         onResult: window.state = "result"
     }
 
     // menuScene is our first scene, so set the state to menu initially
@@ -108,6 +116,11 @@ GameWindow {
             name: "gameOver"
             PropertyChanges {target: gameOverScene; opacity: 1}
             PropertyChanges {target: window; activeScene: gameOverScene}
+        },
+        State {
+            name: "result"
+            PropertyChanges {target: resultScene; opacity: 1}
+            PropertyChanges {target: window; activeScene: resultScene}
         },
         State {
             name: "game"

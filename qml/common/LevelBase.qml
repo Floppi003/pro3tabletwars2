@@ -6,6 +6,7 @@ Item {
     width: 768
     height: 1024
 
+    signal result
     signal gameOver
     signal damage
 
@@ -18,6 +19,4 @@ Item {
         color: "white"
         anchors.fill: parent
     }
-
 }
-
