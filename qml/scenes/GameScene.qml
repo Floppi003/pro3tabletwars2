@@ -1,6 +1,7 @@
 import VPlay 2.0
 import QtQuick 2.0
 import "../common"
+import ".."
 
 SceneBase {
     id:gameScene
@@ -8,6 +9,8 @@ SceneBase {
     property string activeLevelFileName
     // the currently loaded level gets stored here
     property var activeLevel
+    property string winner: GameInfo.winnerRed ? "Rot" : "Blau";
+    property alias victory: victory
 
     //signal damage
 
@@ -64,5 +67,16 @@ SceneBase {
             // store the loaded level as activeLevel for easier access
             activeLevel = item
         }
+    }
+
+    // game over
+    Text {
+        id: victory
+        text: "Game Over, der Gewinner ist " + winner
+        color: GameInfo.winnerRed ? "red" : "blue"
+        anchors.centerIn: parent
+
+        visible: GameInfo.victory ? true : false
+
     }
 }

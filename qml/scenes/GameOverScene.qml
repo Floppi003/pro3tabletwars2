@@ -28,7 +28,7 @@ SceneBase {
         }
     }
 
-    // credits
+    // game over
     Text {
         text: "Game Over, der Gewinner ist " + winner //GameInfo.winnerRed
         color: "red"
