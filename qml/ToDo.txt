@@ -8,8 +8,9 @@ Matches angezeigt werden oder werden die Gesamtsiege im GameOverscreen mitgezeig
 Wie kann man aktiv ein Match beenden (zB durch Weg zum Hauptmenü)?
 Soll innerhalb eines Matches nur ein Level spielbar sein?
 
-- * Cannon: onReleased vs onClicked auf Tablet testen
-- * Tablet testen: Joysticks für 2 Spieler, auf Multitouchpad umstellen
+- * Cannon: onReleased vs onClicked auf Tablet testen - aktuell ist rot=onReleased und blau=onClicked
+- * PhysicsWorld ist vermutlich wieder kaputt - man kann unten durch die Wand fahren
+- * Lake-Eigenschaften funktionieren nicht mehr seit der Umstellung vom JoystickControllerHUD auf MultiTouchArea
 
 B * Spielauswertung: eigene Klasse, die Siege, Modi, Fortschritt, etc verwaltet
     --> I * Random Item Spawn zu Random Zeiten - maximale Anzahl PowerUps am Feld beachten

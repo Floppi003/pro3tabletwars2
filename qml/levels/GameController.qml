@@ -9,8 +9,10 @@ Common.LevelBase {
 
     property alias tankRed: tankRed
     property alias tankBlue: tankBlue
-    property alias joystickRed: joystickRed
-    property alias joystickBlue: joystickBlue
+    property alias playerMovementControlAreaRed: playerMovementControlAreaRed
+    property alias playerMovementControlAreaBlue: playerMovementControlAreaBlue
+//    property alias joystickRed: joystickRed
+//    property alias joystickBlue: joystickBlue
     property alias playerRed: playerRed
     property alias playerBlue: playerBlue
 
@@ -21,49 +23,116 @@ Common.LevelBase {
     focus: true
 
     // ---------------------------------------------------
-    // Joystick Controller tankRed
+    // Controller tankRed
     // ---------------------------------------------------
-    JoystickControllerHUD {
-        id: joystickRed
+    Rectangle {
+        // Object properties
+        id: playerMovementControlAreaRed
         width: 180
         height: 180
         x: 50
         y: 50
         z: 5
+        opacity: 0.2
+        color: "#000000"
+        border.width: 4
+        border.color: "#ffaa00"
 
-        Rectangle {
-            id: cannonControlArea
+        MultiPointTouchArea {
             anchors.fill: parent
-            color: "#aaaaaa"
-            opacity: 0.3
-            z: 5
-        }
+            property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")     // Touch Methods
+            property real newPosX: 0.0
+            property real newPosY: 0.0
 
-        // delete the default images
-        source: ""
-        thumbSource: ""
+            touchPoints: [
+                TouchPoint {id: pointCtrlRed}
+            ]
 
-        // Touch Methods
-        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+            onTouchUpdated: {
+                newPosX = (pointCtrlRed.x / (parent.width / 2) - 1)
+                newPosY = (pointCtrlRed.y / (parent.height / 2) - 1)
 
-        onControllerXPositionChanged: {
-            playerTwoAxisController.xAxis = controllerXPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankRed.tankBody.rotation = angle
-                tankRed.circleCollider.rotation = angle
+                newPosY = newPosY * -1
+
+                if (newPosX > 1) newPosX = 1
+                if (newPosY > 1) newPosY = 1
+                if (newPosX < -1) newPosX = -1
+                if (newPosY < -1) newPosY = -1
+
+                updateMovement()
             }
-        }
 
-        onControllerYPositionChanged: {
-            playerTwoAxisController.yAxis = controllerYPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankRed.tankBody.rotation = angle
-                tankRed.circleCollider.rotation = angle
+            function updateMovement(){
+                updateMovementX()
+                updateMovementY()
+            }
+
+            function updateMovementX(){
+                //console.debug("pointCtrlRed.x = " + pointCtrlRed.x)
+                playerTwoAxisController.xAxis = newPosX
+                var angle = calcAngle(newPosX, newPosY) - 90
+                if (newPosX!=0 && newPosY != 0){
+                    tankRed.tankBody.rotation = angle
+                    tankRed.circleCollider.rotation = angle
+                }
+            }
+
+            function updateMovementY(){
+                //console.debug("pointCtrlRed.y = " + pointCtrlRed.y)
+                playerTwoAxisController.yAxis = newPosY
+                var angle = calcAngle(newPosX, newPosY) - 90
+                if (newPosX!=0 && newPosY != 0){
+                    tankRed.tankBody.rotation = angle
+                    tankRed.circleCollider.rotation = angle
+                }
             }
         }
     }
+
+    // ---------------------------------------------------
+    // Joystick Controller tankRed
+    // ---------------------------------------------------
+//    JoystickControllerHUD {
+//        id: joystickRed
+//        width: 180
+//        height: 180
+//        x: 50
+//        y: 50
+//        z: 5
+
+//        Rectangle {
+//            id: cannonControlArea
+//            anchors.fill: parent
+//            color: "#aaaaaa"
+//            opacity: 0.3
+//            z: 5
+//        }
+
+//        // delete the default images
+//        source: ""
+//        thumbSource: ""
+
+//        // Touch Methods
+//        property var playerTwoAxisController: tankRed.getComponent("TwoAxisController")
+
+//        onControllerXPositionChanged: {
+//            playerTwoAxisController.xAxis = controllerXPosition
+//            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankRed.tankBody.rotation = angle
+//                tankRed.circleCollider.rotation = angle
+//            }
+//        }
+
+//        onControllerYPositionChanged: {
+//            playerTwoAxisController.yAxis = controllerYPosition
+//            var angle = calcAngle(controllerXPosition, controllerYPosition) - 90
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankRed.tankBody.rotation = angle
+//                tankRed.circleCollider.rotation = angle
+//            }
+//        }
+//    }
 
     // ---------------------------------------------------
     // Controller redTankCannon
@@ -120,7 +189,7 @@ Common.LevelBase {
 */
     Rectangle {
         // Object properties
-        id: playerMovementControlAreaRed
+        id: playerBulletControlAreaRed
 
         opacity: 0.2
         color: "#000000"
@@ -136,10 +205,7 @@ Common.LevelBase {
             anchors.fill: parent
 
             property bool pressBool: false
-
-            //property int minTimeDistanceBullet: 1000
             property var lastTime: 0
-
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
 
             touchPoints: [
@@ -151,9 +217,7 @@ Common.LevelBase {
             onPressed: {
                 upDateCannon()
                 pressBool= true
-
             }
-
 
             onReleased: {
                 upDateCannon()
@@ -186,8 +250,8 @@ Common.LevelBase {
             function upDateCannon(){
                 var x = point1.x
                 var y = point1.y
-                x = x - (playerMovementControlAreaRed.width / 2)
-                y = (y - (playerMovementControlAreaRed.height / 2)) * (-1)
+                x = x - (playerBulletControlAreaRed.width / 2)
+                y = (y - (playerBulletControlAreaRed.height / 2)) * (-1)
                 var angle = calcAngle(x, y)
                 tankRed.tankCannon.rotation = angle
             }
@@ -195,56 +259,122 @@ Common.LevelBase {
     }
 
     // ---------------------------------------------------
-    // Joystick Controller tankBlue
+    // Controller tankBlue
     // ---------------------------------------------------
-    JoystickControllerHUD {
-        rotation: 0
-        id: joystickBlue
+    Rectangle {
+        // Object properties
+        id: playerMovementControlAreaBlue
         width: 180
         height: 180
         x: scene.width - 230
         y: scene.height - 230
         z: 5
+        opacity: 0.2
+        color: "#000000"
+        border.width: 4
+        border.color: "#ffaa00"
 
-        Rectangle {
+        MultiPointTouchArea {
             anchors.fill: parent
-            color: "#aaaaaa"
-            opacity: 0.3
-            z: 5
-        }
+            property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")     // Touch Methods
+            property real newPosX: 0.0
+            property real newPosY: 0.0
 
-        // delete the default images
-        source: ""
-        thumbSource: ""
+            touchPoints: [
+                TouchPoint {id: pointCtrlBlue}
+            ]
 
-        property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
+            onTouchUpdated: {
+                newPosX = (pointCtrlBlue.x / (parent.width / 2) - 1)
+                newPosY = (pointCtrlBlue.y / (parent.height / 2) - 1)
 
-        onControllerXPositionChanged: {
-            playerTwoAxisController.xAxis = controllerXPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankBlue.tankBody.rotation = angle +90
-                tankBlue.circleCollider.rotation = angle +90
+                newPosY = newPosY * -1
+
+                if (newPosX > 1) newPosX = 1
+                if (newPosY > 1) newPosY = 1
+                if (newPosX < -1) newPosX = -1
+                if (newPosY < -1) newPosY = -1
+
+                updateMovement()
+            }
+
+            function updateMovement(){
+                updateMovementX()
+                updateMovementY()
+            }
+
+            function updateMovementX(){
+                //console.debug("pointCtrlRed.x = " + pointCtrlRed.x)
+                playerTwoAxisController.xAxis = newPosX
+                var angle = calcAngle(newPosX, newPosY) - 90
+                if (newPosX!=0 && newPosY != 0){
+                    tankBlue.tankBody.rotation = angle
+                    tankBlue.circleCollider.rotation = angle
+                }
+            }
+
+            function updateMovementY(){
+                //console.debug("pointCtrlRed.y = " + pointCtrlRed.y)
+                playerTwoAxisController.yAxis = newPosY
+                var angle = calcAngle(newPosX, newPosY) - 90
+                if (newPosX!=0 && newPosY != 0){
+                    tankBlue.tankBody.rotation = angle
+                    tankBlue.circleCollider.rotation = angle
+                }
             }
         }
-
-        onControllerYPositionChanged: {
-            playerTwoAxisController.yAxis = controllerYPosition
-            var angle = calcAngle(controllerXPosition, controllerYPosition)
-            if (controllerXPosition!=0 && controllerYPosition != 0){
-                tankBlue.tankBody.rotation = angle +90
-                tankBlue.circleCollider.rotation = angle +90
-            }
-        }
-
     }
+
+//    JoystickControllerHUD {
+//        rotation: 0
+//        id: joystickBlue
+//        width: 180
+//        height: 180
+//        x: scene.width - 230
+//        y: scene.height - 230
+//        z: 5
+
+//        Rectangle {
+//            anchors.fill: parent
+//            color: "#aaaaaa"
+//            opacity: 0.3
+//            z: 5
+//        }
+
+//        // delete the default images
+//        source: ""
+//        thumbSource: ""
+
+//        property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
+
+//        onControllerXPositionChanged: {
+//            console.debug("controllerXPosition-Blue = " + controllerXPosition)
+//            playerTwoAxisController.xAxis = controllerXPosition
+//            var angle = calcAngle(controllerXPosition, controllerYPosition)
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankBlue.tankBody.rotation = angle +90
+//                tankBlue.circleCollider.rotation = angle +90
+//            }
+//        }
+
+//        onControllerYPositionChanged: {
+//            console.debug("controllerYPosition-Blue = " + controllerYPosition)
+//            playerTwoAxisController.yAxis = controllerYPosition
+//            var angle = calcAngle(controllerXPosition, controllerYPosition)
+//            if (controllerXPosition!=0 && controllerYPosition != 0){
+//                tankBlue.tankBody.rotation = angle +90
+//                tankBlue.circleCollider.rotation = angle +90
+//            }
+//        }
+
+//    }
 
     // ---------------------------------------------------
     // Controller blueTankCannon
     // ---------------------------------------------------
     Rectangle {
         // Object properties
-        id: playerMovementControlAreaBlue
+        id: playerBulletControlAreaBlue
 
         opacity: 0.2
         color: "#000000"
@@ -260,10 +390,7 @@ Common.LevelBase {
             anchors.fill: parent
 
             property bool pressBool: false
-
-            //property int minTimeDistanceBullet: 1000
             property var lastTime: 0
-
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
             touchPoints: [
@@ -273,11 +400,6 @@ Common.LevelBase {
             onTouchUpdated: upDateCannon()
 
             onPressed: {
-                upDateCannon()
-                pressBool= true
-            }
-
-            onReleased:  {
                 upDateCannon()
                 var currentTime = new Date().getTime()
                 var timeDiff = currentTime - lastTime
@@ -302,14 +424,19 @@ Common.LevelBase {
                                 });
 
                 }
-                pressBool = false
+                pressBool= false
+            }
+
+            onReleased: {
+                upDateCannon()                
+                pressBool = true
             }
 
             function upDateCannon(){
                 var x = point2.x
                 var y = point2.y
-                x = x - (playerMovementControlAreaBlue.width / 2)
-                y = (y - (playerMovementControlAreaBlue.height / 2)) * (-1)
+                x = x - (playerBulletControlAreaBlue.width / 2)
+                y = (y - (playerBulletControlAreaBlue.height / 2)) * (-1)
 
                 var angle = calcAngle(x, y)
                 tankBlue.tankCannon.rotation = angle

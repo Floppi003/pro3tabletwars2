@@ -73,8 +73,10 @@ GameController {
         //anchors.centerIn: parent
         x: 200 - width/2
         y: 200 - height/2
-        joystickRed: scene.joystickRed
-        joystickBlue: scene.joystickBlue
+        playerMovementControlAreaRed: scene.playerMovementControlAreaRed
+        playerMovementControlAreaBlue: scene.playerMovementControlAreaBlue
+//        joystickRed: scene.joystickRed
+//        joystickBlue: scene.joystickBlue
 
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
