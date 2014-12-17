@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import VPlay 2.0
 import "levels"
+import "."
 
 EntityBase {
     id: lake
@@ -9,11 +10,6 @@ EntityBase {
 
     property alias lakeBody: lakeBody
     property alias boxCollider: boxCollider
-
-    property MultiPointTouchArea playerMovementControlAreaRed
-    property MultiPointTouchArea playerMovementControlAreaBlue
-//    property JoystickControllerHUD joystickRed
-//    property JoystickControllerHUD joystickBlue
 
     width: 300
     height: 300
@@ -50,21 +46,24 @@ EntityBase {
 
 
         fixture.onBeginContact: {
+
             // handle the collision and make the image semi-transparent
 
             var collidedEntity = other.parent.parent.parent;
             console.log("object collides with lake:" + collidedEntity.entityId)
 
             if(tankRed.entityId === collidedEntity.entityId){
-                tankRed.opacity = 0.5
-                console.log("tankRed is inside the lake, joystick = " + playerMovementControlAreaRed)
-                playerMovementControlAreaRed.enabled=false;
+                //tankRed.opacity = 0.5
+                console.log("tankRed is inside the lake, joystick = " ) //+ playerMovementControlAreaRed)
+                //playerMovementControlAreaRed.enabled=false;
+                redOnLake()
             }
 
             if(tankBlue.entityId === collidedEntity.entityId){
                 tankBlue.opacity = 0.5
-                console.log("tankRed is inside the lake, joystick = " + playerMovementControlAreaBlue)
-                playerMovementControlAreaBlue.enabled=false;
+                console.log("tankRed is inside the lake, joystick = " )//+ playerMovementControlAreaBlue)
+                //playerMovementControlAreaBlue.enabled=false;
+                blueOnLake()
             }
 
             console.log("contact!")
@@ -78,15 +77,17 @@ EntityBase {
             console.log(collidedEntity.entityId)
 
             if(tankRed.entityId ===collidedEntity.entityId){
-                tankRed.opacity = 1
+                //tankRed.opacity = 1
                 console.log("tankRed is outside the lake!")
-                playerMovementControlAreaRed.enabled=true;
+                //playerMovementControlAreaRed.enabled=true;
+                redOffLake();
             }
 
             if(tankBlue.entityId ===collidedEntity.entityId){
                 tankBlue.opacity = 1
                 console.log("tankBlue is outside the lake!")
-                playerMovementControlAreaBlue.enabled=true;
+                //playerMovementControlAreaBlue.enabled=true;
+                blueOffLake()
             }
 
             console.log("contact!")

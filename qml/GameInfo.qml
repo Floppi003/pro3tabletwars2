@@ -11,7 +11,8 @@ Item {
     property int blueVictory: 0
     property int maxGames: 3
 
+    //don't work..
     property bool victory: false
-
     signal victory
+    //signal redOnLake
 }

@@ -62,6 +62,8 @@ Common.LevelBase {
                 updateMovement()
             }
 
+
+
             function updateMovement(){
                 updateMovementX()
                 updateMovementY()
@@ -86,8 +88,16 @@ Common.LevelBase {
                     tankRed.circleCollider.rotation = angle
                 }
             }
+
+
         }
     }
+
+    onRedOnLake: { playerMovementControlAreaRed.enabled=false; }
+    onRedOffLake: { playerMovementControlAreaRed.enabled=true; }
+    onBlueOnLake: { playerMovementControlAreaBlue.enabled=false; }
+    onBlueOffLake: { playerMovementControlAreaBlue.enabled=true; }
+
 
     // ---------------------------------------------------
     // Joystick Controller tankRed
@@ -468,7 +478,7 @@ Common.LevelBase {
         y: scene.height - 100 - height/2
         z: 1
         entityId: "tank_1"
-        rotation: 0
+        rotation: 180
         tankBody.source: "../../assets/img/charBlue.png"
     }
 

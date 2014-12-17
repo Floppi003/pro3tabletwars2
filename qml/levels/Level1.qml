@@ -70,13 +70,8 @@ GameController {
 
     Lake {
         id: lake
-        //anchors.centerIn: parent
         x: 200 - width/2
         y: 200 - height/2
-        playerMovementControlAreaRed: scene.playerMovementControlAreaRed
-        playerMovementControlAreaBlue: scene.playerMovementControlAreaBlue
-//        joystickRed: scene.joystickRed
-//        joystickBlue: scene.joystickBlue
 
         rotation: 0
         lakeBody.source: "../../assets/img/Lake.png"
@@ -92,7 +87,18 @@ GameController {
     }
 
     Wall {
-        id: wallBottom
+        id: wallTop
+        height: 20
+        anchors {
+            left: parent.left
+            right: parent.right
+            top:parent.top
+        }
+    }
+
+    Wall {
+        enabled: false
+        id: wallBottomOld
         height: 20
         anchors {
             left: parent.left
@@ -102,13 +108,11 @@ GameController {
     }
 
     Wall {
-        id: wallTop
+        id: wallBottom
         height: 20
-        anchors {
-            left: parent.left
-            right: parent.right
-            top:parent.top
-        }
+        width: parent.width
+        x: 0
+        y: parent.height-height
     }
 
     Wall {

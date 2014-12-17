@@ -9,7 +9,7 @@ EntityBase {
     property alias controller: twoAxisController
     property alias tankBody: tankBody
     property alias tankCannon: tankCannon
-   property alias circleCollider: circleCollider
+    property alias circleCollider: circleCollider
 
     property int life: 3
     // flag indicating if dead
@@ -44,13 +44,8 @@ EntityBase {
         color: "#000000"
     }
 
-
-
     CircleCollider {
-
                 //collisionTestingOnlyMode: true
-
-
         id: circleCollider
         radius: 22
         x: radius
