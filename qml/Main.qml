@@ -20,6 +20,14 @@ GameWindow {
 
     id: window
 
+
+    Rectangle {
+        id: background
+        color: "black"
+        anchors.fill: parent
+    }
+
+
     // create and remove entities at runtime
     EntityManager {
         id: entityManager
