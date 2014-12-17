@@ -289,10 +289,19 @@ Common.LevelBase {
             property variant playerTwoAxisController: tankBlue.getComponent("TwoAxisController")     // Touch Methods
             property real newPosX: 0.0
             property real newPosY: 0.0
+            property bool rotateOnce: true
 
             touchPoints: [
                 TouchPoint {id: pointCtrlBlue}
             ]
+
+            onEnabledChanged: {
+                if(rotateOnce){
+                tankBlue.tankBody.rotation = 180
+                tankBlue.circleCollider.rotation = 180
+                rotateOnce = false
+                }
+            }
 
             onTouchUpdated: {
                 newPosX = (pointCtrlBlue.x / (parent.width / 2) - 1)
@@ -478,7 +487,7 @@ Common.LevelBase {
         y: scene.height - 100 - height/2
         z: 1
         entityId: "tank_1"
-        rotation: 180
+        rotation: 0
         tankBody.source: "../../assets/img/charBlue.png"
     }
 
