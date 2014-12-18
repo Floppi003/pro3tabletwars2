@@ -20,9 +20,9 @@ SceneBase {
     MenuButton {
         text: "Back"
         // anchor the button to the gameWindowAnchorItem to be on the edge of the screen on any device
-        anchors.right: gameOverScene.right
+        //anchors.right: gameOverScene.right
         anchors.rightMargin: 10
-        anchors.top: gameOverScene.top
+        //anchors.top: gameOverScene.top
         anchors.topMargin: 10
         onClicked: {
             backPressed()

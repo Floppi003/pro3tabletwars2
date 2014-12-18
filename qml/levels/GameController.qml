@@ -11,14 +11,9 @@ Common.LevelBase {
     property alias tankBlue: tankBlue
     property alias playerMovementControlAreaRed: playerMovementControlAreaRed
     property alias playerMovementControlAreaBlue: playerMovementControlAreaBlue
-//    property alias joystickRed: joystickRed
-//    property alias joystickBlue: joystickBlue
     property alias playerRed: playerRed
     property alias playerBlue: playerBlue
 
-    //signal damage
-    //property alias singleBullet: singleBullet
-    //property int moveDuration: 250
 
     focus: true
 
@@ -70,7 +65,6 @@ Common.LevelBase {
             }
 
             function updateMovementX(){
-                //console.debug("pointCtrlRed.x = " + pointCtrlRed.x)
                 playerTwoAxisController.xAxis = newPosX
                 var angle = calcAngle(newPosX, newPosY) - 90
                 if (newPosX!=0 && newPosY != 0){
@@ -80,7 +74,6 @@ Common.LevelBase {
             }
 
             function updateMovementY(){
-                //console.debug("pointCtrlRed.y = " + pointCtrlRed.y)
                 playerTwoAxisController.yAxis = newPosY
                 var angle = calcAngle(newPosX, newPosY) - 90
                 if (newPosX!=0 && newPosY != 0){
@@ -214,6 +207,7 @@ Common.LevelBase {
         MultiPointTouchArea {
             anchors.fill: parent
 
+            property bool rotateOnce: true
             property bool pressBool: false
             property var lastTime: 0
             property variant playerTwoAxisController: tankRed.getComponent("TwoAxisController")
@@ -264,6 +258,13 @@ Common.LevelBase {
                 y = (y - (playerBulletControlAreaRed.height / 2)) * (-1)
                 var angle = calcAngle(x, y)
                 tankRed.tankCannon.rotation = angle
+            }
+
+            onEnabledChanged: {
+                if(rotateOnce){
+                tankRed.tankCannon.rotation = 90
+                rotateOnce = false
+                }
             }
         }
     }
@@ -408,7 +409,8 @@ Common.LevelBase {
         MultiPointTouchArea {
             anchors.fill: parent
 
-            property bool pressBool: false
+            property bool rotateOnce: true
+            property bool pressBool: true
             property var lastTime: 0
             property var playerTwoAxisController: tankBlue.getComponent("TwoAxisController")
 
@@ -416,13 +418,51 @@ Common.LevelBase {
                 TouchPoint {id: point2}
             ]
 
-            onTouchUpdated: upDateCannon()
+/*onPressed: {
+                upDateCannon()
+                pressBool= true
+            }
 
-            onPressed: {
+            onReleased: {
                 upDateCannon()
                 var currentTime = new Date().getTime()
                 var timeDiff = currentTime - lastTime
+                if (pressBool && timeDiff > playerRed.minTimeDistanceBullet) {
+                    lastTime = currentTime
+
+                    console.debug("Shoot Cannon")
+
+
+                    var speed = (playerRed.activateAccelerator) ? 500 : 250
+
+                    var xDirection = Math.cos(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+                    var yDirection = Math.sin(tankRed.tankCannon.rotation * Math.PI / 180.0) * speed
+
+                    var startX= (45*Math.cos((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.x + tankRed.width/2
+                    var startY= (45*Math.sin((tankRed.tankCannon.rotation)*Math.PI/180)) + tankRed.y + tankRed.height/2
+
+                    // create and remove entities at runtime
+                    entityManager.createEntityFromComponentWithProperties(
+                                bullet, {
+                                    start: Qt.point(startX, startY),
+                                    velocity: Qt.point(xDirection, yDirection)
+                                });
+                }
+                pressBool= false
+            }*/
+
+            onPressed: {
+                upDateCannon()
+                pressBool= true
+            }
+
+            onReleased: {
+                upDateCannon()
+                var currentTime = new Date().getTime()
+                var timeDiff = currentTime - lastTime
+
                 if (pressBool && timeDiff > playerBlue.minTimeDistanceBullet) {
+
                     lastTime = currentTime
 
                     console.debug("Shoot Cannon")
@@ -441,14 +481,8 @@ Common.LevelBase {
                                     start: Qt.point(startX, startY),
                                     velocity: Qt.point(xDirection, yDirection)
                                 });
-
                 }
                 pressBool= false
-            }
-
-            onReleased: {
-                upDateCannon()                
-                pressBool = true
             }
 
             function upDateCannon(){
@@ -459,6 +493,13 @@ Common.LevelBase {
 
                 var angle = calcAngle(x, y)
                 tankBlue.tankCannon.rotation = angle
+            }
+
+            onEnabledChanged: {
+                if(rotateOnce){
+                tankBlue.tankCannon.rotation = 270
+                rotateOnce = false
+                }
             }
         }
     }
