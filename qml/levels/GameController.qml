@@ -478,7 +478,9 @@ Common.LevelBase {
         z: 1
         entityId: "tank_0"
         rotation: 0
-        tankBody.source: "../../assets/img/charRed.png"
+        //tankBody.source: "../../assets/img/charRed.png"
+        tankBody.source: "../../assets/img/redBody.png"
+        tankHead.source: "../../assets/img/redHead.png"
     }
 
     Tank {
@@ -488,7 +490,8 @@ Common.LevelBase {
         z: 1
         entityId: "tank_1"
         rotation: 0
-        tankBody.source: "../../assets/img/charBlue.png"
+        tankBody.source: "../../assets/img/blueBody.png"
+        tankHead.source: "../../assets/img/blueHead.png"
     }
 
     Component {

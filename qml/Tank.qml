@@ -8,6 +8,7 @@ EntityBase {
     // make the twoAxisController acessible from outside
     property alias controller: twoAxisController
     property alias tankBody: tankBody
+    property alias tankHead: tankHead
     property alias tankCannon: tankCannon
     property alias circleCollider: circleCollider
 
@@ -31,21 +32,35 @@ EntityBase {
         anchors.centerIn: parent
     }
 
+
+
+
     Rectangle {
         id: tankCannon
 
         x: tankBody.x + tankBody.width / 2
         y: tankBody.y + tankBody.height / 2 - 2
-        width: 26
+        width: 4 //26
         height: 4
         transformOrigin: Item.Left
         //transformOriginPoint: Qt.point(13, 2)
 
-        color: "#000000"
+        color: "transparent"
+
+        Image {
+            id: tankHead
+            width: 40
+            height: 40
+            //transformOrigin: Item.Right
+            //rotation: 0
+            anchors.centerIn: tankCannon
+            //x: -tankHead.width
+        }
+
     }
 
     CircleCollider {
-                //collisionTestingOnlyMode: true
+        //collisionTestingOnlyMode: true
         id: circleCollider
         radius: 22
         x: radius
