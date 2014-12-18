@@ -11,8 +11,8 @@ EntityBase {
     property alias lakeBody: lakeBody
     property alias boxCollider: boxCollider
 
-    width: 300
-    height: 300
+    width: 400
+    height: 400
 
     Image {
         id: lakeBody
@@ -57,6 +57,7 @@ EntityBase {
                 console.log("tankRed is inside the lake, joystick = " ) //+ playerMovementControlAreaRed)
                 //playerMovementControlAreaRed.enabled=false;
                 redOnLake()
+                GameInfo.redOnLake=true
             }
 
             if(tankBlue.entityId === collidedEntity.entityId){
@@ -64,6 +65,7 @@ EntityBase {
                 console.log("tankRed is inside the lake, joystick = " )//+ playerMovementControlAreaBlue)
                 //playerMovementControlAreaBlue.enabled=false;
                 blueOnLake()
+                GameInfo.blueOnLake=true
             }
 
             console.log("contact!")
@@ -81,6 +83,7 @@ EntityBase {
                 console.log("tankRed is outside the lake!")
                 //playerMovementControlAreaRed.enabled=true;
                 redOffLake();
+                GameInfo.redOnLake=false
             }
 
             if(tankBlue.entityId ===collidedEntity.entityId){
@@ -88,6 +91,7 @@ EntityBase {
                 console.log("tankBlue is outside the lake!")
                 //playerMovementControlAreaBlue.enabled=true;
                 blueOffLake()
+                GameInfo.blueOnLake=false
             }
 
             console.log("contact!")

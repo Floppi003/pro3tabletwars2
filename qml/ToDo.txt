@@ -26,6 +26,7 @@ I * Bilder einfügen
 B * Rutschen: Richtungsänderung/Stopp nach Rutschen, Steuerbarkeit
 ? * Rückstöße funktionieren noch nicht so wie sie sollen
 ? * Beim Austritt aus TeleporterIglu muss Tank kurzfristig deaktiviert werden (Zeit zum Orientieren)
+? * Tank Ausrichtung nach Teleporter noch fehlerhaft
 ____________________________________________________________________________
 Wer macht was:
     C = Bartsch

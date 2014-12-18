@@ -39,6 +39,9 @@ Common.LevelBase {
             property real newPosX: 0.0
             property real newPosY: 0.0
 
+            property real oldPosX: 0.0
+            property real oldPosY: 0.0
+
             touchPoints: [
                 TouchPoint {id: pointCtrlRed}
             ]
@@ -54,42 +57,37 @@ Common.LevelBase {
                 if (newPosX < -1) newPosX = -1
                 if (newPosY < -1) newPosY = -1
 
+                if(GameInfo.redOnLake){
+                    console.log("X old: " + oldPosX + " | new: " + newPosX)
+                    console.log("Y old: " + oldPosY + " | new: " + newPosY)
+                    newPosX = oldPosX+(newPosX*0.03)
+                    newPosY = oldPosY+(newPosY*0.03)
+
+                    if (newPosX > 1) newPosX = 1
+                    if (newPosY > 1) newPosY = 1
+                    if (newPosX < -1) newPosX = -1
+                    if (newPosY < -1) newPosY = -1
+                }
                 updateMovement()
             }
 
-
-
             function updateMovement(){
-                updateMovementX()
-                updateMovementY()
-            }
-
-            function updateMovementX(){
                 playerTwoAxisController.xAxis = newPosX
-                var angle = calcAngle(newPosX, newPosY) - 90
-                if (newPosX!=0 && newPosY != 0){
-                    tankRed.tankBody.rotation = angle
-                    tankRed.circleCollider.rotation = angle
-                }
-            }
-
-            function updateMovementY(){
                 playerTwoAxisController.yAxis = newPosY
+                oldPosX=newPosX
+                oldPosY=newPosY
+
                 var angle = calcAngle(newPosX, newPosY) - 90
+
                 if (newPosX!=0 && newPosY != 0){
                     tankRed.tankBody.rotation = angle
                     tankRed.circleCollider.rotation = angle
                 }
             }
-
-
         }
     }
 
-    onRedOnLake: { playerMovementControlAreaRed.enabled=false; }
-    onRedOffLake: { playerMovementControlAreaRed.enabled=true; }
-    onBlueOnLake: { playerMovementControlAreaBlue.enabled=false; }
-    onBlueOffLake: { playerMovementControlAreaBlue.enabled=true; }
+
 
 
     // ---------------------------------------------------
@@ -504,6 +502,24 @@ Common.LevelBase {
         }
     }
 
+    onRedOnLake: {
+        //GameInfo.redOnLake=true
+        //playerMovementControlAreaRed.enabled=false;
+    }
+    onRedOffLake: {
+        //GameInfo.redOnLake=false
+        //playerMovementControlAreaRed.enabled=true;
+    }
+
+    onBlueOnLake: {
+        playerMovementControlAreaBlue.enabled=false;
+    }
+    onBlueOffLake: {
+        playerMovementControlAreaBlue.enabled=true;
+    }
+
+
+
     PlayerRed {
         id: playerRed
     }
@@ -668,7 +684,8 @@ Common.LevelBase {
         font.pixelSize: 50
         text: playerRed.life<=0 || playerBlue.life<=0 ? "Game Over" : ""
     }
-*/
+    */
+
     function calcAngle(touchX, touchY) {
         //console.log("calcAngle: " + (-180 / Math.PI * Math.atan2(touchY, touchX)))
         return -180 / Math.PI * Math.atan2(touchY, touchX)

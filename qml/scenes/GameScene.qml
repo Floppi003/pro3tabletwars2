@@ -22,7 +22,7 @@ SceneBase {
     // physics world for collision detection
     PhysicsWorld {
         id: world
-        debugDrawVisible: false
+        debugDrawVisible: true
         updatesPerSecondForPhysics: 10
         z: 1110
     }
